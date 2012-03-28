@@ -1,8 +1,10 @@
 package com.douglasinfoweb.bandecodroid;
 
 import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -13,8 +15,10 @@ import org.apache.http.util.ByteArrayBuffer;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,83 +26,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Main extends Activity {
-    private int pagAtual;
-    private TextView texto;
+    private int cardapioAtual=0;
+    private Restaurante restaurante;
+	private TextView texto;
+	private Main main=this;
     private Button bttAnterior;
     private  Button bttProximo;
-    
 	private LoadDataThread loadDataThread;
 	private ProgressDialog progressDialog;
-    
- // Define the Handler that receives messages from the thread and update the progress
-    private Handler handler; 
-    
+   
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-		handler = new Handler()
-	    {
-	        @Override
-			public void handleMessage(Message msg) 
-	        {
-	            String cardapio = (String) msg.obj;
-	            int isBttAntOn = msg.arg1;
-	            int isBttProxOn = msg.arg2;
-	            texto.setText(cardapio);
-	            
-	            if(isBttProxOn==0)
-	            {
-	            	bttProximo.setEnabled(false);
-	            }
-	            else
-	            {
-	            	bttProximo.setEnabled(true);
-	            }
-	            
-	            if(isBttAntOn==0)
-	            {
-	            	bttAnterior.setEnabled(false);
-	            }
-	            else
-	            {
-	            	bttAnterior.setEnabled(true);
-	            }
-	            
-	            progressDialog.dismiss();
-	        }
-	    };
-	
-        pagAtual = 1;
-        
-        bttAnterior = (Button) this.findViewById(R.id.btt_anterior);
-        bttAnterior.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(pagAtual>1)
-					pagAtual--;
-				loadDataThread = new LoadDataThread(handler, bttProximo, bttAnterior);
-				loadDataThread.start(pagAtual);
-				progressDialog.show();
-			}
-		});
-        
-        bttProximo = (Button) findViewById(R.id.btt_proximo);
-        bttProximo.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) 
-			{
-				pagAtual++;
-				loadDataThread = new LoadDataThread(handler, bttProximo, bttAnterior);
-				loadDataThread.start(pagAtual);
-				progressDialog.show();
-			}
-		});
-        
-        texto = (TextView) findViewById(R.id.texto);
-        
+        /* Tentar recuperar dados */
+        try {
+			FileInputStream fis = openFileInput("cardapios");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			restaurante = (Restaurante)ois.readObject();
+			ois.close();
+			Log.v("bandeco","recuperou objeto com sucesso :D");
+		} catch (Exception e) {
+			restaurante = new BandecoUnicamp();
+		}
+        /* Mostra tela de espera */
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		progressDialog.setMessage("Carregando cardapio");
@@ -106,11 +58,74 @@ public class Main extends Activity {
 		progressDialog.setProgress(0);
 		progressDialog.show();
 		
-		loadDataThread = new LoadDataThread(handler, bttProximo, bttAnterior);
-		loadDataThread.start(pagAtual);
+        /* Pega referencia aos components da UI */
+        texto = (TextView) findViewById(R.id.texto);
+        bttAnterior = (Button) this.findViewById(R.id.btt_anterior);
+        bttProximo = (Button) findViewById(R.id.btt_proximo);
+        
+        /* Configura botoes */
+        bttAnterior.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(cardapioAtual>0)
+					cardapioAtual--;
+				updateScreen();
+			}
+		});
+        
+        bttProximo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) 
+			{
+				if (cardapioAtual<restaurante.getCardapios().size()-1)
+					cardapioAtual++;
+				updateScreen();
+			}
+		});
+        
+        //Atualiza os dados
+        Log.v("bandeco","comecou a pegar dados");
+        loadDataThread = new LoadDataThread(this,restaurante);
+        loadDataThread.start(false);
+        //E agora a tela
+		updateScreen();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	super.onCreateOptionsMenu(menu);
+    	MenuItem itemAtualiza = menu.add(0, Menu.NONE, Menu.NONE, "Atualizar");
+    	itemAtualiza.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem arg0) {
+		        loadDataThread = new LoadDataThread(main,restaurante);
+		        loadDataThread.start(true);
+				return true;
+			}
+		});
+    	itemAtualiza.setIcon(R.drawable.atualizar);
+    	return true;
+    }
+    	
+  
     
-    private String getImage(String prato)
+    public void updateScreen() {
+	    	if (loadDataThread.isDataReady()) {
+	    		progressDialog.dismiss();
+	    		bttAnterior.setEnabled((cardapioAtual > 0));
+		    	bttProximo.setEnabled((cardapioAtual < restaurante.getCardapios().size()-1));
+		    	if (restaurante.getCardapios().size() >= 1) {
+		    		texto.setText(restaurante.getCardapios().get(cardapioAtual).toString());
+		    	} else {
+		    		texto.setText("Nenhum cardapio.");
+		    	}
+	    	} else {
+	    		progressDialog.show();
+	    	}
+    }	
+    @SuppressWarnings("unused")
+    //TODO: getImage()
+	private String getImage(String prato)
     {
         //http://www.google.com/search?q=almoço&tbm=isch
     	try
@@ -210,7 +225,10 @@ public class Main extends Activity {
     
     }
     */
-    private String getCardapio(int pagina)
+    
+    @SuppressWarnings("unused")
+    //Nao usa?
+	private String getCardapio(int pagina)
     {
     	try
     	{

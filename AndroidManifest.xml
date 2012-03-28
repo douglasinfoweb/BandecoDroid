@@ -3,7 +3,7 @@
       package="com.douglasinfoweb.bandecodroid"
       android:versionCode="3"
       android:versionName="1.6">
-    <uses-sdk android:minSdkVersion="4" />
+    <uses-sdk android:targetSdkVersion="4" android:minSdkVersion="4"/>
     <uses-permission
         android:name="android.permission.INTERNET" />
 
