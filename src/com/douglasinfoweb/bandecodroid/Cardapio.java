@@ -74,7 +74,7 @@ public class Cardapio implements Serializable {
 				case JANTA: saida.append("JANTAR"); break;
 			}
 		if (data != null)
-			saida.append(" "+data.getDayOfMonth()+"/"+data.getMonthOfYear()+"/"+data.getYear());  
+			saida.append(" "+int2diaDaSemana(data.getDayOfWeek()).toUpperCase()+" "+data.getDayOfMonth()+"/"+data.getMonthOfYear());  
 		if (pratoPrincipal!=null)
 			saida.append("\n"+pratoPrincipal.toUpperCase());
 		if (suco!=null)
@@ -88,6 +88,21 @@ public class Cardapio implements Serializable {
 		if (obs != null)
 			saida.append("\n"+obs);
 		return saida.toString();
+	}
+	
+	private String int2diaDaSemana(int dayOfWeek) {
+		String result;
+		switch (dayOfWeek) {
+			case 1: result = "Segunda-feira"; break;
+			case 2: result = "Terça-feira"; break;
+			case 3: result = "Quarta-feira"; break;
+			case 4: result = "Quinta-feira"; break;
+			case 5: result = "Sexta-feira"; break;
+			case 6: result = "Sábado"; break;
+			case 7: result = "Domingo"; break;
+			default: result = ""; break;
+		}
+		return result;
 	}
 }
 

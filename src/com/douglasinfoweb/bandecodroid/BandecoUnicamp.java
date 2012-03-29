@@ -19,82 +19,82 @@ import android.util.Log;
 public class BandecoUnicamp extends Restaurante {
 	boolean proximo;
 	@Override
-	public void atualizarCardapios(Main main) {
+	public boolean atualizarCardapios(Main main) {
 		Log.v("bandeco","ATUALIZAR");
-		getCardapios().clear();
+		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 		proximo = true;
 		int pagina=1;
-		while (proximo) {
-
-			try {
-				proximo=false;
-				String URL = "http://www.prefeitura.unicamp.br/busca_cardapio.php?pagina="+pagina;
-				Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
-				Elements linhas = doc.select("tr");
-				Cardapio cardapio = new Cardapio();
-				getCardapios().add(cardapio);
-				boolean duasLinhasPratoPrincipal=false;
-				for (Element e : linhas) {
-					String text = e.text().toLowerCase().trim();
-					String textoNormal = e.text().trim();
-					/** INFORMAÇÕES **/
-					if (text.contains("feira")) {
-						String dataTxt = text.substring(0, 10).trim();
-						String[] dataSplited = dataTxt.split("/");
-						if (dataSplited.length == 3) {
-							DateTime data = new DateTime(
-									Integer.parseInt(dataSplited[2]),
-									Integer.parseInt(dataSplited[1]),
-									Integer.parseInt(dataSplited[0]), 
-									0, 0 ,0);
-							cardapio.setData(data);
-						}
-					} else if (text.contains("prato principal")) {
-						cardapio.setPratoPrincipal(separaEPegaValor(textoNormal));
-						duasLinhasPratoPrincipal=true;
-					} else if (text.contains("sobremesa")) {
-						cardapio.setSobremesa(capitalize(separaEPegaValor(textoNormal)));
-						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("salada")) {
-						cardapio.setSalada(capitalize(separaEPegaValor(textoNormal)));
-						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("suco")) {
-						cardapio.setSuco(capitalize(separaEPegaValor(textoNormal)));
-						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("pts")) {
-						cardapio.setPts(capitalize(textoNormal));
-						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("obs")) {
-						cardapio.setObs(capitalize(textoNormal));
-						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("jantar")) {
-						cardapio.setRefeicao(Cardapio.Refeicao.JANTA);
-						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("almoço")) {
-						cardapio.setRefeicao(Cardapio.Refeicao.ALMOCO);
-						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("próximo")) {
-						proximo=true;
-						duasLinhasPratoPrincipal=false;
-					} else if (duasLinhasPratoPrincipal) {
-						cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+textoNormal);
-						duasLinhasPratoPrincipal=false;
-					}
-				}		
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			pagina++;	
-		}
 		try {
+			while (proximo) {
+					proximo=false;
+					String URL = "http://www.prefeitura.unicamp.br/busca_cardapio.php?pagina="+pagina;
+					Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
+					Elements linhas = doc.select("tr");
+					Cardapio cardapio = new Cardapio();
+					cardapios.add(cardapio);
+					boolean duasLinhasPratoPrincipal=false;
+					for (Element e : linhas) {
+						String text = e.text().toLowerCase().trim();
+						String textoNormal = e.text().trim();
+						/** INFORMAÇÕES **/
+						if (text.contains("feira")) {
+							String dataTxt = text.substring(0, 10).trim();
+							String[] dataSplited = dataTxt.split("/");
+							if (dataSplited.length == 3) {
+								DateTime data = new DateTime(
+										Integer.parseInt(dataSplited[2]),
+										Integer.parseInt(dataSplited[1]),
+										Integer.parseInt(dataSplited[0]), 
+										0, 0 ,0);
+								cardapio.setData(data);
+							}
+						} else if (text.contains("prato principal")) {
+							cardapio.setPratoPrincipal(separaEPegaValor(textoNormal));
+							duasLinhasPratoPrincipal=true;
+						} else if (text.contains("sobremesa")) {
+							cardapio.setSobremesa(capitalize(separaEPegaValor(textoNormal)));
+							duasLinhasPratoPrincipal=false;
+						} else if (text.contains("salada")) {
+							cardapio.setSalada(capitalize(separaEPegaValor(textoNormal)));
+							duasLinhasPratoPrincipal=false;
+						} else if (text.contains("suco")) {
+							cardapio.setSuco(capitalize(separaEPegaValor(textoNormal)));
+							duasLinhasPratoPrincipal=false;
+						} else if (text.contains("pts")) {
+							cardapio.setPts(capitalize(textoNormal));
+							duasLinhasPratoPrincipal=false;
+						} else if (text.contains("obs")) {
+							cardapio.setObs(capitalize(textoNormal));
+							duasLinhasPratoPrincipal=false;
+						} else if (text.contains("jantar")) {
+							cardapio.setRefeicao(Cardapio.Refeicao.JANTA);
+							duasLinhasPratoPrincipal=false;
+						} else if (text.contains("almoço")) {
+							cardapio.setRefeicao(Cardapio.Refeicao.ALMOCO);
+							duasLinhasPratoPrincipal=false;
+						} else if (text.contains("próximo")) {
+							proximo=true;
+							duasLinhasPratoPrincipal=false;
+						} else if (duasLinhasPratoPrincipal) {
+							cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+textoNormal);
+							duasLinhasPratoPrincipal=false;
+						}
+					}		
+	
+				pagina++;	
+			}
+			removeCardapiosAntigos();
 			FileOutputStream fos = main.openFileOutput("cardapios", Context.MODE_WORLD_READABLE);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(this);
 			oos.flush();
 			oos.close();
+			setCardapios(cardapios);
 			Log.v("bandeco","salvou objeto com sucesso :D");
-		} catch (IOException e) {
-			e.printStackTrace();
+			return true;
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			return false;
 		}
 	}
 	
@@ -110,7 +110,6 @@ public class BandecoUnicamp extends Restaurante {
 	public Boolean temQueAtualizar() {
 		DateTime now = new DateTime(new Date());
 		ArrayList<Cardapio> cardapios = getCardapios();
-		Log.v("bandeco","cardapios: "+cardapios);
 		if (cardapios.size() >= 1) {
 			Cardapio ultimoCardapio = cardapios.get(cardapios.size() -1);
 			//Se o ultimo que esta na memoria ainda eh dessa semana, nao precisa atualizar.
@@ -136,8 +135,8 @@ public class BandecoUnicamp extends Restaurante {
 					getCardapios().remove(c);
 				} else { //Se eh de hoje, ver se ja passou a hora do almoço/janta
 					switch (c.getRefeicao()) {
-						case ALMOCO: if (now.getHourOfDay() >= 2) getCardapios().remove(c);
-						case JANTA: if (now.getHourOfDay() >= 8) getCardapios().remove(c);
+						case ALMOCO: if (now.getHourOfDay() >= 14) getCardapios().remove(c);
+						case JANTA: if (now.getHourOfDay() >= 20) getCardapios().remove(c);
 					}
 				}
 			}

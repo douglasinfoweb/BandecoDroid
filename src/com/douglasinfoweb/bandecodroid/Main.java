@@ -50,7 +50,7 @@ public class Main extends Activity {
 		} catch (Exception e) {
 			restaurante = new BandecoUnicamp();
 		}
-        /* Mostra tela de espera */
+        /* Prepara e mostra tela de espera */
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		progressDialog.setMessage("Carregando cardapio");
@@ -86,6 +86,7 @@ public class Main extends Activity {
         //Atualiza os dados
         Log.v("bandeco","comecou a pegar dados");
         loadDataThread = new LoadDataThread(this,restaurante);
+        updateScreen();
         loadDataThread.start(false);
         //E agora a tela
 		updateScreen();
@@ -99,11 +100,12 @@ public class Main extends Activity {
 			@Override
 			public boolean onMenuItemClick(MenuItem arg0) {
 		        loadDataThread = new LoadDataThread(main,restaurante);
+		        updateScreen();
 		        loadDataThread.start(true);
 				return true;
 			}
 		});
-    	itemAtualiza.setIcon(R.drawable.atualizar);
+    	itemAtualiza.setIcon(R.drawable.ic_menu_refresh);
     	return true;
     }
     	
@@ -111,16 +113,19 @@ public class Main extends Activity {
     
     public void updateScreen() {
 	    	if (loadDataThread.isDataReady()) {
-	    		progressDialog.dismiss();
-	    		bttAnterior.setEnabled((cardapioAtual > 0));
+	    		if (progressDialog != null)
+	    			progressDialog.dismiss();
+    			bttAnterior.setEnabled((cardapioAtual > 0));
 		    	bttProximo.setEnabled((cardapioAtual < restaurante.getCardapios().size()-1));
 		    	if (restaurante.getCardapios().size() >= 1) {
 		    		texto.setText(restaurante.getCardapios().get(cardapioAtual).toString());
 		    	} else {
 		    		texto.setText("Nenhum cardapio.");
 		    	}
+	    		
 	    	} else {
-	    		progressDialog.show();
+	    		if (progressDialog != null)
+	    			progressDialog.show();
 	    	}
     }	
     @SuppressWarnings("unused")
@@ -160,6 +165,12 @@ public class Main extends Activity {
         
         return null;
     
+    }
+    @Override
+    protected void onStop() {
+    	super.onStop();
+    	progressDialog.dismiss();
+    	progressDialog=null;
     }
     /*
     private String getCardapio2(int pagina)

@@ -8,7 +8,7 @@ public abstract class Restaurante implements Serializable {
 	private static final long serialVersionUID = -1612436480775220733L;
 	private ArrayList<Cardapio> cardapios = new ArrayList<Cardapio>();
 	
-	public abstract void atualizarCardapios(Main main);
+	public abstract boolean atualizarCardapios(Main main);
 	
 	public abstract Boolean temQueAtualizar();
 	
@@ -16,5 +16,9 @@ public abstract class Restaurante implements Serializable {
 	
 	public ArrayList<Cardapio> getCardapios() {
 		return cardapios;
+	}
+	
+	public void setCardapios(ArrayList<Cardapio> cardapios) {
+		this.cardapios=cardapios;
 	}
 }
