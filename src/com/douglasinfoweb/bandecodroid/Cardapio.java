@@ -65,45 +65,7 @@ public class Cardapio implements Serializable {
 		this.refeicao = refeicao;
 	}
 	
-	@Override
-	public String toString() {
-		StringBuilder saida = new StringBuilder();
-		if (refeicao != null)
-			switch (refeicao) {
-				case ALMOCO: saida.append("ALMOÇO"); break;
-				case JANTA: saida.append("JANTAR"); break;
-			}
-		if (data != null)
-			saida.append(" "+int2diaDaSemana(data.getDayOfWeek()).toUpperCase()+" "+data.getDayOfMonth()+"/"+data.getMonthOfYear());  
-		if (pratoPrincipal!=null)
-			saida.append("\n"+pratoPrincipal.toUpperCase());
-		if (suco!=null)
-			saida.append("\nSuco de "+suco);
-		if (salada!=null)
-			saida.append("\nSalada: "+salada);
-		if (sobremesa != null)
-			saida.append("\nSobremesa: "+sobremesa);
-		if (pts != null)
-			saida.append("\n"+pts);
-		if (obs != null)
-			saida.append("\n"+obs);
-		return saida.toString();
-	}
-	
-	private String int2diaDaSemana(int dayOfWeek) {
-		String result;
-		switch (dayOfWeek) {
-			case 1: result = "Segunda-feira"; break;
-			case 2: result = "Terça-feira"; break;
-			case 3: result = "Quarta-feira"; break;
-			case 4: result = "Quinta-feira"; break;
-			case 5: result = "Sexta-feira"; break;
-			case 6: result = "Sábado"; break;
-			case 7: result = "Domingo"; break;
-			default: result = ""; break;
-		}
-		return result;
-	}
+
 }
 
 

@@ -49,7 +49,7 @@ public class BandecoUnicamp extends Restaurante {
 								cardapio.setData(data);
 							}
 						} else if (text.contains("prato principal")) {
-							cardapio.setPratoPrincipal(separaEPegaValor(textoNormal));
+							cardapio.setPratoPrincipal(capitalize(separaEPegaValor(textoNormal)));
 							duasLinhasPratoPrincipal=true;
 						} else if (text.contains("sobremesa")) {
 							cardapio.setSobremesa(capitalize(separaEPegaValor(textoNormal)));
@@ -76,15 +76,15 @@ public class BandecoUnicamp extends Restaurante {
 							proximo=true;
 							duasLinhasPratoPrincipal=false;
 						} else if (duasLinhasPratoPrincipal) {
-							cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+textoNormal);
+							cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+capitalize(textoNormal));
 							duasLinhasPratoPrincipal=false;
 						}
 					}		
 	
 				pagina++;	
 			}
-			removeCardapiosAntigos();
 			setCardapios(cardapios);
+			removeCardapiosAntigos();
 			FileOutputStream fos = main.openFileOutput("cardapios", Context.MODE_WORLD_READABLE);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(this);

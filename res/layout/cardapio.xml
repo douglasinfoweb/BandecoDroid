@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardapio"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+	<ImageView
+	    android:id="@+id/Imagem"
+	    android:src="@drawable/cardapio_almoco"
+	    android:layout_width="318dp"
+	    android:layout_height="332dp"
+	    ></ImageView>
+            
+            <TextView
+            android:id="@+id/Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="64dp"
+            
+            android:text="Almoço Segunda-feira"
+            android:textAppearance="@style/Titulo" />
+            
+    <TextView
+        android:id="@+id/PratoPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="82dp"
+        android:layout_marginLeft="82dp"
+        android:text="FRICASSÊ DE FRANGO
+BATATA SAUTÉ"
+        android:textStyle="bold"
+        android:textAppearance="@style/Texto" />
+
+        <TextView
+        android:id="@+id/Suco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="145dp"
+        android:layout_marginLeft="82dp"
+        android:text="Tangerina"
+        android:textAppearance="@style/Texto" />
+        
+        <TextView
+        android:id="@+id/Salada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="193dp"
+        android:layout_marginLeft="82dp"
+        android:text="Vagem"
+        android:textAppearance="@style/Texto" />
+        <TextView
+        android:id="@+id/Sobremesa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="237dp"
+        android:layout_marginLeft="82dp"
+        android:text="Picolé de chocolate"
+        android:textAppearance="@style/Texto" />
+        <TextView
+        android:id="@+id/PTS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="282dp"
+        android:layout_marginLeft="82dp"
+        android:text="PTS com batata"
+        android:textAppearance="@style/Texto" />
+
+
+    
+</RelativeLayout>

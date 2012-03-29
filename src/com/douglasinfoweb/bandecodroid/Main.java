@@ -14,24 +14,22 @@ import org.apache.http.util.ByteArrayBuffer;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Main extends Activity {
-    private int cardapioAtual=0;
     private Restaurante restaurante;
-	private TextView texto;
 	private Main main=this;
-    private Button bttAnterior;
-    private  Button bttProximo;
 	private LoadDataThread loadDataThread;
 	private ProgressDialog progressDialog;
    
@@ -58,31 +56,6 @@ public class Main extends Activity {
 		progressDialog.setProgress(0);
 		progressDialog.show();
 		
-        /* Pega referencia aos components da UI */
-        texto = (TextView) findViewById(R.id.texto);
-        bttAnterior = (Button) this.findViewById(R.id.btt_anterior);
-        bttProximo = (Button) findViewById(R.id.btt_proximo);
-        
-        /* Configura botoes */
-        bttAnterior.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(cardapioAtual>0)
-					cardapioAtual--;
-				updateScreen();
-			}
-		});
-        
-        bttProximo.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) 
-			{
-				if (cardapioAtual<restaurante.getCardapios().size()-1)
-					cardapioAtual++;
-				updateScreen();
-			}
-		});
-        
         //Atualiza os dados
         Log.v("bandeco","comecou a pegar dados");
         loadDataThread = new LoadDataThread(this,restaurante);
@@ -91,6 +64,7 @@ public class Main extends Activity {
         //E agora a tela
 		updateScreen();
     }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
@@ -108,20 +82,52 @@ public class Main extends Activity {
     	itemAtualiza.setIcon(R.drawable.ic_menu_refresh);
     	return true;
     }
-    	
-  
+    
     
     public void updateScreen() {
 	    	if (loadDataThread.isDataReady()) {
 	    		if (progressDialog != null)
 	    			progressDialog.dismiss();
-    			bttAnterior.setEnabled((cardapioAtual > 0));
-		    	bttProximo.setEnabled((cardapioAtual < restaurante.getCardapios().size()-1));
-		    	if (restaurante.getCardapios().size() >= 1) {
-		    		texto.setText(restaurante.getCardapios().get(cardapioAtual).toString());
-		    	} else {
-		    		texto.setText("Nenhum cardapio.");
-		    	}
+    			LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+	    		LinearLayout mainScroll = (LinearLayout)findViewById(R.id.main);
+    			mainScroll.removeAllViews();
+	    		for (Cardapio cardapio : restaurante.getCardapios()) {
+    				//Pega o layout de cardapios
+	    			RelativeLayout layout = (RelativeLayout)vi.inflate(R.layout.cardapio, null);
+    				//Pega o titulo do cardapio
+    				TextView titulo = (TextView)layout.findViewById(R.id.Titulo);
+    				ImageView image = (ImageView)layout.findViewById(R.id.Imagem);
+    				switch (cardapio.getRefeicao()) {
+    					case ALMOCO: titulo.setText("ALMOÇO "+int2diaDaSemana(cardapio.getData().getDayOfWeek())); 
+    								image.setImageDrawable(getResources().getDrawable(R.drawable.cardapio_almoco));
+    								break;
+    					case JANTA: titulo.setText("JANTAR "+int2diaDaSemana(cardapio.getData().getDayOfWeek()));
+									image.setImageDrawable(getResources().getDrawable(R.drawable.cardapio_jantar));
+									break;
+    				}
+    				//layout.setLayoutParams(new RelativeLayout.LayoutParams());
+    				//Prega o prato principal
+    				TextView pratoPrincipal = (TextView)layout.findViewById(R.id.PratoPrincipal);
+    				pratoPrincipal.setText(cardapio.getPratoPrincipal());
+    				
+    				//Pega o suco
+    				TextView suco = (TextView)layout.findViewById(R.id.Suco);
+    				suco.setText(cardapio.getSuco());
+    				
+    				//Pega a salada
+    				TextView salada = (TextView)layout.findViewById(R.id.Salada);
+    				salada.setText(cardapio.getSalada());
+    				
+    				//Pega a sobremesa
+    				TextView sobremesa = (TextView)layout.findViewById(R.id.Sobremesa);
+    				sobremesa.setText(cardapio.getSobremesa());
+    				
+    				//Pega o PTS
+    				TextView PTS = (TextView)layout.findViewById(R.id.PTS);
+    				PTS.setText(cardapio.getPts());
+    				mainScroll.addView(layout);
+    			}
 	    		
 	    	} else {
 	    		if (progressDialog != null)
@@ -174,125 +180,19 @@ public class Main extends Activity {
 	    	progressDialog=null;
     	}
     }
-    /*
-    private String getCardapio2(int pagina)
-    {
-
-    	try
-    	{
-            URL updateURL = new URL("http://www.caco.ic.unicamp.br/cardapio.php/"+pagina);
-            URLConnection conn = updateURL.openConnection();
-            InputStream is = conn.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            ByteArrayBuffer baf = new ByteArrayBuffer(50);
-
-            int current = 0;
-            while((current = bis.read()) != -1){
-                baf.append((byte)current);
-            }
-
-            // Convert the Bytes read to a String. 
-            String html = new String(baf.toByteArray());
-            html = html.replaceAll("<b>", "");
-            html = html.replaceAll("</b>", "");
-            
-            String vet[] = html.split("<br>");
-            
-            vet[0] = vet[0].split("1px>")[1];
-            vet[1] = vet[1].trim();
-            
-            if(html.indexOf("Próximo<br>")!=-1)
-            {
-            	bttProximo.setEnabled(false);
-            }
-            else
-            {
-            	bttProximo.setEnabled(true);
-            }
-            
-            if(html.indexOf("<br>Anterior")!=-1)
-            {
-            	bttAnterior.setEnabled(false);
-            }
-            else
-            {
-            	bttAnterior.setEnabled(true);
-            }
-            
-            String conc = vet[0];
-            for(int i=1;i<vet.length-2;i++)
-            	conc+="\n"+vet[i];
-            
-            return conc;
-    	}
-    	catch (MalformedURLException e) 
-    	{	
-    		Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG);
-		} 
-    	catch (IOException e) 
-		{
-    		Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG);
+		
+	private String int2diaDaSemana(int dayOfWeek) {
+		String result;
+		switch (dayOfWeek) {
+			case 1: result = "Segunda-feira"; break;
+			case 2: result = "Terça-feira"; break;
+			case 3: result = "Quarta-feira"; break;
+			case 4: result = "Quinta-feira"; break;
+			case 5: result = "Sexta-feira"; break;
+			case 6: result = "Sábado"; break;
+			case 7: result = "Domingo"; break;
+			default: result = ""; break;
 		}
-        
-        return null;
-    
-    }
-    */
-    
-    @SuppressWarnings("unused")
-    //Nao usa?
-	private String getCardapio(int pagina)
-    {
-    	try
-    	{
-            URL updateURL = new URL("http://www.caco.ic.unicamp.br/cardapio.php/"+pagina);
-            URLConnection conn = updateURL.openConnection();
-            InputStream is = conn.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            ByteArrayBuffer baf = new ByteArrayBuffer(50);
-
-            int current = 0;
-            while((current = bis.read()) != -1){
-                baf.append((byte)current);
-            }
-
-            /* Convert the Bytes read to a String. */
-            String html = new String(baf.toByteArray());
-            
-            if(html.indexOf("Próximo<br>")!=-1)
-            {
-            	bttProximo.setEnabled(false);
-            }
-            else
-            {
-            	bttProximo.setEnabled(true);
-            }
-            
-            if(html.indexOf("<br>Anterior")!=-1)
-            {
-            	html = html.substring(html.indexOf("px>")+3, html.indexOf("<br>Anterior"));
-            	bttAnterior.setEnabled(false);
-            }
-            else
-            {
-            	html = html.substring(html.indexOf("px>")+3, html.indexOf("<a"));
-            	bttAnterior.setEnabled(true);
-            }
-            
-            html = html.replaceAll("<br>", "\n");
-            html = html.replaceAll("<b>", "");
-            html = html.replaceAll("</b>", "");
-            return html.trim();
-    	}
-    	catch (MalformedURLException e) 
-    	{	
-    		Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG);
-		} 
-    	catch (IOException e) 
-		{
-    		Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG);
-		}
-        
-        return null;
-    }
+		return result;
+	}
 }
