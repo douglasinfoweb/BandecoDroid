@@ -169,8 +169,10 @@ public class Main extends Activity {
     @Override
     protected void onStop() {
     	super.onStop();
-    	progressDialog.dismiss();
-    	progressDialog=null;
+    	if (progressDialog != null) {
+	    	progressDialog.dismiss();
+	    	progressDialog=null;
+    	}
     }
     /*
     private String getCardapio2(int pagina)

@@ -9,7 +9,7 @@ public class LoadDataThread extends Thread
     private boolean dataReady=false;
     private Main main;
     private Restaurante restaurante;
-    private boolean forcarAtualizacao;
+    private boolean forcarAtualizacao=false;
    
     LoadDataThread(Main main, Restaurante restaurante) 
     {

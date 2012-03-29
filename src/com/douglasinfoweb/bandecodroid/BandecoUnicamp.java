@@ -84,12 +84,12 @@ public class BandecoUnicamp extends Restaurante {
 				pagina++;	
 			}
 			removeCardapiosAntigos();
+			setCardapios(cardapios);
 			FileOutputStream fos = main.openFileOutput("cardapios", Context.MODE_WORLD_READABLE);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(this);
 			oos.flush();
 			oos.close();
-			setCardapios(cardapios);
 			Log.v("bandeco","salvou objeto com sucesso :D");
 			return true;
 		} catch (IOException e1) {
