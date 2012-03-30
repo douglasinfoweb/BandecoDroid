@@ -8,4 +8,12 @@
         <item name="android:textSize">18sp</item>
         <item name="android:typeface">serif</item>
     </style>
+    <style name="Titulo_widget" parent="@android:style/TextAppearance.Large">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="Texto_widget" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">8sp</item>
+        <item name="android:typeface">serif</item>
+    </style>
 </resources>
