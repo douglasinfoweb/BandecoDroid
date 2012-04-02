@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TableRow;
+import android.widget.TextView;
+
 public class Cardapio implements Serializable {
 	private static final long serialVersionUID = 5627453443659151036L;
 	private DateTime data;
@@ -65,7 +72,85 @@ public class Cardapio implements Serializable {
 		this.refeicao = refeicao;
 	}
 	
+	public View getCardapioView(Context applicationContext) {
+		LayoutInflater vi = (LayoutInflater) applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		//Pega o layout de cardapios
+		View layout = (View)vi.inflate(R.layout.cardapio, null);
+		//Pega o titulo do cardapio
+		TextView titulo = (TextView)layout.findViewById(R.id.Titulo);
+		ImageView imageTop = (ImageView)layout.findViewById(R.id.topImage);
+		ImageView imageBottom = (ImageView)layout.findViewById(R.id.bottomImage);
+		
+		switch (refeicao) {
+			case ALMOCO: titulo.setText("ALMOÇO "+int2diaDaSemana(data.getDayOfWeek())); 
+						 imageTop.setImageResource(R.drawable.cardapio_almoco_top);
+						 imageBottom.setImageResource(R.drawable.cardapio_almoco_bottom);
+						break;
+			case JANTA: titulo.setText("JANTAR "+int2diaDaSemana(data.getDayOfWeek()));
+						imageTop.setImageResource(R.drawable.cardapio_jantar_top);
+						imageBottom.setImageResource(R.drawable.cardapio_jantar_bottom);
+						break;
+		}
+		setLayoutText(layout,
+				R.id.PratoPrincipalRow,
+				R.id.PratoPrincipal,
+				(pratoPrincipal != null && pratoPrincipal.length() > 2),
+				pratoPrincipal);
 
+		setLayoutText(layout,
+				R.id.SucoRow,
+				R.id.Suco,
+				(suco != null && suco.length() > 2),
+				suco);
+		
+		setLayoutText(layout,
+				R.id.SaladaRow,
+				R.id.Salada,
+				(salada != null && salada.length() > 2),
+				salada);
+		
+		setLayoutText(layout,
+				R.id.SobremesaRow,
+				R.id.Sobremesa,
+				(sobremesa != null && sobremesa.length() > 2),
+				sobremesa);
+		
+		setLayoutText(layout,
+				R.id.PtsRow,
+				R.id.Pts,
+				(pts != null && pts.length() > 2),
+				pts);
+		return layout;
+	}
+	private void setLayoutText(View layout, int rowID, int textID, boolean show, String text) {
+		TableRow rowView = (TableRow)layout.findViewById(rowID);
+		TextView textView = (TextView)layout.findViewById(textID);
+		textView.setText(text);
+		if (refeicao.equals(Refeicao.ALMOCO)) {
+			rowView.setBackgroundResource(R.drawable.cardapio_almoco_repeat);
+		} else {
+			rowView.setBackgroundResource(R.drawable.cardapio_jantar_repeat);
+		}
+		if (!show) {
+			rowView.setVisibility(View.GONE);
+		} else {
+			rowView.setVisibility(View.VISIBLE);
+		}
+	}
+	private String int2diaDaSemana(int dayOfWeek) {
+		String result;
+		switch (dayOfWeek) {
+			case 1: result = "Segunda-feira"; break;
+			case 2: result = "Terça-feira"; break;
+			case 3: result = "Quarta-feira"; break;
+			case 4: result = "Quinta-feira"; break;
+			case 5: result = "Sexta-feira"; break;
+			case 6: result = "Sábado"; break;
+			case 7: result = "Domingo"; break;
+			default: result = ""; break;
+		}
+		return result;
+	}
 }
 
 

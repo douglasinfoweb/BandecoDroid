@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BandecoDroid</string>
-    <string name="loading_data_message">Carregando cardápio</string>
-    <string name="anterior">Anterior</string>
-    <string name="proximo">Próximo</string>
+    <string name="teste">Teste</string>
 </resources>
