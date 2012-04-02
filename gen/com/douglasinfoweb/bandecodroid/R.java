@@ -11,22 +11,20 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int cardapio_almoco=0x7f020000;
-        public static final int cardapio_almoco_bottom=0x7f020001;
-        public static final int cardapio_almoco_repeat=0x7f020002;
-        public static final int cardapio_almoco_top=0x7f020003;
-        public static final int cardapio_jantar=0x7f020004;
-        public static final int cardapio_jantar_bottom=0x7f020005;
-        public static final int cardapio_jantar_repeat=0x7f020006;
-        public static final int cardapio_jantar_top=0x7f020007;
-        public static final int ic_menu_refresh=0x7f020008;
-        public static final int ic_pratoprincipal=0x7f020009;
-        public static final int ic_pts=0x7f02000a;
-        public static final int ic_salada=0x7f02000b;
-        public static final int ic_sobremesa=0x7f02000c;
-        public static final int ic_sol=0x7f02000d;
-        public static final int ic_suco=0x7f02000e;
-        public static final int icon=0x7f02000f;
+        public static final int cardapio_almoco_bottom=0x7f020000;
+        public static final int cardapio_almoco_repeat=0x7f020001;
+        public static final int cardapio_almoco_top=0x7f020002;
+        public static final int cardapio_jantar_bottom=0x7f020003;
+        public static final int cardapio_jantar_repeat=0x7f020004;
+        public static final int cardapio_jantar_top=0x7f020005;
+        public static final int ic_menu_refresh=0x7f020006;
+        public static final int ic_pratoprincipal=0x7f020007;
+        public static final int ic_pts=0x7f020008;
+        public static final int ic_salada=0x7f020009;
+        public static final int ic_sobremesa=0x7f02000a;
+        public static final int ic_sol=0x7f02000b;
+        public static final int ic_suco=0x7f02000c;
+        public static final int icon=0x7f02000d;
     }
     public static final class id {
         public static final int PratoPrincipal=0x7f060003;

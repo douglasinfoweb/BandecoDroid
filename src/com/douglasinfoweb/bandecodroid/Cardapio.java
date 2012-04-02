@@ -10,7 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
-
+/**
+ * Classe responsavel pelo armazenamento do cardapio em um dia
+ * @author Vinicius
+ *
+ */
 public class Cardapio implements Serializable {
 	private static final long serialVersionUID = 5627453443659151036L;
 	private DateTime data;
