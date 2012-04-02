@@ -39,12 +39,16 @@ public final class R {
         public static final int SucoRow=0x7f060004;
         public static final int Titulo=0x7f060001;
         public static final int bottomImage=0x7f06000c;
-        public static final int main=0x7f06000d;
+        public static final int main=0x7f060010;
+        public static final int textview1=0x7f06000d;
+        public static final int textview2=0x7f06000e;
+        public static final int textview3=0x7f06000f;
         public static final int topImage=0x7f060000;
     }
     public static final class layout {
         public static final int cardapio=0x7f030000;
-        public static final int main=0x7f030001;
+        public static final int configuracoes=0x7f030001;
+        public static final int main=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
