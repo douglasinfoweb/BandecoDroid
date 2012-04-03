@@ -1,8 +1,6 @@
-package com.douglasinfoweb.bandecodroid;
+package com.douglasinfoweb.bandecodroid.restaurantes;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,8 +10,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import android.content.Context;
 import android.util.Log;
+
+import com.douglasinfoweb.bandecodroid.Cardapio;
+import com.douglasinfoweb.bandecodroid.Main;
+import com.douglasinfoweb.bandecodroid.R;
+import com.douglasinfoweb.bandecodroid.Restaurante;
 
 @SuppressWarnings("serial")
 public class BandecoUnicamp extends Restaurante {
@@ -85,11 +87,7 @@ public class BandecoUnicamp extends Restaurante {
 			}
 			setCardapios(cardapios);
 			removeCardapiosAntigos();
-			FileOutputStream fos = main.openFileOutput("cardapios", Context.MODE_WORLD_READABLE);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(this);
-			oos.flush();
-			oos.close();
+			main.save();
 			Log.v("bandeco","salvou objeto com sucesso :D");
 			return true;
 		} catch (IOException e1) {
@@ -155,6 +153,16 @@ public class BandecoUnicamp extends Restaurante {
         	sb.append(capitalizeOneWord(splited[i]));
         }
         return sb.toString().trim();
+	}
+
+	@Override
+	public int getImagem() {
+		return R.drawable.logo_unicamp;
+	}
+
+	@Override
+	public String getNome() {
+		return "UNICAMP";
 	}
 	
 

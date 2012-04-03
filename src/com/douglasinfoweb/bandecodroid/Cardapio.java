@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 
-import android.content.Context;
+import android.graphics.Shader.TileMode;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 /**
@@ -76,15 +78,22 @@ public class Cardapio implements Serializable {
 		this.refeicao = refeicao;
 	}
 	
-	public View getCardapioView(Context applicationContext) {
-		LayoutInflater vi = (LayoutInflater) applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	public View getCardapioView(LayoutInflater vi) {
 		//Pega o layout de cardapios
 		View layout = (View)vi.inflate(R.layout.cardapio, null);
 		//Pega o titulo do cardapio
+		TableLayout table = (TableLayout)layout.findViewById(R.id.cardapioTable);
 		TextView titulo = (TextView)layout.findViewById(R.id.Titulo);
 		ImageView imageTop = (ImageView)layout.findViewById(R.id.topImage);
 		ImageView imageBottom = (ImageView)layout.findViewById(R.id.bottomImage);
 		
+		if (refeicao.equals(Refeicao.ALMOCO)) {
+			table.setBackgroundResource(R.drawable.background_almoco);
+		} else {
+			table.setBackgroundResource(R.drawable.background_jantar);
+		}
+		BitmapDrawable bm= (BitmapDrawable)table.getBackground();
+		bm.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
 		switch (refeicao) {
 			case ALMOCO: titulo.setText("ALMOÇO "+int2diaDaSemana(data.getDayOfWeek())); 
 						 imageTop.setImageResource(R.drawable.cardapio_almoco_top);
@@ -130,11 +139,6 @@ public class Cardapio implements Serializable {
 		TableRow rowView = (TableRow)layout.findViewById(rowID);
 		TextView textView = (TextView)layout.findViewById(textID);
 		textView.setText(text);
-		if (refeicao.equals(Refeicao.ALMOCO)) {
-			rowView.setBackgroundResource(R.drawable.cardapio_almoco_repeat);
-		} else {
-			rowView.setBackgroundResource(R.drawable.cardapio_jantar_repeat);
-		}
 		if (!show) {
 			rowView.setVisibility(View.GONE);
 		} else {
@@ -155,6 +159,7 @@ public class Cardapio implements Serializable {
 		}
 		return result;
 	}
+	
 }
 
 

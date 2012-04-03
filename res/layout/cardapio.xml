@@ -22,39 +22,34 @@
     </RelativeLayout>
     
     <TableLayout 
-        android:layout_width="wrap_content" android:layout_height="wrap_content">
+        android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/cardapioTable">
         <TableRow android:id="@+id/PratoPrincipalRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp"
-        android:background="@drawable/cardapio_almoco_repeat">
+            android:paddingLeft="27dp" android:paddingRight="10dp" android:paddingBottom="10dp">
             <ImageView android:src="@drawable/ic_pratoprincipal" android:layout_gravity="center" android:layout_margin="5dp" />
             <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
                 android:layout_width="210dp" android:id="@+id/PratoPrincipal"/>
         </TableRow>
         
         <TableRow android:id="@+id/SucoRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp"
-        android:background="@drawable/cardapio_almoco_repeat">
+            android:paddingLeft="27dp" android:paddingRight="10dp" android:paddingBottom="10dp">
             <ImageView android:src="@drawable/ic_suco" android:layout_gravity="center" android:layout_margin="5dp" />
             <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
                 android:layout_width="210dp"  android:id="@+id/Suco"/>
         </TableRow>
         <TableRow android:id="@+id/SaladaRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp"
-        android:background="@drawable/cardapio_almoco_repeat">
+            android:paddingLeft="27dp" android:paddingRight="10dp" android:paddingBottom="10dp">
             <ImageView android:src="@drawable/ic_salada" android:layout_gravity="center" android:layout_margin="5dp" />
             <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
                 android:layout_width="210dp" android:id="@+id/Salada"/>
         </TableRow>
         <TableRow android:id="@+id/SobremesaRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp"
-        android:background="@drawable/cardapio_almoco_repeat">
+            android:paddingLeft="27dp" android:paddingRight="10dp" android:paddingBottom="10dp">
             <ImageView android:src="@drawable/ic_sobremesa" android:layout_gravity="center" android:layout_margin="5dp" />
             <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
                 android:layout_width="210dp" android:id="@+id/Sobremesa"/>
         </TableRow>
         <TableRow android:id="@+id/PtsRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp"
-        android:background="@drawable/cardapio_almoco_repeat">
+            android:paddingLeft="27dp" android:paddingRight="10dp">
             <ImageView android:src="@drawable/ic_pts" android:layout_gravity="center" android:layout_margin="5dp" />
             <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
                 android:layout_width="210dp" android:id="@+id/Pts"/>
