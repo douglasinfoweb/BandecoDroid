@@ -40,7 +40,7 @@ public class RestauranteAdapter extends BaseAdapter {
 		final Restaurante restaurante = Restaurante.possiveisRestaurantes[position]; 
 		
 		ImageView image = (ImageView)restauranteView.findViewById(R.id.RestauranteImage);
-		image.setBackgroundResource(restaurante.getImagem());
+		image.setImageResource(restaurante.getImagem());
 		
 		CheckBox checkBox = (CheckBox)restauranteView.findViewById(R.id.RestauranteCheckbox);
 		checkBox.setChecked(config.getRestaurantesEscolhidos().contains(restaurante));
@@ -50,10 +50,10 @@ public class RestauranteAdapter extends BaseAdapter {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
-				if (config.getRestaurantesEscolhidos().contains(restaurante)) {
-					config.getRestaurantesEscolhidos().remove(restaurante);
+				if (activity.getRestaurantesSelecionados().contains(restaurante)) {
+					activity.getRestaurantesSelecionados().remove(restaurante);
 				} else {
-					config.getRestaurantesEscolhidos().add(restaurante);
+					activity.getRestaurantesSelecionados().add(restaurante);
 				}
 				activity.update();
 			}

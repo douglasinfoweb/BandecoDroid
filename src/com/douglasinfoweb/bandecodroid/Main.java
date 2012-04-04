@@ -97,9 +97,15 @@ public class Main extends Activity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	config = (Configuracoes)data.getExtras().get("config");
-    	Log.v("bandeco","config: total de restaurantes "+config.getRestaurantesEscolhidos().size());
-    	start();
+    	if (data == null || data.getExtras() == null || data.getExtras().get("config") == null) {
+        	Intent intent = new Intent(this, ConfiguracoesActivity.class);
+        	intent.putExtra("config", config);
+        	startActivityForResult(intent, 0);
+    	} else {
+    		config = (Configuracoes)data.getExtras().get("config");
+        	Log.v("bandeco","config: total de restaurantes "+config.getRestaurantesEscolhidos().size());
+        	start();
+    	}
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

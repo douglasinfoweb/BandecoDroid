@@ -3,13 +3,20 @@ package com.douglasinfoweb.bandecodroid;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.douglasinfoweb.bandecodroid.restaurantes.BandecoUnicamp;
+import com.douglasinfoweb.bandecodroid.restaurantes.Unicamp;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspCentral;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspFisica;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspPrefeitura;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspQuimicas;
 
 
 public abstract class Restaurante implements Serializable {
 	public static Restaurante[] possiveisRestaurantes = new Restaurante[] {
-		new BandecoUnicamp()
-		
+		new Unicamp(),
+		new UspCentral(),
+		new UspQuimicas(),
+		new UspFisica(),
+		new UspPrefeitura()
 	};
 	private static final long serialVersionUID = -1612436480775220733L;
 	public abstract int getImagem();

@@ -16,9 +16,10 @@ import com.douglasinfoweb.bandecodroid.Cardapio;
 import com.douglasinfoweb.bandecodroid.Main;
 import com.douglasinfoweb.bandecodroid.R;
 import com.douglasinfoweb.bandecodroid.Restaurante;
+import com.douglasinfoweb.bandecodroid.Util;
 
 @SuppressWarnings("serial")
-public class BandecoUnicamp extends Restaurante {
+public class Unicamp extends Restaurante {
 	boolean proximo;
 	@Override
 	public boolean atualizarCardapios(Main main) {
@@ -40,7 +41,7 @@ public class BandecoUnicamp extends Restaurante {
 						String textoNormal = e.text().trim();
 						/** INFORMAÇÕES **/
 						if (text.contains("feira")) {
-							String dataTxt = text.substring(0, 10).trim();
+							String dataTxt = Util.removerEspacosDuplicados(text).trim().substring(0, 10);
 							String[] dataSplited = dataTxt.split("/");
 							if (dataSplited.length == 3) {
 								DateTime data = new DateTime(
@@ -51,22 +52,22 @@ public class BandecoUnicamp extends Restaurante {
 								cardapio.setData(data);
 							}
 						} else if (text.contains("prato principal")) {
-							cardapio.setPratoPrincipal(capitalize(separaEPegaValor(textoNormal)));
+							cardapio.setPratoPrincipal(Util.capitalize(Util.separaEPegaValor(textoNormal)));
 							duasLinhasPratoPrincipal=true;
 						} else if (text.contains("sobremesa")) {
-							cardapio.setSobremesa(capitalize(separaEPegaValor(textoNormal)));
+							cardapio.setSobremesa(Util.capitalize(Util.separaEPegaValor(textoNormal)));
 							duasLinhasPratoPrincipal=false;
 						} else if (text.contains("salada")) {
-							cardapio.setSalada(capitalize(separaEPegaValor(textoNormal)));
+							cardapio.setSalada(Util.capitalize(Util.separaEPegaValor(textoNormal)));
 							duasLinhasPratoPrincipal=false;
 						} else if (text.contains("suco")) {
-							cardapio.setSuco(capitalize(separaEPegaValor(textoNormal)));
+							cardapio.setSuco(Util.capitalize(Util.separaEPegaValor(textoNormal)));
 							duasLinhasPratoPrincipal=false;
 						} else if (text.contains("pts")) {
-							cardapio.setPts(capitalize(textoNormal));
+							cardapio.setPts(Util.capitalize(textoNormal));
 							duasLinhasPratoPrincipal=false;
 						} else if (text.contains("obs")) {
-							cardapio.setObs(capitalize(textoNormal));
+							cardapio.setObs(Util.capitalize(textoNormal));
 							duasLinhasPratoPrincipal=false;
 						} else if (text.contains("jantar")) {
 							cardapio.setRefeicao(Cardapio.Refeicao.JANTA);
@@ -78,7 +79,7 @@ public class BandecoUnicamp extends Restaurante {
 							proximo=true;
 							duasLinhasPratoPrincipal=false;
 						} else if (duasLinhasPratoPrincipal) {
-							cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+capitalize(textoNormal));
+							cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+Util.capitalize(textoNormal));
 							duasLinhasPratoPrincipal=false;
 						}
 					}		
@@ -96,13 +97,6 @@ public class BandecoUnicamp extends Restaurante {
 		}
 	}
 	
-	private String separaEPegaValor(String text) { //String no formato "A: BCD" retorna BCD
-		String [] splited = text.split(":");
-		if (splited.length > 1) {
-			return splited[1].trim();
-		}
-		return null;
-	}
 	
 	@Override
 	public Boolean temQueAtualizar() {
@@ -139,20 +133,6 @@ public class BandecoUnicamp extends Restaurante {
 				}
 			}
 		}
-	}
-
-	private String capitalizeOneWord(String s) {
-        if (s.length() == 0) return s;
-        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase() + " ";
-	}
-	private String capitalize(String s) {
-		if (s == null || s.length() == 0) return s;
-		String[] splited = s.split(" ");
-		StringBuilder sb = new StringBuilder();
-        for (int i=0; i<splited.length; i++) {
-        	sb.append(capitalizeOneWord(splited[i]));
-        }
-        return sb.toString().trim();
 	}
 
 	@Override
