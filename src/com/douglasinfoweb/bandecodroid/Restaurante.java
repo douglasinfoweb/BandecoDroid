@@ -7,16 +7,18 @@ import com.douglasinfoweb.bandecodroid.restaurantes.Unicamp;
 import com.douglasinfoweb.bandecodroid.restaurantes.UspCentral;
 import com.douglasinfoweb.bandecodroid.restaurantes.UspFisica;
 import com.douglasinfoweb.bandecodroid.restaurantes.UspPrefeitura;
-import com.douglasinfoweb.bandecodroid.restaurantes.UspQuimicas;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspQuimica;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspSaoCarlos;
 
 
 public abstract class Restaurante implements Serializable {
 	public static Restaurante[] possiveisRestaurantes = new Restaurante[] {
 		new Unicamp(),
 		new UspCentral(),
-		new UspQuimicas(),
+		new UspQuimica(),
 		new UspFisica(),
-		new UspPrefeitura()
+		new UspPrefeitura(),
+		new UspSaoCarlos()
 	};
 	private static final long serialVersionUID = -1612436480775220733L;
 	public abstract int getImagem();

@@ -160,10 +160,6 @@ public class Main extends Activity {
 	    				text.setText("Erro: Nenhum restaurante atual");
 	    				mainScroll.addView(text);
 	    			}
-    			} else {
-    				TextView text =new TextView(this);
-    				text.setText("Erro: Nenhum restaurante escolhido");
-    				mainScroll.addView(text);
     			}
 	    	} else {
 	    		if (progressDialog != null)

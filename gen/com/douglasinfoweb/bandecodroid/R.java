@@ -35,7 +35,8 @@ public final class R {
         public static final int logo_usp_central=0x7f020015;
         public static final int logo_usp_fisica=0x7f020016;
         public static final int logo_usp_prefeitura=0x7f020017;
-        public static final int logo_usp_quimicas=0x7f020018;
+        public static final int logo_usp_quimica=0x7f020018;
+        public static final int logo_usp_saocarlos=0x7f020019;
     }
     public static final class id {
         public static final int PratoPrincipal=0x7f060004;

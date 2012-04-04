@@ -98,7 +98,7 @@ public class UspFisica extends Restaurante {
 							case 3: cardapio.setPratoPrincipal(text); break;
 							case 4: cardapio.setPratoPrincipal(cardapio.getPratoPrincipal() + "\n"+text); break;		 
 							case 5: cardapio.setSalada(text); break;
-							case 6: cardapio.setPts(separaEPegaValor(text)); break;
+							case 6: cardapio.setPts(Util.separaEPegaValor(text)); break;
 							case 7: 
 								String textSplited[] = text.split("/");
 								if (textSplited.length == 2) {
@@ -145,13 +145,6 @@ public class UspFisica extends Restaurante {
 		return true;
 	}
 
-	private String separaEPegaValor(String text) { //String no formato "A: BCD" retorna BCD
-		String [] splited = text.split(":");
-		if (splited.length > 1) {
-			return splited[1].trim();
-		}
-		return text;
-	}
 	@Override
 	public void removeCardapiosAntigos() {
 		DateTime now = DateTime.now();

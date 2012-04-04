@@ -21,7 +21,7 @@ import com.douglasinfoweb.bandecodroid.Restaurante;
 import com.douglasinfoweb.bandecodroid.Util;
 
 @SuppressWarnings("serial")
-public class UspQuimicas extends Restaurante {
+public class UspQuimica extends Restaurante {
 	boolean proximo;
 	@Override
 	public boolean atualizarCardapios(Main main) {
@@ -160,12 +160,12 @@ public class UspQuimicas extends Restaurante {
 
 	@Override
 	public int getImagem() {
-		return R.drawable.logo_usp_quimicas;
+		return R.drawable.logo_usp_quimica;
 	}
 
 	@Override
 	public String getNome() {
-		return "USP Químicas";
+		return "USP Química";
 	}
 	
 

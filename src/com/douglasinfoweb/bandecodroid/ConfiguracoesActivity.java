@@ -78,7 +78,7 @@ public class ConfiguracoesActivity extends Activity {
 
 	public void update() {
 		Button btn = (Button)findViewById(R.id.salvarButton);
-		btn.setEnabled((config.getRestaurantesEscolhidos().size()>0));
+		btn.setEnabled((getRestaurantesSelecionados().size()>0));
 	}
 	
 	public Configuracoes getConfiguracoes() {
