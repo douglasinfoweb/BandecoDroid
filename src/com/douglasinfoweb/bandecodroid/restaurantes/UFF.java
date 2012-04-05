@@ -117,6 +117,12 @@ public class UFF extends Restaurante {
 	public String getNome() {
 		return "UFF";
 	}
+
+
+	@Override
+	public String getSite() {
+		return "http://www.uff.br/dac/cardapio.htm";
+	}
 	
 	  
 }

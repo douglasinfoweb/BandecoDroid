@@ -182,6 +182,12 @@ public class UspCentral extends Restaurante {
 	public String getNome() {
 		return "USP Central";
 	}
+
+
+	@Override
+	public String getSite() {
+		return "http://www.usp.br/coseas/cardapio.html";
+	}
 	
 	  
 }

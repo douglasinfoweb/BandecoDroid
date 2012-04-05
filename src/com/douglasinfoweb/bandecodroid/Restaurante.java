@@ -73,4 +73,7 @@ public abstract class Restaurante implements Serializable {
 	public String toString() {
 		return getNome();
 	}
+	
+	public abstract String getSite();
+	
 }

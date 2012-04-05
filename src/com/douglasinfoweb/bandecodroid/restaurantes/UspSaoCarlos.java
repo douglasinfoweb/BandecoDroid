@@ -185,6 +185,12 @@ public class UspSaoCarlos extends Restaurante {
 	public String getNome() {
 		return "USP São Carlos";
 	}
+
+
+	@Override
+	public String getSite() {
+		return "http://www.pcasc.usp.br/pop_cardapio.php";
+	}
 	
 	  
 }

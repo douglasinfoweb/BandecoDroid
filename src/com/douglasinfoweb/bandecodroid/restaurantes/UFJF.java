@@ -130,6 +130,12 @@ public class UFJF extends Restaurante {
 	public String getNome() {
 		return "UFJF";
 	}
+
+
+	@Override
+	public String getSite() {
+		return "http://www.ufjf.br/portal/utilidade/restaurante/";
+	}
 	
 	  
 }

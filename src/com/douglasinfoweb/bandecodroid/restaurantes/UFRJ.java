@@ -173,6 +173,12 @@ public class UFRJ extends Restaurante {
 	public String getNome() {
 		return "UFRJ";
 	}
+
+
+	@Override
+	public String getSite() {
+		return "http://www.nutricao.ufrj.br/cardapio_ru.htm";
+	}
 	
 	  
 }

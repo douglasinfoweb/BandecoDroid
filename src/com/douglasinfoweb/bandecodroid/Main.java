@@ -1,31 +1,25 @@
 package com.douglasinfoweb.bandecodroid;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
-import org.apache.http.util.ByteArrayBuffer;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Main extends Activity {
 	private Configuracoes config;
@@ -153,6 +147,17 @@ public class Main extends Activity {
 		    				text.setText("Erro: Não foi possível recuperar nenhum cardápio");
 		    				mainScroll.addView(text);
 			    		}
+			    		Button btn = new Button(this);
+			    		btn.setText("Ir para site do restaurante");
+			    		btn.setOnClickListener(new OnClickListener() {			
+							@Override
+							public void onClick(View arg0) {
+								Intent i = new Intent(Intent.ACTION_VIEW);
+								i.setData(Uri.parse(restauranteAtual.getSite()));
+								startActivity(i);
+							}
+						});
+			    		mainScroll.addView(btn);
 	    			} else {
 	    				TextView text =new TextView(this);
 	    				text.setText("Erro: Nenhum restaurante atual");
@@ -164,44 +169,6 @@ public class Main extends Activity {
 	    			progressDialog.show();
 	    	}
     }	
-    @SuppressWarnings("unused")
-    //TODO: getImage()
-	private String getImage(String prato)
-    {
-        //http://www.google.com/search?q=almoço&tbm=isch
-    	try
-    	{
-            URL updateURL = new URL("http://br.images.search.yahoo.com/search/images;_ylt=A0WTf2tjeVVOIlUAoOX06Qt.?p="+URLEncoder.encode(prato));
-            URLConnection conn = updateURL.openConnection();
-            InputStream is = conn.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            ByteArrayBuffer baf = new ByteArrayBuffer(50);
-
-            int current = 0;
-            while((current = bis.read()) != -1){
-                baf.append((byte)current);
-            }
-
-            /* Convert the Bytes read to a String. */
-            String html = new String(baf.toByteArray());
-
-            html = html.split("alt=\"Go to fullsize image\"")[1];
-            html = html.split("</a>")[0];
-            return html;
-            
-    	}
-    	catch (MalformedURLException e) 
-    	{	
-    		Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG);
-		} 
-    	catch (IOException e) 
-		{
-    		Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG);
-		}
-        
-        return null;
-    
-    }
     @Override
     protected void onStop() {
     	super.onStop();

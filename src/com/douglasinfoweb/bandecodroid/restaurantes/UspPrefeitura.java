@@ -181,6 +181,12 @@ public class UspPrefeitura extends Restaurante {
 	public String getNome() {
 		return "USP Prefeitura";
 	}
+
+
+	@Override
+	public String getSite() {
+		return "http://www.usp.br/coseas/cardcocesp.html";
+	}
 	
 	  
 }

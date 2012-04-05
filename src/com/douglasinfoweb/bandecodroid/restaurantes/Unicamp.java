@@ -144,6 +144,12 @@ public class Unicamp extends Restaurante {
 	public String getNome() {
 		return "UNICAMP";
 	}
+
+
+	@Override
+	public String getSite() {
+		return "http://www.prefeitura.unicamp.br/servicos.php?servID=119";
+	}
 	
 
 }

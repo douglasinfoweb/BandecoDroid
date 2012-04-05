@@ -174,6 +174,12 @@ public class UspFisica extends Restaurante {
 	public String getNome() {
 		return "USP Física";
 	}
+
+
+	@Override
+	public String getSite() {
+		return "http://www.usp.br/coseas/cardapiofisica.html";
+	}
 	
 	  
 }

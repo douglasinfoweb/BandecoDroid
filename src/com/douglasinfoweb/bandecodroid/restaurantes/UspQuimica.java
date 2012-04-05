@@ -167,6 +167,12 @@ public class UspQuimica extends Restaurante {
 	public String getNome() {
 		return "USP Química";
 	}
+
+
+	@Override
+	public String getSite() {
+		return "http://www.usp.br/coseas/cardapioquimica.html";
+	}
 	
 
 }
