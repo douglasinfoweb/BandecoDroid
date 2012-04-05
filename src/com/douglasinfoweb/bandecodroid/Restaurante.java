@@ -3,6 +3,9 @@ package com.douglasinfoweb.bandecodroid;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.douglasinfoweb.bandecodroid.restaurantes.UFF;
+import com.douglasinfoweb.bandecodroid.restaurantes.UFJF;
+import com.douglasinfoweb.bandecodroid.restaurantes.UFRJ;
 import com.douglasinfoweb.bandecodroid.restaurantes.Unicamp;
 import com.douglasinfoweb.bandecodroid.restaurantes.UspCentral;
 import com.douglasinfoweb.bandecodroid.restaurantes.UspFisica;
@@ -18,7 +21,10 @@ public abstract class Restaurante implements Serializable {
 		new UspQuimica(),
 		new UspFisica(),
 		new UspPrefeitura(),
-		new UspSaoCarlos()
+		new UspSaoCarlos(),
+		new UFRJ(),
+		new UFF(),
+		new UFJF()
 	};
 	private static final long serialVersionUID = -1612436480775220733L;
 	public abstract int getImagem();
@@ -26,7 +32,7 @@ public abstract class Restaurante implements Serializable {
 	
 	public abstract String getNome();
 	
-	public abstract boolean atualizarCardapios(Main main);
+	public abstract boolean atualizarCardapios(Main main) throws Exception;
 	
 	public abstract Boolean temQueAtualizar();
 	
@@ -40,7 +46,7 @@ public abstract class Restaurante implements Serializable {
 		this.cardapios=cardapios;
 	}
 	
-	public boolean atualizar(boolean forcar, Main main) {
+	public boolean atualizar(boolean forcar, Main main) throws Exception {
 		removeCardapiosAntigos();
     	if (temQueAtualizar() || forcar) {
     		return atualizarCardapios(main);

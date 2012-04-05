@@ -41,9 +41,7 @@ public class Main extends Activity {
         setContentView(R.layout.main);
         config = Configuracoes.read(this);
         if (config.getRestaurantesEscolhidos().size() == 0) {
-        	Intent intent = new Intent(this, ConfiguracoesActivity.class);
-        	intent.putExtra("config", config);
-        	startActivityForResult(intent, 0);
+        	abrirConfiguracoes();
         }
         start();
     }
@@ -98,9 +96,7 @@ public class Main extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if (data == null || data.getExtras() == null || data.getExtras().get("config") == null) {
-        	Intent intent = new Intent(this, ConfiguracoesActivity.class);
-        	intent.putExtra("config", config);
-        	startActivityForResult(intent, 0);
+        	abrirConfiguracoes();
     	} else {
     		config = (Configuracoes)data.getExtras().get("config");
         	Log.v("bandeco","config: total de restaurantes "+config.getRestaurantesEscolhidos().size());
@@ -129,16 +125,18 @@ public class Main extends Activity {
 			
 			@Override
 			public boolean onMenuItemClick(MenuItem arg0) {
-	        	Intent intent = new Intent(main, ConfiguracoesActivity.class);
-	        	intent.putExtra("config", config);
-	        	startActivityForResult(intent, 0);
+				abrirConfiguracoes();
 				return true;
 			}
 		});
     	return true;
     }
     
-    
+    public void abrirConfiguracoes() {
+    	Intent intent = new Intent(main, ConfiguracoesActivity.class);
+    	intent.putExtra("config", config);
+    	startActivityForResult(intent, 0);
+    }
     public void updateScreen() {
 	    	if (loadDataThread.isDataReady()) {
 	    		if (progressDialog != null)

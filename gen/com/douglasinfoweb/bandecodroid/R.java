@@ -31,12 +31,15 @@ public final class R {
         public static final int ic_sol=0x7f020011;
         public static final int ic_suco=0x7f020012;
         public static final int icon=0x7f020013;
-        public static final int logo_unicamp=0x7f020014;
-        public static final int logo_usp_central=0x7f020015;
-        public static final int logo_usp_fisica=0x7f020016;
-        public static final int logo_usp_prefeitura=0x7f020017;
-        public static final int logo_usp_quimica=0x7f020018;
-        public static final int logo_usp_saocarlos=0x7f020019;
+        public static final int logo_uff=0x7f020014;
+        public static final int logo_ufjf=0x7f020015;
+        public static final int logo_ufrj=0x7f020016;
+        public static final int logo_unicamp=0x7f020017;
+        public static final int logo_usp_central=0x7f020018;
+        public static final int logo_usp_fisica=0x7f020019;
+        public static final int logo_usp_prefeitura=0x7f02001a;
+        public static final int logo_usp_quimica=0x7f02001b;
+        public static final int logo_usp_saocarlos=0x7f02001c;
     }
     public static final class id {
         public static final int PratoPrincipal=0x7f060004;

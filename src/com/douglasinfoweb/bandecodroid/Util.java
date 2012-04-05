@@ -1,5 +1,7 @@
 package com.douglasinfoweb.bandecodroid;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,8 +20,17 @@ public class Util {
 		}
 		return null;
 	}
-	
-
+	 public static String stack2string(Exception e) {
+		  try {
+		    StringWriter sw = new StringWriter();
+		    PrintWriter pw = new PrintWriter(sw);
+		    e.printStackTrace(pw);
+		    return "------\r\n" + sw.toString() + "------\r\n";
+		  }
+		  catch(Exception e2) {
+		    return "bad stack2string";
+		  }
+	}
 	private static String capitalizeOneWord(String s) {
         if (s.length() == 0) return s;
         return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase() + " ";

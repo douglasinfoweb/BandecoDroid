@@ -1,6 +1,8 @@
 package com.douglasinfoweb.bandecodroid;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.util.Log;
 
 
@@ -23,20 +25,42 @@ public class LoadDataThread extends Thread
     {
     	Log.v("bandeco", "rodou thread");
     	for (Restaurante r : main.getConfig().getRestaurantesEscolhidos()) {
-    		if (!r.atualizar(forcarAtualizacao, main)) {
-        		main.runOnUiThread(new Runnable() {
-    				public void run() {
-    			        AlertDialog alertDialog = new AlertDialog.Builder(main).create();
-    			        alertDialog.setTitle("Erro!");
-    			        alertDialog.setMessage("Impossível atualizar cardápios. Verifique conexão.");
-    			        alertDialog.setCanceledOnTouchOutside(true);
-    			        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
-    			        alertDialog.setCancelable(true);
-    			        alertDialog.show();
-    				}
-    			});
-    			break;
-        	}
+    		try {
+				if (!r.atualizar(forcarAtualizacao, main)) {
+					main.runOnUiThread(new Runnable() {
+						public void run() {
+					        AlertDialog alertDialog = new AlertDialog.Builder(main).create();
+					        alertDialog.setTitle("Erro!");
+					        alertDialog.setMessage("Impossível atualizar cardápios. Verifique conexão.");
+					        alertDialog.setCanceledOnTouchOutside(true);
+					        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+					        alertDialog.setCancelable(true);
+					        alertDialog.show();
+						}
+					});
+					break;
+				}
+			} catch (final Exception e) {
+				main.runOnUiThread(new Runnable() {
+					public void run() {
+				        AlertDialog alertDialog = new AlertDialog.Builder(main).create();
+				        alertDialog.setTitle("Erro!");
+				        alertDialog.setMessage("Erro inesperado ao atualizar cardapio. Necessária atualização do aplicativo. Favor contatar-nos.");
+				        alertDialog.setCanceledOnTouchOutside(true);
+				        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+				        alertDialog.setCancelable(true);
+				        Log.e("bandeco", "Erro inesperado: "+e+"\n"+Util.stack2string(e));
+				        alertDialog.show();
+				        alertDialog.setOnCancelListener(new OnCancelListener() {
+							
+							@Override
+							public void onCancel(DialogInterface arg0) {
+								main.abrirConfiguracoes();
+							}
+						});
+					}
+				});
+			}
     	}
     	dataReady=true;
     	main.runOnUiThread(new Runnable() {

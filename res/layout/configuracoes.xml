@@ -39,7 +39,7 @@
                     android:id="@+id/about"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="Todos os cardápios nesse programa são coletados a partir do site oficial de cada restaurante.\n\nAplicativo feito por:\n - Douglas Fonseca (douglasinfoweb@gmail.com)\n - Vinícius Felizardo (felizardow@gmail.com)\n\nO código do aplicativo está disponível no GitHub em:\nhttps://github.com/douglasinfoweb/BandecoDroid" />
+                    android:text="Todos os cardápios nesse programa são coletados a partir do site oficial de cada restaurante.\n\nAplicativo feito por:\n - Douglas Fonseca (douglasinfoweb@gmail.com)\n - Vinícius Felizardo (felizardow@gmail.com)\n\nVisite nosso repositório em:\nhttps://github.com/douglasinfoweb/BandecoDroid\n\nPedimos ajuda da comunidade para manter o aplicativo atualizado :)" />
 
             </FrameLayout>
         </LinearLayout>

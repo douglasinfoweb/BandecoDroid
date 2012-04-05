@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +18,7 @@ import android.widget.TextView;
  * @author Vinicius
  *
  */
-public class Cardapio implements Serializable {
+public class Cardapio implements Serializable, Comparable<Cardapio> {
 	private static final long serialVersionUID = 5627453443659151036L;
 	private DateTime data;
 	private String pratoPrincipal;
@@ -158,6 +159,27 @@ public class Cardapio implements Serializable {
 			default: result = ""; break;
 		}
 		return result;
+	}
+	
+	@Override
+	public String toString() {
+		return data+" - "+pratoPrincipal;
+	}
+	@Override
+	public int compareTo(Cardapio arg0) {
+		if (getData() != null && arg0.getData() != null) {
+			if (arg0.getData().isBefore(getData())) {
+				Log.v("bandeco", "1");
+				return 1;
+			} else if (arg0.getData().isEqual(getData())) {
+				Log.v("bandeco", "0");
+				return 0;
+			} else {
+				Log.v("bandeco", "-1");
+				return -1;
+			}
+		}
+		return 0;
 	}
 	
 }
