@@ -30,25 +30,38 @@ public final class R {
         public static final int Imagem=0x7f070001;
         public static final int PTS=0x7f070007;
         public static final int PratoPrincipal=0x7f070003;
-        public static final int PratoPrincipalRow=0x7f07000a;
-        public static final int Pts=0x7f07000f;
-        public static final int PtsRow=0x7f07000e;
+        public static final int PratoPrincipalRow_widget=0x7f07000e;
+        public static final int PtsRow_widget=0x7f07001a;
+        public static final int Pts_widget=0x7f07001c;
         public static final int Salada=0x7f070005;
-        public static final int SaladaRow=0x7f07000c;
+        public static final int SaladaRow_widget=0x7f070014;
         public static final int Sobremesa=0x7f070006;
-        public static final int SobremesaRow=0x7f07000d;
+        public static final int SobremesaRow_widget=0x7f070017;
         public static final int Suco=0x7f070004;
-        public static final int SucoRow=0x7f07000b;
+        public static final int SucoRow_widget=0x7f070011;
         public static final int Titulo=0x7f070002;
-        public static final int bottomImage=0x7f070010;
+        public static final int Titulo_widget=0x7f07000c;
+        public static final int bottomImage_widget=0x7f07001d;
         public static final int cardapio=0x7f070000;
+        public static final int cardapioTable_widget=0x7f07000d;
+        public static final int imgPratoPrincipal_widget=0x7f07000f;
+        public static final int imgPts_widget=0x7f07001b;
+        public static final int imgSalada_widget=0x7f070015;
+        public static final int imgSobremesa_widget=0x7f070018;
+        public static final int imgSuco_widget=0x7f070012;
+        public static final int linearlayout1_widget=0x7f070009;
         public static final int main=0x7f070008;
-        public static final int topImage=0x7f070009;
+        public static final int topImage_widget=0x7f07000b;
+        public static final int topLayout_widget=0x7f07000a;
+        public static final int txtPratoPrincipal_widget=0x7f070010;
+        public static final int txtSalada_widget=0x7f070016;
+        public static final int txtSobremesa_widget=0x7f070019;
+        public static final int txtSuco_widget=0x7f070013;
     }
     public static final class layout {
         public static final int cardapio=0x7f030000;
         public static final int main=0x7f030001;
-        public static final int widget=0x7f030002;
+        public static final int widget_layout=0x7f030002;
     }
     public static final class string {
         public static final int anterior=0x7f050002;
