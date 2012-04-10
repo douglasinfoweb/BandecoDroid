@@ -2,7 +2,6 @@ package com.douglasinfoweb.bandecodroid.restaurantes;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.joda.time.DateTime;
 import org.joda.time.MutableDateTime;
@@ -29,19 +28,17 @@ public class UspPrefeitura extends Restaurante {
 		String URL = "http://www.usp.br/coseas/cardcocesp.html";
 		Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
 		//Pega semana
-		int semana=0;
 		DateTime ultimaData = new DateTime();
 		for (Element pre : doc.select("pre")) {
 			String text = pre.text();
 			if (text.contains("Semana")) {
 				String[] dataSplited = Util.removerEspacosDuplicados(text).split(" ")[4].split("/");
 				ultimaData = new DateTime(
-						Integer.parseInt(dataSplited[2]),
+						Integer.parseInt(dataSplited[2])+2000,
 						Integer.parseInt(dataSplited[1]),
 						Integer.parseInt(dataSplited[0]), 
 						0, 0 ,0);
-				Log.v("usp-fisica", "ultimaData: "+ultimaData.toString());
-				semana = ultimaData.getWeekOfWeekyear();
+				Log.v("usp-prefeitura", "ultimaData: "+ultimaData.toString());
 			}
 		}
 		//Pega infos
@@ -89,9 +86,10 @@ public class UspPrefeitura extends Restaurante {
 							}
 							MutableDateTime data = new MutableDateTime();
 							data.setDayOfWeek(diaDaSemana);
-							data.setWeekOfWeekyear(semana);
+							data.setWeekOfWeekyear(ultimaData.getWeekOfWeekyear());
 							data.setYear(ultimaData.getYear());
 							cardapio.setData(data.toDateTime());
+							Log.v("usp-prefeitura", "data: "+data.toDateTime());
 							break;
 						case 2: cardapio.setPratoPrincipal(text); break;
 						case 3: cardapio.setPratoPrincipal(cardapio.getPratoPrincipal() + "\n"+text); break;
@@ -124,11 +122,13 @@ public class UspPrefeitura extends Restaurante {
 	
 	@Override
 	public Boolean temQueAtualizar() {
-		DateTime now = new DateTime(new Date());
+		DateTime now = DateTime.now();
 		ArrayList<Cardapio> cardapios = getCardapios();
+		Log.v("usp-prefeitura","cardapios: "+cardapios);
 		if (cardapios.size() >= 1) {
 			Cardapio ultimoCardapio = cardapios.get(cardapios.size() -1);
 			//Se o ultimo que esta na memoria ainda eh dessa semana, nao precisa atualizar.
+			Log.v("usp-prefeitura","ultimoCardapio: "+ultimoCardapio.getData()+" agora: "+now);
 			if (ultimoCardapio.getData().getWeekOfWeekyear() >= now.getWeekOfWeekyear()
 					&& ultimoCardapio.getData().getYear() >= now.getYear()) {
 				return false;
