@@ -1,5 +1,7 @@
 package com.douglasinfoweb.bandecodroid;
 
+import java.io.IOException;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -26,21 +28,22 @@ public class LoadDataThread extends Thread
     	Log.v("bandeco", "rodou thread");
     	for (Restaurante r : main.getConfig().getRestaurantesEscolhidos()) {
     		try {
-				if (!r.atualizar(forcarAtualizacao, main)) {
-					main.runOnUiThread(new Runnable() {
-						public void run() {
-					        AlertDialog alertDialog = new AlertDialog.Builder(main).create();
-					        alertDialog.setTitle("Erro!");
-					        alertDialog.setMessage("Impossível atualizar cardápios. Verifique conexão.");
-					        alertDialog.setCanceledOnTouchOutside(true);
-					        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
-					        alertDialog.setCancelable(true);
-					        alertDialog.show();
-						}
-					});
-					break;
-				}
-			} catch (final Exception e) {
+				r.atualizar(forcarAtualizacao, main);
+    		} catch (final IOException e) {
+    			main.runOnUiThread(new Runnable() {
+					public void run() {
+				        AlertDialog alertDialog = new AlertDialog.Builder(main).create();
+				        alertDialog.setTitle("Erro!");
+				        alertDialog.setMessage("Impossível atualizar cardápios. Verifique conexão.");
+				        alertDialog.setCanceledOnTouchOutside(true);
+				        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+				        alertDialog.setCancelable(true);
+				        Log.e("bandeco", "Erro conexao: "+e+"\n"+Util.stack2string(e));
+				        alertDialog.show();
+					}
+				});
+				
+    		} catch (final Exception e) {
 				main.runOnUiThread(new Runnable() {
 					public void run() {
 				        AlertDialog alertDialog = new AlertDialog.Builder(main).create();

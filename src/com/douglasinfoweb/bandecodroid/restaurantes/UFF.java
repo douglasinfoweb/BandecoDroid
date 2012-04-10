@@ -22,54 +22,49 @@ import com.douglasinfoweb.bandecodroid.Util;
 public class UFF extends Restaurante {
 	boolean proximo;
 	@Override
-	public boolean atualizarCardapios(Main main) {
+	public void atualizarCardapios(Main main) throws IOException {
 		Log.v("bandeco","ATUALIZAR");
 		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
-		try {
-			String URL = "http://www.uff.br/dac/cardapio.htm";
-			//String URL = "http://www.felizardo.me/cardapio.htm";
-			Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
-			//Pega tabelas
-			int pN=-99999;
-			Cardapio cardapio=null;
-			for (Element p : doc.select("p")) {
-				Log.v("bandeco","p "+pN);
-				String texto = Util.removerEspacosDuplicados(p.text().trim());
-				if (texto.toLowerCase().contains("feira")) {
-					pN=0;
-					if (cardapio != null && cardapio.getData() != null && cardapio.getPratoPrincipal() != null && cardapio.getPratoPrincipal().trim().length() > 2)
-						cardapios.add(cardapio);
-					cardapio = new Cardapio();
-					cardapio.setRefeicao(Refeicao.ALMOCO);
-					//Pega data
-					String[] dataSplited = texto.split("/");
-					DateTime data = new DateTime(
-							Integer.parseInt(dataSplited[2].substring(0, 2))+2000,
-							Integer.parseInt(dataSplited[1]),
-							Integer.parseInt(dataSplited[0].substring(dataSplited[0].length()-2,dataSplited[0].length())), 
-							0, 0 ,0);
-					cardapio.setData(data);
-				}
-				switch (pN) {
-					case 2: cardapio.setPratoPrincipal(texto); break;
-					case 3: cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+texto); break;
-					case 4: cardapio.setSalada(Util.separaEPegaValor(texto)); break;
-					case 5: cardapio.setSobremesa(Util.separaEPegaValor(texto)); break;
-					case 6: cardapio.setSuco(texto); break;
-				}
-				
-				pN++;
+		String URL = "http://www.uff.br/dac/cardapio.htm";
+		//String URL = "http://www.felizardo.me/cardapio.htm";
+		Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
+		//Pega tabelas
+		int pN=-99999;
+		Cardapio cardapio=null;
+		for (Element p : doc.select("p")) {
+			Log.v("bandeco","p "+pN);
+			String texto = Util.removerEspacosDuplicados(p.text().trim());
+			if (texto.toLowerCase().contains("feira")) {
+				pN=0;
+				if (cardapio != null && cardapio.getData() != null && cardapio.getPratoPrincipal() != null && cardapio.getPratoPrincipal().trim().length() > 2)
+					cardapios.add(cardapio);
+				cardapio = new Cardapio();
+				cardapio.setRefeicao(Refeicao.ALMOCO);
+				//Pega data
+				String[] dataSplited = texto.split("/");
+				DateTime data = new DateTime(
+						Integer.parseInt(dataSplited[2].substring(0, 2))+2000,
+						Integer.parseInt(dataSplited[1]),
+						Integer.parseInt(dataSplited[0].substring(dataSplited[0].length()-2,dataSplited[0].length())), 
+						0, 0 ,0);
+				cardapio.setData(data);
 			}
-			if (cardapio != null && cardapio.getData() != null && cardapio.getPratoPrincipal() != null && cardapio.getPratoPrincipal().trim().length() > 2)
-				cardapios.add(cardapio);
-			setCardapios(cardapios);
-			removeCardapiosAntigos();
-			main.save();
-			return true;
-		} catch (IOException e1) {
-			e1.printStackTrace();
-			return false;
+			switch (pN) {
+				case 2: cardapio.setPratoPrincipal(texto); break;
+				case 3: cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+texto); break;
+				case 4: cardapio.setSalada(Util.separaEPegaValor(texto)); break;
+				case 5: cardapio.setSobremesa(Util.separaEPegaValor(texto)); break;
+				case 6: cardapio.setSuco(texto); break;
+			}
+			
+			pN++;
 		}
+		if (cardapio != null && cardapio.getData() != null && cardapio.getPratoPrincipal() != null && cardapio.getPratoPrincipal().trim().length() > 2)
+			cardapios.add(cardapio);
+		setCardapios(cardapios);
+		removeCardapiosAntigos();
+		main.save();
+		
 	}
 	
 	

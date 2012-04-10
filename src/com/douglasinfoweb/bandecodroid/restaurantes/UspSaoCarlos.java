@@ -35,63 +35,57 @@ import com.douglasinfoweb.bandecodroid.Util;
 public class UspSaoCarlos extends Restaurante {
 	boolean proximo;
 	@Override
-	public boolean atualizarCardapios(Main main) {
+	public void atualizarCardapios(Main main) throws IOException {
 		Log.v("bandeco","ATUALIZAR");
-		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
-		try {
-			String URL = "http://www.pcasc.usp.br/restaurante.xml";
-			String XML = getXmlFromUrl(URL);
-			Log.v("usp-saocarlos","XML: "+XML);
-			Document doc = getDomElement(XML);
-			Element root = doc.getDocumentElement();
-			NodeList dias = root.getChildNodes();
-			for (int i=0; i < dias.getLength(); i++) {
-				Node dia = dias.item(i);
-				DateTime ultimaData = new DateTime();
-				for (int j=0; j < dia.getChildNodes().getLength(); j++) {
-					Node noDoDia = dia.getChildNodes().item(j);
-					if (noDoDia.getNodeName().equals("data")) {
-						String[] dataSplited = getNodeValue(noDoDia).split("/");
-						ultimaData = new DateTime(
-								Integer.parseInt(dataSplited[2]),
-								Integer.parseInt(dataSplited[1]),
-								Integer.parseInt(dataSplited[0]), 
-								0, 0 ,0);
-					} else if (noDoDia.getNodeName().equals("almoco") || noDoDia.getNodeName().equals("jantar")) {
-						Cardapio cardapio = new Cardapio();
-						cardapio.setData(ultimaData);
-						if (noDoDia.getNodeName().equals("almoco")) {
-							cardapio.setRefeicao(Refeicao.ALMOCO);
-						} else {
-							cardapio.setRefeicao(Refeicao.JANTA);
+	ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
+		String URL = "http://www.pcasc.usp.br/restaurante.xml";
+		String XML = getXmlFromUrl(URL);
+		Log.v("usp-saocarlos","XML: "+XML);
+		Document doc = getDomElement(XML);
+		Element root = doc.getDocumentElement();
+		NodeList dias = root.getChildNodes();
+		for (int i=0; i < dias.getLength(); i++) {
+			Node dia = dias.item(i);
+			DateTime ultimaData = new DateTime();
+			for (int j=0; j < dia.getChildNodes().getLength(); j++) {
+				Node noDoDia = dia.getChildNodes().item(j);
+				if (noDoDia.getNodeName().equals("data")) {
+					String[] dataSplited = getNodeValue(noDoDia).split("/");
+					ultimaData = new DateTime(
+							Integer.parseInt(dataSplited[2]),
+							Integer.parseInt(dataSplited[1]),
+							Integer.parseInt(dataSplited[0]), 
+							0, 0 ,0);
+				} else if (noDoDia.getNodeName().equals("almoco") || noDoDia.getNodeName().equals("jantar")) {
+					Cardapio cardapio = new Cardapio();
+					cardapio.setData(ultimaData);
+					if (noDoDia.getNodeName().equals("almoco")) {
+						cardapio.setRefeicao(Refeicao.ALMOCO);
+					} else {
+						cardapio.setRefeicao(Refeicao.JANTA);
+					}
+					for (int k=0; k < noDoDia.getChildNodes().getLength(); k++) {
+						Node atributo = noDoDia.getChildNodes().item(k);
+						if (atributo.getNodeName().equals("principal")) {
+							cardapio.setPratoPrincipal(getNodeValue(atributo));
+						} else if (atributo.getNodeName().equals("acompanhamento")) {
+							cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+getNodeValue(atributo));
+						} else if (atributo.getNodeName().equals("salada")) {
+							cardapio.setSalada(getNodeValue(atributo));
+						} else if (atributo.getNodeName().equals("sobremesa")) {
+							cardapio.setSobremesa(getNodeValue(atributo));
 						}
-						for (int k=0; k < noDoDia.getChildNodes().getLength(); k++) {
-							Node atributo = noDoDia.getChildNodes().item(k);
-							if (atributo.getNodeName().equals("principal")) {
-								cardapio.setPratoPrincipal(getNodeValue(atributo));
-							} else if (atributo.getNodeName().equals("acompanhamento")) {
-								cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+getNodeValue(atributo));
-							} else if (atributo.getNodeName().equals("salada")) {
-								cardapio.setSalada(getNodeValue(atributo));
-							} else if (atributo.getNodeName().equals("sobremesa")) {
-								cardapio.setSobremesa(getNodeValue(atributo));
-							}
-						}
-						if (cardapio.getPratoPrincipal() != null 
-								&& Util.removerEspacosDuplicados(cardapio.getPratoPrincipal().trim()).length() > 2) {
-							cardapios.add(cardapio);
-						}
+					}
+					if (cardapio.getPratoPrincipal() != null 
+							&& Util.removerEspacosDuplicados(cardapio.getPratoPrincipal().trim()).length() > 2) {
+						cardapios.add(cardapio);
 					}
 				}
 			}
-			setCardapios(cardapios);
-			removeCardapiosAntigos();
-			main.save();
-			return true;
-		} catch (IOException e1) {
-			e1.printStackTrace();
-			return false;
 		}
+		setCardapios(cardapios);
+		removeCardapiosAntigos();
+		main.save();
 	}
 	
 	

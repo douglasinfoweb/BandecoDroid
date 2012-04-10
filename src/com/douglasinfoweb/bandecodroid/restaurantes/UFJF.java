@@ -22,67 +22,61 @@ import com.douglasinfoweb.bandecodroid.Util;
 public class UFJF extends Restaurante {
 	boolean proximo;
 	@Override
-	public boolean atualizarCardapios(Main main) {
+	public void atualizarCardapios(Main main) throws IOException {
 		Log.v("bandeco","ATUALIZAR");
 		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
-		try {
-			String URL = "http://www.ufjf.br/portal/utilidade/restaurante/";
-			Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
-			//Pega tabelas
-			for (Element table : doc.select("table")) {
-				int trN=0;
-				for (Element tr : table.select("tr")) {
-					if (trN>0) {
-						int tdN=0;
-						Cardapio cardapio = new Cardapio();
-						for (Element td : tr.select("td")) {
-							String texto = Util.removerEspacosDuplicados(td.text());
-							Log.v("bandeco","td "+tdN+" "+texto);
-							switch (tdN) {
-								case 0: 
-									String[] dataRefeicao = texto.split(" ");
-									if (dataRefeicao.length == 2) {
-										String[] dataSplited = dataRefeicao[0].split("/");
-										if (dataSplited.length == 2) {
-											//Pega data
-											DateTime data = new DateTime(
-													DateTime.now().getYear(),
-													Integer.parseInt(dataSplited[1]),
-													Integer.parseInt(dataSplited[0]), 
-													0, 0 ,0);
-											cardapio.setData(data);
-										}
-										//Pega refeicao
-										if (dataRefeicao[1].toLowerCase().contains("jantar")) {
-											cardapio.setRefeicao(Refeicao.JANTA);
-										} else {
-											cardapio.setRefeicao(Refeicao.ALMOCO);
-										}
+		String URL = "http://www.ufjf.br/portal/utilidade/restaurante/";
+		Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
+		//Pega tabelas
+		for (Element table : doc.select("table")) {
+			int trN=0;
+			for (Element tr : table.select("tr")) {
+				if (trN>0) {
+					int tdN=0;
+					Cardapio cardapio = new Cardapio();
+					for (Element td : tr.select("td")) {
+						String texto = Util.removerEspacosDuplicados(td.text());
+						Log.v("bandeco","td "+tdN+" "+texto);
+						switch (tdN) {
+							case 0: 
+								String[] dataRefeicao = texto.split(" ");
+								if (dataRefeicao.length == 2) {
+									String[] dataSplited = dataRefeicao[0].split("/");
+									if (dataSplited.length == 2) {
+										//Pega data
+										DateTime data = new DateTime(
+												DateTime.now().getYear(),
+												Integer.parseInt(dataSplited[1]),
+												Integer.parseInt(dataSplited[0]), 
+												0, 0 ,0);
+										cardapio.setData(data);
 									}
-									break;
-									case 1: cardapio.setSalada(texto); break;
-									case 2: cardapio.setPratoPrincipal(texto); break;
-									case 3: cardapio.setPratoPrincipal(cardapio.getPratoPrincipal() +"\n"+texto); break;
-									case 5: cardapio.setSuco(texto); break;
-									case 6: cardapio.setSobremesa(texto); break;
-									case 7: cardapio.setSalada(cardapio.getSalada()+"\n"+texto); break;
+									//Pega refeicao
+									if (dataRefeicao[1].toLowerCase().contains("jantar")) {
+										cardapio.setRefeicao(Refeicao.JANTA);
+									} else {
+										cardapio.setRefeicao(Refeicao.ALMOCO);
+									}
 								}
-								tdN++;
+								break;
+								case 1: cardapio.setSalada(texto); break;
+								case 2: cardapio.setPratoPrincipal(texto); break;
+								case 3: cardapio.setPratoPrincipal(cardapio.getPratoPrincipal() +"\n"+texto); break;
+								case 5: cardapio.setSuco(texto); break;
+								case 6: cardapio.setSobremesa(texto); break;
+								case 7: cardapio.setSalada(cardapio.getSalada()+"\n"+texto); break;
 							}
-							if (cardapio.getData() != null && cardapio.getPratoPrincipal() != null && cardapio.getPratoPrincipal().length() > 2)
-								cardapios.add(cardapio);
+							tdN++;
 						}
-					trN++;
-				}
+						if (cardapio.getData() != null && cardapio.getPratoPrincipal() != null && cardapio.getPratoPrincipal().length() > 2)
+							cardapios.add(cardapio);
+					}
+				trN++;
 			}
-			setCardapios(cardapios);
-			removeCardapiosAntigos();
-			main.save();
-			return true;
-		} catch (IOException e1) {
-			e1.printStackTrace();
-			return false;
 		}
+		setCardapios(cardapios);
+		removeCardapiosAntigos();
+		main.save();
 	}
 	
 	

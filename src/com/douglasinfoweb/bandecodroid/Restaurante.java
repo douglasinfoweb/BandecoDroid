@@ -1,5 +1,6 @@
 package com.douglasinfoweb.bandecodroid;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public abstract class Restaurante implements Serializable {
 	
 	public abstract String getNome();
 	
-	public abstract boolean atualizarCardapios(Main main) throws Exception;
+	public abstract void atualizarCardapios(Main main) throws IOException;
 	
 	public abstract Boolean temQueAtualizar();
 	
@@ -46,12 +47,10 @@ public abstract class Restaurante implements Serializable {
 		this.cardapios=cardapios;
 	}
 	
-	public boolean atualizar(boolean forcar, Main main) throws Exception {
+	public void atualizar(boolean forcar, Main main) throws IOException {
 		removeCardapiosAntigos();
     	if (temQueAtualizar() || forcar) {
-    		return atualizarCardapios(main);
-    	} else {
-    		return true;
+    		atualizarCardapios(main);
     	}
 	}
 	@Override
