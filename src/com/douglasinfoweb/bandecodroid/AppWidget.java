@@ -59,7 +59,7 @@ public class AppWidget extends AppWidgetProvider
 	
 	private void start() {
         /* Prepara e mostra tela de espera */
-		progressDialog = new ProgressDialog(this);
+		progressDialog = new ProgressDialog(this.mContext);
 		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		progressDialog.setMessage("Baixando cardapios");
 		progressDialog.setCancelable(false);
