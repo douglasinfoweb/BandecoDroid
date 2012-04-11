@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayout1_widget"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/topLayout_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/topImage_widget"
+            android:layout_width="320dp"
+            android:layout_height="70dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/cardapio_almoco_top" />
+
+        <TextView
+            android:id="@+id/Titulo_widget"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/topImage_widget"
+            android:layout_alignRight="@id/topImage_widget"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="aeaeaeeaea"
+            android:textAppearance="@style/Titulo" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/cardapioTable_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:id="@+id/PratoPrincipalRow_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/cardapio_almoco_repeat"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="27dp"
+            android:paddingRight="10dp" >
+
+            <ImageView
+                android:id="@+id/imgPratoPrincipal_widget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_pratoprincipal" />
+
+            <TextView
+                android:id="@+id/txtPratoPrincipal_widget"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="aduiadas"
+                android:textAppearance="@style/Texto" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SucoRow_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/PratoPrincipalRow_widget"
+            android:layout_below="@id/PratoPrincipalRow_widget"
+            android:background="@drawable/cardapio_almoco_repeat"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="27dp"
+            android:paddingRight="10dp" >
+
+            <ImageView
+                android:id="@+id/imgSuco_widget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_suco" />
+
+            <TextView
+                android:id="@+id/txtSuco_widget"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="aduiadas"
+                android:textAppearance="@style/Texto" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SaladaRow_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/PratoPrincipalRow_widget"
+            android:layout_below="@id/SucoRow_widget"
+            android:background="@drawable/cardapio_almoco_repeat"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="27dp"
+            android:paddingRight="10dp" >
+
+            <ImageView
+                android:id="@+id/imgSalada_widget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_salada" />
+
+            <TextView
+                android:id="@+id/txtSalada_widget"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="aduiadas"
+                android:textAppearance="@style/Texto" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SobremesaRow_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/PratoPrincipalRow_widget"
+            android:layout_below="@id/SaladaRow_widget"
+            android:background="@drawable/cardapio_almoco_repeat"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="27dp"
+            android:paddingRight="10dp" >
+
+            <ImageView
+                android:id="@+id/imgSobremesa_widget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_sobremesa" />
+
+            <TextView
+                android:id="@+id/txtSobremesa_widget"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="aduiadas"
+                android:textAppearance="@style/Texto" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/PtsRow_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/PratoPrincipalRow_widget"
+            android:layout_below="@id/SobremesaRow_widget"
+            android:background="@drawable/cardapio_almoco_repeat"
+            android:gravity="center_vertical"
+            android:paddingLeft="27dp"
+            android:paddingRight="10dp" >
+
+            <ImageView
+                android:id="@+id/imgPts_widget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_pts" />
+
+            <TextView
+                android:id="@+id/Pts_widget"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="aduiadas"
+                android:textAppearance="@style/Texto" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/bottomImage_widget"
+        android:layout_width="320dp"
+        android:layout_height="26dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/cardapio_almoco_bottom" />
+
+</LinearLayout>
