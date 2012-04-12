@@ -6,6 +6,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Util {
+
+	public static String int2diaDaSemana(int dayOfWeek) {
+		String result;
+		switch (dayOfWeek) {
+			case 1: result = "Segunda-feira"; break;
+			case 2: result = "Terça-feira"; break;
+			case 3: result = "Quarta-feira"; break;
+			case 4: result = "Quinta-feira"; break;
+			case 5: result = "Sexta-feira"; break;
+			case 6: result = "Sábado"; break;
+			case 7: result = "Domingo"; break;
+			default: result = ""; break;
+		}
+		return result;
+	}
 	public static String removerEspacosDuplicados(String str){
 	     String patternStr = "\\s+";
 	     String replaceStr = " ";

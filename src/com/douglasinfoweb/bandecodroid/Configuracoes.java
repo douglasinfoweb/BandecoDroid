@@ -31,7 +31,7 @@ public class Configuracoes implements Serializable {
 		oos.flush();
 		oos.close();
 	}
-	public static Configuracoes read(Activity act) {
+	public static Configuracoes read(Context act) {
 		Configuracoes configuracoes = new Configuracoes();
         /* Tentar recuperar dados */
         try {

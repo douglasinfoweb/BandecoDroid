@@ -96,11 +96,11 @@ public class Cardapio implements Serializable, Comparable<Cardapio> {
 		BitmapDrawable bm= (BitmapDrawable)table.getBackground();
 		bm.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
 		switch (refeicao) {
-			case ALMOCO: titulo.setText("ALMOÇO "+int2diaDaSemana(data.getDayOfWeek())); 
+			case ALMOCO: titulo.setText("ALMOÇO "+Util.int2diaDaSemana(data.getDayOfWeek())); 
 						 imageTop.setImageResource(R.drawable.cardapio_almoco_top);
 						 imageBottom.setImageResource(R.drawable.cardapio_almoco_bottom);
 						break;
-			case JANTA: titulo.setText("JANTAR "+int2diaDaSemana(data.getDayOfWeek()));
+			case JANTA: titulo.setText("JANTAR "+Util.int2diaDaSemana(data.getDayOfWeek()));
 						imageTop.setImageResource(R.drawable.cardapio_jantar_top);
 						imageBottom.setImageResource(R.drawable.cardapio_jantar_bottom);
 						break;
@@ -145,20 +145,6 @@ public class Cardapio implements Serializable, Comparable<Cardapio> {
 		} else {
 			rowView.setVisibility(View.VISIBLE);
 		}
-	}
-	private String int2diaDaSemana(int dayOfWeek) {
-		String result;
-		switch (dayOfWeek) {
-			case 1: result = "Segunda-feira"; break;
-			case 2: result = "Terça-feira"; break;
-			case 3: result = "Quarta-feira"; break;
-			case 4: result = "Quinta-feira"; break;
-			case 5: result = "Sexta-feira"; break;
-			case 6: result = "Sábado"; break;
-			case 7: result = "Domingo"; break;
-			default: result = ""; break;
-		}
-		return result;
 	}
 	
 	@Override
