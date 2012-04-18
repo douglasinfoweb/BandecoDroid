@@ -4,12 +4,10 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 /**
@@ -82,21 +80,16 @@ public class Cardapio implements Serializable, Comparable<Cardapio> {
 		//Pega o layout de cardapios
 		View layout = (View)vi.inflate(R.layout.cardapio, null);
 		//Pega o titulo do cardapio
-		TableLayout table = (TableLayout)layout.findViewById(R.id.cardapioTable);
 		TextView titulo = (TextView)layout.findViewById(R.id.Titulo);
 		ImageView icone = (ImageView)layout.findViewById(R.id.cardapio_ic);
 		switch (refeicao) {
 			case ALMOCO: 
 						icone.setImageResource(R.drawable.ic_sol);
-						table.setBackgroundResource(R.drawable.appwidget_bg);
 						titulo.setText("ALMOÇO "+Util.int2diaDaSemana(data.getDayOfWeek(),false));
-						 titulo.setTextColor(Color.BLACK);
 						break;
 			case JANTA: 
 						icone.setImageResource(R.drawable.ic_lua);
-						table.setBackgroundResource(R.drawable.appwidget_dark_bg);
 						titulo.setText("JANTAR "+Util.int2diaDaSemana(data.getDayOfWeek(),false));
-						titulo.setTextColor(Color.WHITE);
 						break;
 		}
 		setLayoutText(layout,
@@ -135,11 +128,7 @@ public class Cardapio implements Serializable, Comparable<Cardapio> {
 		TableRow rowView = (TableRow)layout.findViewById(rowID);
 		TextView textView = (TextView)layout.findViewById(textID);
 		
-		if (refeicao.equals(Refeicao.ALMOCO)) {
-			textView.setTextColor(Color.BLACK);
-		} else {
-			textView.setTextColor(Color.WHITE);
-		}
+
 		textView.setText(text);
 		if (!show) {
 			rowView.setVisibility(View.GONE);

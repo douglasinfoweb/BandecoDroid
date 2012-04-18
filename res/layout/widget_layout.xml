@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="180dp"
   	  android:layout_height="wrap_content"
+  	  android:id="@+id/backgroud_widget"
   	  android:background="@drawable/appwidget_dark_bg"
     >
 
