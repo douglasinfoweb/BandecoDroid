@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 
-import android.graphics.Shader.TileMode;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,24 +84,19 @@ public class Cardapio implements Serializable, Comparable<Cardapio> {
 		//Pega o titulo do cardapio
 		TableLayout table = (TableLayout)layout.findViewById(R.id.cardapioTable);
 		TextView titulo = (TextView)layout.findViewById(R.id.Titulo);
-		ImageView imageTop = (ImageView)layout.findViewById(R.id.topImage);
-		ImageView imageBottom = (ImageView)layout.findViewById(R.id.bottomImage);
-		
-		if (refeicao.equals(Refeicao.ALMOCO)) {
-			table.setBackgroundResource(R.drawable.background_almoco);
-		} else {
-			table.setBackgroundResource(R.drawable.background_jantar);
-		}
-		BitmapDrawable bm= (BitmapDrawable)table.getBackground();
-		bm.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
+		ImageView icone = (ImageView)layout.findViewById(R.id.cardapio_ic);
 		switch (refeicao) {
-			case ALMOCO: titulo.setText("ALMOÇO "+Util.int2diaDaSemana(data.getDayOfWeek())); 
-						 imageTop.setImageResource(R.drawable.cardapio_almoco_top);
-						 imageBottom.setImageResource(R.drawable.cardapio_almoco_bottom);
+			case ALMOCO: 
+						icone.setImageResource(R.drawable.ic_sol);
+						table.setBackgroundResource(R.drawable.appwidget_bg);
+						titulo.setText("ALMOÇO "+Util.int2diaDaSemana(data.getDayOfWeek(),false));
+						 titulo.setTextColor(Color.BLACK);
 						break;
-			case JANTA: titulo.setText("JANTAR "+Util.int2diaDaSemana(data.getDayOfWeek()));
-						imageTop.setImageResource(R.drawable.cardapio_jantar_top);
-						imageBottom.setImageResource(R.drawable.cardapio_jantar_bottom);
+			case JANTA: 
+						icone.setImageResource(R.drawable.ic_lua);
+						table.setBackgroundResource(R.drawable.appwidget_dark_bg);
+						titulo.setText("JANTAR "+Util.int2diaDaSemana(data.getDayOfWeek(),false));
+						titulo.setTextColor(Color.WHITE);
 						break;
 		}
 		setLayoutText(layout,
@@ -116,29 +110,36 @@ public class Cardapio implements Serializable, Comparable<Cardapio> {
 				R.id.Suco,
 				(suco != null && suco.length() > 2),
 				suco);
-		
-		setLayoutText(layout,
-				R.id.SaladaRow,
-				R.id.Salada,
-				(salada != null && salada.length() > 2),
-				salada);
-		
+		if (pts != null && pts.length() > 2) {
+				setLayoutText(layout,
+						R.id.SaladaRow,
+						R.id.Salada,
+						(salada != null && salada.length() > 2),
+						salada+"\n"+pts);
+		}  else {
+			setLayoutText(layout,
+					R.id.SaladaRow,
+					R.id.Salada,
+					(salada != null && salada.length() > 2),
+					salada);
+		}
 		setLayoutText(layout,
 				R.id.SobremesaRow,
 				R.id.Sobremesa,
 				(sobremesa != null && sobremesa.length() > 2),
 				sobremesa);
-		
-		setLayoutText(layout,
-				R.id.PtsRow,
-				R.id.Pts,
-				(pts != null && pts.length() > 2),
-				pts);
+	
 		return layout;
 	}
 	private void setLayoutText(View layout, int rowID, int textID, boolean show, String text) {
 		TableRow rowView = (TableRow)layout.findViewById(rowID);
 		TextView textView = (TextView)layout.findViewById(textID);
+		
+		if (refeicao.equals(Refeicao.ALMOCO)) {
+			textView.setTextColor(Color.BLACK);
+		} else {
+			textView.setTextColor(Color.WHITE);
+		}
 		textView.setText(text);
 		if (!show) {
 			rowView.setVisibility(View.GONE);

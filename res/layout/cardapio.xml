@@ -1,66 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:orientation="vertical">
-	<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
-        	<ImageView android:src="@drawable/cardapio_almoco_top" 
-        	    android:layout_height="70dp"
-        	    android:layout_width="320dp"
-        	    android:scaleType="fitXY"
-        	    android:id="@+id/topImage"/>	
-        	<TextView 
-        	    android:id="@+id/Titulo"
-        	    android:textAppearance="@style/Titulo"
-        	    android:layout_marginRight="10dp"
-        	    android:layout_marginBottom="15dp"
-        	    android:layout_width="243dp" 
-        	    android:gravity="center"
-        	    android:layout_height="wrap_content" 
-        	    android:text="aeaeaeeaea" 
-        	    android:layout_alignBottom="@id/topImage" 
-        	    android:layout_alignRight="@id/topImage"/>
-    </RelativeLayout>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp" 
+    android:layout_height="wrap_content"
+	android:id="@+id/cardapioTable" android:background="@drawable/appwidget_bg">
+
+    <TableRow
+        android:gravity="center"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:textColor="@android:color/primary_text_light"  android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/cardapio_ic"
+            android:scaleType="fitXY"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_sol" android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/Titulo"
+            android:text="aeaeaeeaea"
+            android:textAppearance="@style/Titulo"
+            android:layout_width="220dp"
+            android:textColor="@android:color/primary_text_light" />
+    </TableRow>
+
+    <TableRow 
+        android:id="@+id/PratoPrincipalRow" 
+        android:gravity="center" android:layout_marginBottom="20dp">
+        <ImageView android:src="@drawable/ic_pratoprincipal" android:layout_gravity="center"/>
+        <TextView android:textAppearance="@style/Texto" android:text="aduiadas"
+            android:id="@+id/PratoPrincipal" android:layout_width="220dp" android:textColor="@android:color/primary_text_light"/>
+    </TableRow>
     
-    <TableLayout 
-        android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/cardapioTable">
-        <TableRow android:id="@+id/PratoPrincipalRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp" android:paddingBottom="10dp">
-            <ImageView android:src="@drawable/ic_pratoprincipal" android:layout_gravity="center" android:layout_margin="5dp" />
-            <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
-                android:layout_width="210dp" android:id="@+id/PratoPrincipal"/>
-        </TableRow>
-        
-        <TableRow android:id="@+id/SucoRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp" android:paddingBottom="10dp">
-            <ImageView android:src="@drawable/ic_suco" android:layout_gravity="center" android:layout_margin="5dp" />
-            <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
-                android:layout_width="210dp"  android:id="@+id/Suco"/>
-        </TableRow>
-        <TableRow android:id="@+id/SaladaRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp" android:paddingBottom="10dp">
-            <ImageView android:src="@drawable/ic_salada" android:layout_gravity="center" android:layout_margin="5dp" />
-            <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
-                android:layout_width="210dp" android:id="@+id/Salada"/>
-        </TableRow>
-        <TableRow android:id="@+id/SobremesaRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp" android:paddingBottom="10dp">
-            <ImageView android:src="@drawable/ic_sobremesa" android:layout_gravity="center" android:layout_margin="5dp" />
-            <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
-                android:layout_width="210dp" android:id="@+id/Sobremesa"/>
-        </TableRow>
-        <TableRow android:id="@+id/PtsRow" android:gravity="center_vertical" 
-            android:paddingLeft="27dp" android:paddingRight="10dp">
-            <ImageView android:src="@drawable/ic_pts" android:layout_gravity="center" android:layout_margin="5dp" />
-            <TextView android:textAppearance="@style/Texto" android:text="aduiadas" android:layout_marginLeft="1dp"
-                android:layout_width="210dp" android:id="@+id/Pts"/>
-        </TableRow>
-         
-    </TableLayout>
+    <TableRow android:id="@+id/SucoRow" 
+        android:gravity="center"  android:layout_marginBottom="20dp">
+        <ImageView android:src="@drawable/ic_suco" android:layout_gravity="center"/>
+        <TextView android:textAppearance="@style/Texto" android:layout_width="220dp" android:text="aduiadas" android:id="@+id/Suco" android:textColor="@android:color/primary_text_light"/>
+    </TableRow>
     
-   	<ImageView 
-   	    android:layout_width="320dp"
-   	    android:layout_height="26dp"
-       	android:scaleType="fitXY"
-   	    android:src="@drawable/cardapio_almoco_bottom"
-   	    android:id="@+id/bottomImage"/>
-</LinearLayout>
+    <TableRow android:id="@+id/SaladaRow" android:gravity="center"  android:layout_marginBottom="20dp">
+        <ImageView android:src="@drawable/ic_salada" android:layout_gravity="center"/>
+        <TextView android:textAppearance="@style/Texto" android:text="aduiadas"
+             android:id="@+id/Salada" android:layout_width="220dp" android:textColor="@android:color/primary_text_light"/>
+    </TableRow>
+    <TableRow android:id="@+id/SobremesaRow" android:gravity="center"  android:layout_marginBottom="20dp">
+        <ImageView android:src="@drawable/ic_sobremesa" android:layout_gravity="center" />
+        <TextView android:textAppearance="@style/Texto" android:layout_width="220dp" android:text="aduiadas" android:id="@+id/Sobremesa" android:textColor="@android:color/primary_text_light"/>
+    </TableRow>
+     
+</TableLayout>

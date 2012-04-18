@@ -1,63 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearlayout1_widget"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
-
-    <RelativeLayout
-        android:id="@+id/topLayout_widget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:id="@+id/topImage_widget"
-            android:layout_width="180dp"
-            android:layout_height="40dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/cardapio_almoco_top" />
-
-        <TextView
-            android:id="@+id/Titulo_widget"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/topImage_widget"
-            android:layout_alignRight="@id/topImage_widget"
-            android:layout_marginBottom="0dp"
-            android:layout_marginRight="5dp"
-            android:gravity="center"
-            android:text="N/A"
-            android:textAppearance="@style/Titulo" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="180dp"
+  	  android:layout_height="wrap_content"
+  	  android:background="@drawable/appwidget_dark_bg"
+    >
 
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/PratoPrincipalRow_widget"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/cardapio_almoco_repeat"
-        android:gravity="center_vertical"
-        android:paddingTop="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="5dp" >
+        <ImageView
+            android:id="@+id/simbolo_widget"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_sol" />
 
         <TextView
             android:id="@+id/txt_widget"
-            android:layout_width="155dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:text="N/A"
-            android:textAppearance="@style/Texto" />
+            android:layout_below="@id/simbolo_widget"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="aeaeea"
+            android:textAppearance="@style/Texto_widget"/>
 
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/bottomImage_widget"
-        android:layout_width="180dp"
-        android:layout_height="15dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/cardapio_almoco_bottom" />
+        <TextView
+            android:id="@+id/Titulo_widget"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="45dp"
+            android:gravity="center"
+            android:text="Sábado"
+          	android:textAppearance="@android:style/TextAppearance.Medium"/>
 
-</LinearLayout>
+</RelativeLayout>

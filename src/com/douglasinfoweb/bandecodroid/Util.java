@@ -7,17 +7,20 @@ import java.util.regex.Pattern;
 
 public class Util {
 
-	public static String int2diaDaSemana(int dayOfWeek) {
+	public static String int2diaDaSemana(int dayOfWeek, boolean resumido) {
 		String result;
 		switch (dayOfWeek) {
-			case 1: result = "Segunda-feira"; break;
-			case 2: result = "Terça-feira"; break;
-			case 3: result = "Quarta-feira"; break;
-			case 4: result = "Quinta-feira"; break;
-			case 5: result = "Sexta-feira"; break;
+			case 1: result = "Segunda"; break;
+			case 2: result = "Terça"; break;
+			case 3: result = "Quarta"; break;
+			case 4: result = "Quinta"; break;
+			case 5: result = "Sexta"; break;
 			case 6: result = "Sábado"; break;
 			case 7: result = "Domingo"; break;
 			default: result = ""; break;
+		}
+		if (!resumido && dayOfWeek >= 1 && dayOfWeek <= 5) {
+			result += "-feira";
 		}
 		return result;
 	}
