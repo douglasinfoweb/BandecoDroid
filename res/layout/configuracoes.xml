@@ -28,7 +28,7 @@
 				<GridView
 				    android:id="@+id/RestaurantesGrid"
 				    android:layout_width="fill_parent"
-				    android:layout_height="351dp"
+				    android:layout_height="fill_parent"
 				    android:columnWidth="90dp"
 				    android:horizontalSpacing="10dp"
 				    android:numColumns="auto_fit"
@@ -48,7 +48,7 @@
         <Button
             android:id="@+id/salvarButton"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="Salvar" />
 
 </LinearLayout>

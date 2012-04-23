@@ -5,6 +5,8 @@ import java.io.StringWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.joda.time.DateTime;
+
 public class Util {
 
 	public static String int2diaDaSemana(int dayOfWeek, boolean resumido) {
@@ -61,5 +63,34 @@ public class Util {
         	sb.append(capitalizeOneWord(splited[i]));
         }
         return sb.toString().trim();
+	}
+	
+	public static int mes2int(String mes) {
+		String mesC = mes.trim().toLowerCase();
+		if (mesC.equals("janeiro"))
+			return 1;
+		else if (mesC.equals("fevereiro"))
+			return 2;
+		else if (mesC.equals("março") || mesC.equals("marco"))
+			return 3;
+		else if (mesC.equals("abril"))
+			return 4;
+		else if (mesC.equals("maio"))
+			return 5;
+		else if (mesC.equals("junho"))
+			return 6;
+		else if (mesC.equals("julho"))
+			return 7;
+		else if (mesC.equals("agosto"))
+			return 8;
+		else if (mesC.equals("setembro"))
+			return 9;
+		else if (mesC.equals("outubro"))
+			return 10;
+		else if (mesC.equals("novembro"))
+			return 11;
+		else if (mesC.equals("dezembro"))
+			return 12;
+		return DateTime.now().getMonthOfYear();
 	}
 }
