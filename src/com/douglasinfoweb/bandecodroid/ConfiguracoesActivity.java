@@ -41,7 +41,7 @@ public class ConfiguracoesActivity extends Activity {
 	    tabHost.addTab(spec);
 	    //E a grid...
 	    GridView grid = (GridView)findViewById(R.id.RestaurantesGrid);
-		grid.setAdapter(new RestauranteAdapter(this,config));
+		grid.setAdapter(new RestauranteAdapter(this));
 		//Botao de salvar
 		Button btn = (Button)findViewById(R.id.salvarButton);
 		final ConfiguracoesActivity act = this;

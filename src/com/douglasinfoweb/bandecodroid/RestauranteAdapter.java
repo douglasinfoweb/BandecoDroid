@@ -11,11 +11,9 @@ import android.widget.ImageView;
 
 public class RestauranteAdapter extends BaseAdapter {
     private ConfiguracoesActivity activity;
-    private Configuracoes config;
 
-    public RestauranteAdapter(ConfiguracoesActivity c, Configuracoes conf) {
+    public RestauranteAdapter(ConfiguracoesActivity c) {
         activity = c;
-        config=conf;
     }
 
 	@Override
@@ -43,7 +41,7 @@ public class RestauranteAdapter extends BaseAdapter {
 		image.setImageResource(restaurante.getImagem());
 		
 		CheckBox checkBox = (CheckBox)restauranteView.findViewById(R.id.RestauranteCheckbox);
-		checkBox.setChecked(config.getRestaurantesEscolhidos().contains(restaurante));
+		checkBox.setChecked(activity.getRestaurantesSelecionados().contains(restaurante));
 		
 		checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
