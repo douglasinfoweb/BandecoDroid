@@ -27,7 +27,7 @@ public class UFF extends Restaurante {
 		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 		String URL = "http://www.uff.br/dac/cardapio.htm";
 		//String URL = "http://www.felizardo.me/cardapio.htm";
-		Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
+		Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30 * 1000).header("Accept", "text/html").get();
 		//Pega tabelas
 		int pN=-99999;
 		Cardapio cardapio=null;
@@ -59,7 +59,11 @@ public class UFF extends Restaurante {
 			
 			pN++;
 		}
-		if (cardapio != null && cardapio.getData() != null && cardapio.getPratoPrincipal() != null && cardapio.getPratoPrincipal().trim().length() > 2)
+		if (cardapio != null 
+				&& cardapio.getRefeicao() != null
+				&& cardapio.getData() != null 
+				&& cardapio.getPratoPrincipal() != null 
+				&& cardapio.getPratoPrincipal().trim().length() > 2)
 			cardapios.add(cardapio);
 		setCardapios(cardapios);
 		removeCardapiosAntigos();

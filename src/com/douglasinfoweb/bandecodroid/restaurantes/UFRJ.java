@@ -27,9 +27,9 @@ public class UFRJ extends Restaurante {
 	public void atualizarCardapios(Main main) throws IOException {
 		Log.v("bandeco","ATUALIZAR");
 		ArrayList<Cardapio> cardapiosFinal=new ArrayList<Cardapio>();
-		String URL = "http://www.nutricao.ufrj.br/cardapio_ru.htm";
+		String URL = "http://www.nutricao.ufrj.br/cardapio.htm";
 		//String URL = "http://www.felizardo.me/cardapio_ru.htm";
-		Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
+		Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30 * 1000).header("Accept", "text/html").get();
 		//Pega tabelas
 		int tableN=0;
 		for (Element table : doc.select("table")) {
@@ -107,6 +107,7 @@ public class UFRJ extends Restaurante {
 				Log.v("bandeco","cardapios: "+cardapios);
 				for (Cardapio c : cardapios) {
 					if (c.getData() != null 
+							&& c.getRefeicao() != null
 							&& c.getPratoPrincipal() != null 
 							&& c.getPratoPrincipal().trim().length() > 2) {
 						cardapiosFinal.add(c);

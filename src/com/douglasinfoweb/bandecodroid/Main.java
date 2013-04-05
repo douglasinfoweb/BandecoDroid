@@ -113,7 +113,7 @@ public class Main extends Activity {
 			}
 		});
     	
-    	MenuItem itemConfiguracoes = menu.add(0, Menu.NONE, Menu.NONE, "ConfiguraÁıes");
+    	MenuItem itemConfiguracoes = menu.add(0, Menu.NONE, Menu.NONE, "Configurações");
     	itemConfiguracoes.setIcon(R.drawable.ic_menu_preferences);
     	itemConfiguracoes.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			
@@ -144,7 +144,7 @@ public class Main extends Activity {
 		    			}
 			    		if (restauranteAtual.getCardapios().size() == 0) {
 		    				TextView text =new TextView(this);
-		    				text.setText("Erro: N„o foi possÌvel recuperar nenhum card·pio");
+		    				text.setText("Não foi possÌvel recuperar nenhum cardápio");
 		    				mainScroll.addView(text);
 			    		}
 			    		Button btn = new Button(this);

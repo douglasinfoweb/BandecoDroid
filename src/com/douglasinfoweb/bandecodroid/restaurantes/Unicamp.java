@@ -29,11 +29,10 @@ public class Unicamp extends Restaurante {
 		int pagina=1;
 		while (proximo) {
 				proximo=false;
-				String URL = "http://www.prefeitura.unicamp.br/busca_cardapio.php?pagina="+pagina;
-				Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
+				String URL = "http://www.prefeitura.unicamp.br/cardapio_pref.php?pagina="+pagina;
+				Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30000).header("Accept", "text/html").get();
 				Elements linhas = doc.select("tr");
 				Cardapio cardapio = new Cardapio();
-				cardapios.add(cardapio);
 				boolean duasLinhasPratoPrincipal=false;
 				for (Element e : linhas) {
 					String text = e.text().toLowerCase().trim();
@@ -71,17 +70,22 @@ public class Unicamp extends Restaurante {
 					} else if (text.contains("jantar")) {
 						cardapio.setRefeicao(Cardapio.Refeicao.JANTA);
 						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("almoÁo")) {
+					} else if (text.contains("almoço")) {
 						cardapio.setRefeicao(Cardapio.Refeicao.ALMOCO);
 						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("prÛximo")) {
+					} else if (text.contains("próximo")) {
 						proximo=true;
 						duasLinhasPratoPrincipal=false;
 					} else if (duasLinhasPratoPrincipal) {
 						cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+Util.capitalize(textoNormal));
 						duasLinhasPratoPrincipal=false;
 					}
-				}		
+				}
+				if (cardapio.getRefeicao() != null 
+						&& cardapio.getPratoPrincipal() != null 
+						&& cardapio.getData() != null) {
+					cardapios.add(cardapio);
+				}
 
 			pagina++;	
 		}

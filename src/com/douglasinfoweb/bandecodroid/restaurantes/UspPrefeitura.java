@@ -26,8 +26,9 @@ public class UspPrefeitura extends Restaurante {
 		Log.v("bandeco","ATUALIZAR");
 		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 		String URL = "http://www.usp.br/coseas/cardcocesp.html";
-		Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
+		Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30*1000).header("Accept", "text/html").get();
 		//Pega semana
+		int semana=0;
 		DateTime ultimaData = new DateTime();
 		for (Element pre : doc.select("pre")) {
 			String text = pre.text();
@@ -39,74 +40,56 @@ public class UspPrefeitura extends Restaurante {
 						Integer.parseInt(dataSplited[0]), 
 						0, 0 ,0);
 				Log.v("usp-prefeitura", "ultimaData: "+ultimaData.toString());
+				semana = ultimaData.getWeekOfWeekyear();
 			}
 		}
 		//Pega infos
 		int rowN=0;
 		for (Element row : doc.select("tr")) {
-			Log.v("usp-fisica", "tr "+rowN+": "+row);
 			rowN++;
 			if (rowN == 1) continue;
 			//TODO USP
 			int tdN=0;
 			tdCardapio:
 			for (Element td : row.select("td")) {
-				Log.v("usp-fisica", "td "+tdN+": "+td);
+				String text=td.text();
+				String textP=td.text().toLowerCase();
 				Cardapio cardapio = new Cardapio();
 				if (tdN == 0)
 					cardapio.setRefeicao(Refeicao.ALMOCO);
 				else
 					cardapio.setRefeicao(Refeicao.JANTA);
-				int fontN=0;
-				for (Element font : td.select("font[face=Times New Roman]")) {
-					String text = font.text().trim();
-					switch (fontN) {
-						case 0: 
-							String dia = text.toLowerCase();
-							Log.v("usp-fisica", "dia "+dia);
-							int diaDaSemana=0;
-							if (dia.contains("segunda")) {
-								diaDaSemana=1;
-							} else if (dia.contains("terça")) {
-								diaDaSemana=2;
-							} else if (dia.contains("quarta")) {
-								diaDaSemana=3;
-							} else if (dia.contains("quinta")) {
-								diaDaSemana=4;
-							} else if (dia.contains("sexta")) {
-								diaDaSemana=5;
-							} else if (dia.contains("sábado")) {
-								diaDaSemana=6;
-							} else if (dia.contains("domingo")) {
-								diaDaSemana=7;
-							}
-							if (diaDaSemana==0) {
-								tdN++;
-								continue tdCardapio;
-							}
-							MutableDateTime data = new MutableDateTime();
-							data.setDayOfWeek(diaDaSemana);
-							data.setWeekOfWeekyear(ultimaData.getWeekOfWeekyear());
-							data.setYear(ultimaData.getYear());
-							cardapio.setData(data.toDateTime());
-							Log.v("usp-prefeitura", "data: "+data.toDateTime());
-							break;
-						case 2: cardapio.setPratoPrincipal(text); break;
-						case 3: cardapio.setPratoPrincipal(cardapio.getPratoPrincipal() + "\n"+text); break;
-						case 4: cardapio.setSalada(text); break;
-						case 5: cardapio.setPts(Util.separaEPegaValor(text)); break;
-						case 6: String textSplited[] = text.split("/");
-						if (textSplited.length == 2) {
-							cardapio.setSobremesa(textSplited[0]);
-							cardapio.setSuco(textSplited[1]);
-						} else {
-							cardapio.setSobremesa(text);
-						}
-					}
-					fontN++;
+
+				int diaDaSemana=0;
+				if (textP.contains("segunda")) {
+					diaDaSemana=1;
+				} else if (textP.contains("tera")) {
+					diaDaSemana=2;
+				} else if (textP.contains("quarta")) {
+					diaDaSemana=3;
+				} else if (textP.contains("quinta")) {
+					diaDaSemana=4;
+				} else if (textP.contains("sexta")) {
+					diaDaSemana=5;
+				} else if (textP.contains("s‡bado")) {
+					diaDaSemana=6;
+				} else if (textP.contains("domingo")) {
+					diaDaSemana=7;
 				}
+				//Nao foi possivel identificar dia da semana
+				if (diaDaSemana==0) {
+					continue;
+				}
+				MutableDateTime data = new MutableDateTime();
+				data.setDayOfWeek(diaDaSemana);
+				data.setWeekOfWeekyear(semana);
+				data.setYear(ultimaData.getYear());
+				cardapio.setData(data.toDateTime());
+				cardapio.setPratoPrincipal(text);
 				tdN++;
 				if (cardapio.getPratoPrincipal() != null 
+						&& cardapio.getRefeicao() != null
+						&& cardapio.getData() != null
 						&& Util.removerEspacosDuplicados(cardapio.getPratoPrincipal().trim()).length() > 2 
 						&& !cardapio.getPratoPrincipal().toLowerCase().contains("fechado")) {
 					cardapios.add(cardapio);

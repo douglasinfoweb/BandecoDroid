@@ -11,6 +11,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.douglasinfoweb.bandecodroid.Cardapio;
@@ -20,15 +21,17 @@ import com.douglasinfoweb.bandecodroid.R;
 import com.douglasinfoweb.bandecodroid.Restaurante;
 import com.douglasinfoweb.bandecodroid.Util;
 
+@SuppressLint("DefaultLocale")
 @SuppressWarnings("serial")
 public class UspQuimica extends Restaurante {
 	boolean proximo;
+	@SuppressLint("DefaultLocale")
 	@Override
 	public void atualizarCardapios(Main main) throws IOException {
 		Log.v("bandeco","ATUALIZAR");
 		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 		String URL = "http://www.usp.br/coseas/cardapioquimica.html";
-		Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
+		Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30*1000).header("Accept", "text/html").get();
 		//Pega semana
 		int semana=0;
 		DateTime ultimaData = new DateTime();
@@ -48,62 +51,51 @@ public class UspQuimica extends Restaurante {
 		//Pega infos
 		int rowN=0;
 		for (Element row : doc.select("tr")) {
-			Log.v("usp-quimicas", "tr "+rowN+": "+row);
+			//Log.v("usp-quimicas", "tr "+rowN+": "+row.text());
 			rowN++;
 			if (rowN == 1) continue;
 			//TODO USP
 			int tdN=0;
-			tdCardapio:
 			for (Element td : row.select("td")) {
-				Log.v("usp-quimicas", "td "+tdN+": "+td);
+				String text=td.text();
+				String textP=td.text().toLowerCase();
+				Log.v("usp-quimicas", "td "+tdN+": "+text);
 				Cardapio cardapio = new Cardapio();
 				if (tdN == 0)
 					cardapio.setRefeicao(Refeicao.ALMOCO);
 				else
 					cardapio.setRefeicao(Refeicao.JANTA);
-				List<Element> preList = td.select("pre");
-				if (preList.size() == 0) {
-					tdN++;
-					continue tdCardapio;
-				}
-				String dia = Util.removerEspacosDuplicados(preList.get(0).text()).toLowerCase();
-				Log.v("usp-quimicas", "dia "+dia);
+				
 				int diaDaSemana=0;
-				if (dia.contains("segunda")) {
+				if (textP.contains("segunda")) {
 					diaDaSemana=1;
-				} else if (dia.contains("terça")) {
+				} else if (textP.contains("tera")) {
 					diaDaSemana=2;
-				} else if (dia.contains("quarta")) {
+				} else if (textP.contains("quarta")) {
 					diaDaSemana=3;
-				} else if (dia.contains("quinta")) {
+				} else if (textP.contains("quinta")) {
 					diaDaSemana=4;
-				} else if (dia.contains("sexta")) {
+				} else if (textP.contains("sexta")) {
 					diaDaSemana=5;
-				} else if (dia.contains("sábado")) {
+				} else if (textP.contains("s‡bado")) {
 					diaDaSemana=6;
-				} else if (dia.contains("domingo")) {
+				} else if (textP.contains("domingo")) {
 					diaDaSemana=7;
+				}
+				//Nao foi possivel identificar dia da semana
+				if (diaDaSemana==0) {
+					continue;
 				}
 				MutableDateTime data = new MutableDateTime();
 				data.setDayOfWeek(diaDaSemana);
 				data.setWeekOfWeekyear(semana);
 				data.setYear(ultimaData.getYear());
 				cardapio.setData(data.toDateTime());
-				int spanID=0;
-				for (Element span : td.select("span")) {
-					String text = span.text().trim();
-					Log.v("usp-quimicas", "span "+spanID+": "+text);
-					switch (spanID) {
-						case 1: cardapio.setPratoPrincipal(text); break;
-						case 2: cardapio.setPratoPrincipal(cardapio.getPratoPrincipal() + "\n"+text); break;		 
-						case 3: cardapio.setSalada(text); break;
-						case 4: cardapio.setSobremesa(text); break;
-						case 5: cardapio.setSuco(text); break;
-					}
-					spanID++;
-				}
+				cardapio.setPratoPrincipal(text);
 				tdN++;
 				if (cardapio.getPratoPrincipal() != null 
+						&& cardapio.getRefeicao() != null
+						&& cardapio.getData() != null
 						&& Util.removerEspacosDuplicados(cardapio.getPratoPrincipal().trim()).length() > 2
 						&& !cardapio.getPratoPrincipal().toLowerCase().contains("fechado")) {
 					cardapios.add(cardapio);

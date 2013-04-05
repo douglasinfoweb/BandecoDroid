@@ -18,6 +18,11 @@ import com.douglasinfoweb.bandecodroid.R;
 import com.douglasinfoweb.bandecodroid.Restaurante;
 import com.douglasinfoweb.bandecodroid.Util;
 
+/**
+ * ESSA CLASSE ESTA MORTA, UFJF ESTA MOSTRANDO IMAGEM AGORA
+ * @author feliz
+ *
+ */
 @SuppressWarnings("serial")
 public class UFJF extends Restaurante {
 	boolean proximo;

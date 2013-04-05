@@ -13,11 +13,11 @@ public class Util {
 		String result;
 		switch (dayOfWeek) {
 			case 1: result = "Segunda"; break;
-			case 2: result = "Terça"; break;
+			case 2: result = "Tera"; break;
 			case 3: result = "Quarta"; break;
 			case 4: result = "Quinta"; break;
 			case 5: result = "Sexta"; break;
-			case 6: result = "Sábado"; break;
+			case 6: result = "S‡bado"; break;
 			case 7: result = "Domingo"; break;
 			default: result = ""; break;
 		}

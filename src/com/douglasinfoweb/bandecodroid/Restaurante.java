@@ -26,7 +26,6 @@ public abstract class Restaurante implements Serializable {
 		new UspSaoCarlos(),
 		new UFRJ(),
 		new UFF(),
-		new UFJF(),
 		new UERJ()
 	};
 	private static final long serialVersionUID = -1612436480775220733L;

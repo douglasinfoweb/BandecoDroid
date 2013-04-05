@@ -77,6 +77,8 @@ public class UspSaoCarlos extends Restaurante {
 						}
 					}
 					if (cardapio.getPratoPrincipal() != null 
+							&& cardapio.getRefeicao() != null
+							&& cardapio.getData() != null
 							&& Util.removerEspacosDuplicados(cardapio.getPratoPrincipal().trim()).length() > 2) {
 						cardapios.add(cardapio);
 					}

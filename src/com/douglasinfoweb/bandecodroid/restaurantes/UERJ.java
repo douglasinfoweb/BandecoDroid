@@ -27,7 +27,7 @@ public class UERJ extends Restaurante {
 		Log.v("bandeco","ATUALIZAR");
 		ArrayList<Cardapio> cardapiosFinal=new ArrayList<Cardapio>();
 		String URL = "http://www.restauranteuniversitario.uerj.br/cardapio.html";
-		Document doc = Jsoup.connect(URL).userAgent("Mozilla").header("Accept", "text/html").get();
+		Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30*1000).header("Accept", "text/html").get();
 		Element texto_cardapio = doc.select("#texto_cardapio").get(0);
 		Element titulo = texto_cardapio.select("h1").get(0);
 		//Pegando data
@@ -72,7 +72,10 @@ public class UERJ extends Restaurante {
 			trN++;
 		}
 		for (Cardapio c : new ArrayList<Cardapio>(cardapiosFinal)) {
-			if (c.getPratoPrincipal().length() <= 6) {
+			if (c.getPratoPrincipal() != null
+				&& c.getRefeicao () != null
+				&& c.getData() != null
+				&& c.getPratoPrincipal().length() <= 6) {
 				cardapiosFinal.remove(c);
 			}
 		}

@@ -25,7 +25,7 @@ public class Configuracoes implements Serializable {
 	}
 	
 	public static void save(Activity act, Configuracoes m) throws IOException {
-		FileOutputStream fos = act.openFileOutput("config", Context.MODE_WORLD_READABLE);
+		FileOutputStream fos = act.openFileOutput("config2", Context.MODE_PRIVATE);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
 		oos.writeObject(m);
 		oos.flush();
@@ -35,7 +35,7 @@ public class Configuracoes implements Serializable {
 		Configuracoes configuracoes = new Configuracoes();
         /* Tentar recuperar dados */
         try {
-			FileInputStream fis = act.openFileInput("config");
+			FileInputStream fis = act.openFileInput("config2");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			configuracoes = (Configuracoes)ois.readObject();
 			ois.close();
