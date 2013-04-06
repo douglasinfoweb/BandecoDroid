@@ -37,7 +37,7 @@ public class Unicamp extends Restaurante {
 				for (Element e : linhas) {
 					String text = e.text().toLowerCase().trim();
 					String textoNormal = e.text().trim();
-					/** INFORMA«’ES **/
+					/** INFORMCOES **/
 					if (text.contains("feira")) {
 						String dataTxt = Util.removerEspacosDuplicados(text).trim().substring(0, 10);
 						String[] dataSplited = dataTxt.split("/");
@@ -70,10 +70,10 @@ public class Unicamp extends Restaurante {
 					} else if (text.contains("jantar")) {
 						cardapio.setRefeicao(Cardapio.Refeicao.JANTA);
 						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("almoço")) {
+					} else if (text.contains("almo√ßo")) {
 						cardapio.setRefeicao(Cardapio.Refeicao.ALMOCO);
 						duasLinhasPratoPrincipal=false;
-					} else if (text.contains("próximo")) {
+					} else if (text.contains("pr√≥ximo")) {
 						proximo=true;
 						duasLinhasPratoPrincipal=false;
 					} else if (duasLinhasPratoPrincipal) {
@@ -123,7 +123,7 @@ public class Unicamp extends Restaurante {
 				//Se for de dias que ja passaram, remove
 				if (c.getData().getDayOfYear() < now.getDayOfYear()) { 
 					getCardapios().remove(c);
-				} else { //Se eh de hoje, ver se ja passou a hora do almoÁo/janta
+				} else { //Se eh de hoje, ver se ja passou a hora do almoÔøΩo/janta
 					switch (c.getRefeicao()) {
 						case ALMOCO: if (now.getHourOfDay() >= 14) getCardapios().remove(c);
 						case JANTA: if (now.getHourOfDay() >= 20) getCardapios().remove(c);

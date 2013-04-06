@@ -44,7 +44,7 @@ public class UFRJ extends Restaurante {
 					if (trN==0) {
 						String texto = Util.removerEspacosDuplicados(tr.text().toLowerCase());
 						//Define refeicao
-						if (texto.contains("almoço")) {
+						if (texto.contains("almoÃ§o")) {
 							refeicao = Refeicao.ALMOCO;
 						} else {
 							refeicao = Refeicao.JANTA;
@@ -90,7 +90,7 @@ public class UFRJ extends Restaurante {
 									cardapio.setSalada(texto);
 								} else if (titulo.contains("principal")) {
 									cardapio.setPratoPrincipal(texto);
-								} else if (titulo.contains("guarnição")) {
+								} else if (titulo.contains("guarniÃ§Ã£o")) {
 									cardapio.setPratoPrincipal(cardapio.getPratoPrincipal()+"\n"+texto);
 								} else if (titulo.contains("sobremesa")) {
 									cardapio.setSobremesa(texto);
@@ -149,7 +149,7 @@ public class UFRJ extends Restaurante {
 				//Se for de dias que ja passaram, remove
 				if (c.getData().getDayOfYear() < now.getDayOfYear()) { 
 					getCardapios().remove(c);
-				} else { //Se eh de hoje, ver se ja passou a hora do almoço/janta
+				} else { //Se eh de hoje, ver se ja passou a hora do almoï¿½o/janta
 					switch (c.getRefeicao()) {
 						case ALMOCO: if (now.getHourOfDay() >= 14) getCardapios().remove(c);
 						case JANTA: if (now.getHourOfDay() >= 20) getCardapios().remove(c);

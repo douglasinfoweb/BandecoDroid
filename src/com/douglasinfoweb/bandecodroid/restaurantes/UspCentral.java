@@ -67,7 +67,7 @@ public class UspCentral extends Restaurante {
 				int diaDaSemana=0;
 				if (textP.contains("segunda")) {
 					diaDaSemana=1;
-				} else if (textP.contains("terça")) {
+				} else if (textP.contains("ter√ßa")) {
 					diaDaSemana=2;
 				} else if (textP.contains("quarta")) {
 					diaDaSemana=3;
@@ -75,7 +75,7 @@ public class UspCentral extends Restaurante {
 					diaDaSemana=4;
 				} else if (textP.contains("sexta")) {
 					diaDaSemana=5;
-				} else if (textP.contains("sábado")) {
+				} else if (textP.contains("s√°bado")) {
 					diaDaSemana=6;
 				} else if (textP.contains("domingo")) {
 					diaDaSemana=7;
@@ -99,7 +99,7 @@ public class UspCentral extends Restaurante {
 					cardapios.add(cardapio);
 				}
 			}
-			//TODO: TESTAR QUANDO VOLTAR DA MANUTEN«√O
+			//TODO: TESTAR QUANDO VOLTAR DA MANUTEN√á√ÉO
 		}		
 
 		setCardapios(cardapios);
@@ -133,7 +133,7 @@ public class UspCentral extends Restaurante {
 				//Se for de dias que ja passaram, remove
 				if (c.getData().getDayOfYear() < now.getDayOfYear()) { 
 					getCardapios().remove(c);
-				} else { //Se eh de hoje, ver se ja passou a hora do almoÁo/janta
+				} else { //Se eh de hoje, ver se ja passou a hora do almo√ßo/janta
 					switch (c.getRefeicao()) {
 						case ALMOCO: if (now.getHourOfDay() >= 14) getCardapios().remove(c);
 						case JANTA: if (now.getHourOfDay() >= 20) getCardapios().remove(c);

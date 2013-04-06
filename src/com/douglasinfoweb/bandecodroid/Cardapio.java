@@ -85,7 +85,7 @@ public class Cardapio implements Serializable, Comparable<Cardapio> {
 		switch (refeicao) {
 			case ALMOCO: 
 						icone.setImageResource(R.drawable.ic_sol);
-						titulo.setText("ALMO‚O "+Util.int2diaDaSemana(data.getDayOfWeek(),false));
+						titulo.setText("ALMOÃ‡O "+Util.int2diaDaSemana(data.getDayOfWeek(),false));
 						break;
 			case JANTA: 
 						icone.setImageResource(R.drawable.ic_lua);

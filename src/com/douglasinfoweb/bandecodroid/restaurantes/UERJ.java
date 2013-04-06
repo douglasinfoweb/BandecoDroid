@@ -64,7 +64,7 @@ public class UERJ extends Restaurante {
 						case 5: case 6: cardapio.setSalada(cardapio.getSalada()+" / "+texto); break;
 						case 8: cardapio.setSobremesa(texto); break;
 						case 9: cardapio.setSuco(texto); break;
-						case 10: cardapio.setSuco(cardapio.getSuco()+"\nCh· de "+texto);
+						case 10: cardapio.setSuco(cardapio.getSuco()+"\nCh√° de "+texto);
 					}
 				}
 				tdN++;
@@ -111,7 +111,7 @@ public class UERJ extends Restaurante {
 				//Se for de dias que ja passaram, remove
 				if (c.getData().getDayOfYear() < now.getDayOfYear()) { 
 					getCardapios().remove(c);
-				} else { //Se eh de hoje, ver se ja passou a hora do almoÁo/janta
+				} else { //Se eh de hoje, ver se ja passou a hora do almoÔøΩo/janta
 					switch (c.getRefeicao()) {
 						case ALMOCO: if (now.getHourOfDay() >= 14) getCardapios().remove(c);
 						case JANTA: if (now.getHourOfDay() >= 20) getCardapios().remove(c);

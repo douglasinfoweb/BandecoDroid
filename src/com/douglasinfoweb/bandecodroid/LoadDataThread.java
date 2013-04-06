@@ -35,7 +35,7 @@ public class LoadDataThread extends Thread
 				public void run() {
 			        AlertDialog alertDialog = new AlertDialog.Builder(main).create();
 			        alertDialog.setTitle("Erro!");
-			        alertDialog.setMessage("Impossivel atualizar cardápios. Verifique conexão.");
+			        alertDialog.setMessage("Impossivel atualizar card√°pios. Verifique conex√£o.");
 			        alertDialog.setCanceledOnTouchOutside(true);
 			        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
 			        alertDialog.setCancelable(true);
@@ -49,7 +49,7 @@ public class LoadDataThread extends Thread
 				public void run() {
 			        AlertDialog alertDialog = new AlertDialog.Builder(main).create();
 			        alertDialog.setTitle("Erro!");
-			        alertDialog.setMessage("Erro inesperado ao atualizar cardapio. Verifique se há atualização do aplicativo. Se não, favor contatar-nos.");
+			        alertDialog.setMessage("Erro inesperado ao atualizar card√°pio. Verifique se h√° atualiza√ß√£o do aplicativo. Se n√£o, favor contatar-nos.");
 			        alertDialog.setCanceledOnTouchOutside(true);
 			        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
 			        alertDialog.setCancelable(true);
