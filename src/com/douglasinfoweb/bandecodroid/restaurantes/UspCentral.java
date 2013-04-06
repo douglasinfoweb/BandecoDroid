@@ -34,11 +34,12 @@ public class UspCentral extends Restaurante {
 		int semana=0;
 		DateTime ultimaData = new DateTime();
 		for (Element pre : doc.select("pre")) {
-			String text = pre.text();
-			if (text.contains("Semana")) {
-				String[] dataSplited = Util.removerEspacosDuplicados(text).split(" ")[4].split("/");
+			String text = pre.text().toLowerCase();
+			if (text.contains("semana")) {
+				String[] textSplited = Util.removerEspacosDuplicados(text).split(" ");
+				String[] dataSplited = textSplited[textSplited.length - 1].split("/");
 				ultimaData = new DateTime(
-						Integer.parseInt(dataSplited[2])+2000,
+						Integer.parseInt(dataSplited[2]),
 						Integer.parseInt(dataSplited[1]),
 						Integer.parseInt(dataSplited[0]), 
 						0, 0 ,0);

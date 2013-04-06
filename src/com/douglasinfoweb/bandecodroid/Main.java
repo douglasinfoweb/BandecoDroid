@@ -57,8 +57,9 @@ public class Main extends Activity {
 			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	
 			spinner.setAdapter(adapter);
+			
 			spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-	
+				
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View arg1,
 						int pos, long arg3) {
