@@ -2,7 +2,6 @@ package com.douglasinfoweb.bandecodroid.restaurantes;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
@@ -35,7 +34,7 @@ public class Unicamp extends Restaurante {
 				Cardapio cardapio = new Cardapio();
 				boolean duasLinhasPratoPrincipal=false;
 				for (Element e : linhas) {
-					String text = e.text().toLowerCase().trim();
+					String text = e.text().toLowerCase(Util.getBRLocale()).trim();
 					String textoNormal = e.text().trim();
 					/** INFORMCOES **/
 					if (text.contains("feira")) {
@@ -96,44 +95,6 @@ public class Unicamp extends Restaurante {
 	}
 	
 	
-	@Override
-	public Boolean temQueAtualizar() {
-		DateTime now = new DateTime(new Date());
-		ArrayList<Cardapio> cardapios = getCardapios();
-		if (cardapios.size() >= 1) {
-			Cardapio ultimoCardapio = cardapios.get(cardapios.size() -1);
-			//Se o ultimo que esta na memoria ainda eh dessa semana, nao precisa atualizar.
-			if (ultimoCardapio.getData().getWeekOfWeekyear() >= now.getWeekOfWeekyear()
-					&& ultimoCardapio.getData().getYear() >= now.getYear()) {
-				Log.v("bandeco","nao precisa atualizar :D");
-				return false;
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public void removeCardapiosAntigos() {
-		Log.v("bandeco","removeu os antigos");
-		DateTime now = DateTime.now();
-		for (Cardapio c : new ArrayList<Cardapio>(getCardapios())) {
-			//Pra remover, tem que ser no minimo do mesmo dia
-			if (c.getData().getDayOfYear() <= now.getDayOfYear() 
-					&& c.getData().getYear() <= now.getYear()) {
-				//Se for de dias que ja passaram, remove
-				if (c.getData().getDayOfYear() < now.getDayOfYear()) { 
-					getCardapios().remove(c);
-				} else { //Se eh de hoje, ver se ja passou a hora do almo�o/janta
-					switch (c.getRefeicao()) {
-						case ALMOCO: if (now.getHourOfDay() >= 14) getCardapios().remove(c);
-						case JANTA: if (now.getHourOfDay() >= 20) getCardapios().remove(c);
-					}
-				}
-			}
-		}
-	}
-
-	@Override
 	public int getImagem() {
 		return R.drawable.logo_unicamp;
 	}

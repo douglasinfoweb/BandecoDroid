@@ -2,71 +2,100 @@ package com.douglasinfoweb.bandecodroid;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.joda.time.DateTime;
 
 public class Util {
+	public static Locale getBRLocale() {
+		return new Locale("pt", "BR");
+	}
 
 	public static String int2diaDaSemana(int dayOfWeek, boolean resumido) {
 		String result;
 		switch (dayOfWeek) {
-			case 1: result = "Segunda"; break;
-			case 2: result = "Terça"; break;
-			case 3: result = "Quarta"; break;
-			case 4: result = "Quinta"; break;
-			case 5: result = "Sexta"; break;
-			case 6: result = "Sábado"; break;
-			case 7: result = "Domingo"; break;
-			default: result = ""; break;
+		case 1:
+			result = "Segunda";
+			break;
+		case 2:
+			result = "Terça";
+			break;
+		case 3:
+			result = "Quarta";
+			break;
+		case 4:
+			result = "Quinta";
+			break;
+		case 5:
+			result = "Sexta";
+			break;
+		case 6:
+			result = "Sábado";
+			break;
+		case 7:
+			result = "Domingo";
+			break;
+		default:
+			result = "";
+			break;
 		}
 		if (!resumido && dayOfWeek >= 1 && dayOfWeek <= 5) {
 			result += "-feira";
 		}
 		return result;
 	}
-	public static String removerEspacosDuplicados(String str){
-	     String patternStr = "\\s+";
-	     String replaceStr = " ";
-	     Pattern pattern = Pattern.compile(patternStr);
-	     Matcher matcher = pattern.matcher(str);
-	     return matcher.replaceAll(replaceStr);
-	  }
-	public static String separaEPegaValor(String text) { //String no formato "A: BCD" retorna BCD
-		String [] splited = text.split(":");
+
+	public static String removerEspacosDuplicados(String str) {
+		String patternStr = "\\s+";
+		String replaceStr = " ";
+		Pattern pattern = Pattern.compile(patternStr);
+		Matcher matcher = pattern.matcher(str);
+		return matcher.replaceAll(replaceStr);
+	}
+
+	public static String separaEPegaValor(String text) { // String no formato
+															// "A: BCD" retorna
+															// BCD
+		String[] splited = text.split(":");
 		if (splited.length > 1) {
 			return splited[1].trim();
 		}
 		return null;
 	}
-	 public static String stack2string(Exception e) {
-		  try {
-		    StringWriter sw = new StringWriter();
-		    PrintWriter pw = new PrintWriter(sw);
-		    e.printStackTrace(pw);
-		    return "------\r\n" + sw.toString() + "------\r\n";
-		  }
-		  catch(Exception e2) {
-		    return "bad stack2string";
-		  }
+
+	public static String stack2string(Exception e) {
+		try {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			return "------\r\n" + sw.toString() + "------\r\n";
+		} catch (Exception e2) {
+			return "bad stack2string";
+		}
 	}
+
 	private static String capitalizeOneWord(String s) {
-        if (s.length() == 0) return s;
-        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase() + " ";
+		if (s.length() == 0)
+			return s;
+		return s.substring(0, 1).toUpperCase(Util.getBRLocale())
+				+ s.substring(1).toLowerCase(Util.getBRLocale()) + " ";
 	}
+
 	public static String capitalize(String s) {
-		if (s == null || s.length() == 0) return s;
+		if (s == null || s.length() == 0)
+			return s;
 		String[] splited = s.split(" ");
 		StringBuilder sb = new StringBuilder();
-        for (int i=0; i<splited.length; i++) {
-        	sb.append(capitalizeOneWord(splited[i]));
-        }
-        return sb.toString().trim();
+		for (int i = 0; i < splited.length; i++) {
+			sb.append(capitalizeOneWord(splited[i]));
+		}
+		return sb.toString().trim();
 	}
-	
+
 	public static int mes2int(String mes) {
-		String mesC = mes.trim().toLowerCase();
+		String mesC = mes.trim().toLowerCase(Util.getBRLocale());
 		if (mesC.equals("janeiro"))
 			return 1;
 		else if (mesC.equals("fevereiro"))
