@@ -13,11 +13,11 @@ public class Util {
 		String result;
 		switch (dayOfWeek) {
 			case 1: result = "Segunda"; break;
-			case 2: result = "Terça"; break;
+			case 2: result = "Ter√ßa"; break;
 			case 3: result = "Quarta"; break;
 			case 4: result = "Quinta"; break;
 			case 5: result = "Sexta"; break;
-			case 6: result = "Sábado"; break;
+			case 6: result = "S√°bado"; break;
 			case 7: result = "Domingo"; break;
 			default: result = ""; break;
 		}
@@ -71,7 +71,7 @@ public class Util {
 			return 1;
 		else if (mesC.equals("fevereiro"))
 			return 2;
-		else if (mesC.equals("marÁo") || mesC.equals("marco"))
+		else if (mesC.equals("mar√ßo") || mesC.equals("marco"))
 			return 3;
 		else if (mesC.equals("abril"))
 			return 4;

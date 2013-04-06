@@ -116,7 +116,7 @@ public class UspSaoCarlos extends Restaurante {
 				//Se for de dias que ja passaram, remove
 				if (c.getData().getDayOfYear() < now.getDayOfYear()) { 
 					getCardapios().remove(c);
-				} else { //Se eh de hoje, ver se ja passou a hora do almoço/janta
+				} else { //Se eh de hoje, ver se ja passou a hora do almoï¿½o/janta
 					switch (c.getRefeicao()) {
 						case ALMOCO: if (now.getHourOfDay() >= 14) getCardapios().remove(c);
 						case JANTA: if (now.getHourOfDay() >= 20) getCardapios().remove(c);
@@ -179,7 +179,7 @@ public class UspSaoCarlos extends Restaurante {
 
 	@Override
 	public String getNome() {
-		return "USP São Carlos";
+		return "USP SÃ£o Carlos";
 	}
 
 

@@ -56,7 +56,7 @@ public class AppWidgetService extends AppWidgetProvider
 		        }*/
         	}
         } else {
-	        views.setTextViewText(R.id.Titulo_widget, "Sou inútil");
+	        views.setTextViewText(R.id.Titulo_widget, "Sou inÃºtil");
 	        views.setTextViewText(R.id.txt_widget, "ERRO! Me remova");
         }
         appWidgetManager.updateAppWidget(mAppWidgetId, views);		
