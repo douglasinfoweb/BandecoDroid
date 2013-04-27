@@ -9,6 +9,10 @@ import java.util.regex.Pattern;
 import org.joda.time.DateTime;
 
 public class Util {
+	public static String getBaseSite() {
+		return "http://localhost/bandecodroid";
+	}
+	
 	public static Locale getBRLocale() {
 		return new Locale("pt", "BR");
 	}

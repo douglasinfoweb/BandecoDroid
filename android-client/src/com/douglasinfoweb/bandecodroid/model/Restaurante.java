@@ -1,4 +1,4 @@
-package com.douglasinfoweb.bandecodroid;
+package com.douglasinfoweb.bandecodroid.model;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -9,34 +9,39 @@ import org.joda.time.DateTime;
 
 import android.util.Log;
 
-import com.douglasinfoweb.bandecodroid.restaurantes.UERJ;
-import com.douglasinfoweb.bandecodroid.restaurantes.UFRJ;
-import com.douglasinfoweb.bandecodroid.restaurantes.Unicamp;
-import com.douglasinfoweb.bandecodroid.restaurantes.UspGenerico;
-import com.douglasinfoweb.bandecodroid.restaurantes.UspSaoCarlos;
+import com.douglasinfoweb.bandecodroid.Util;
 
-public abstract class Restaurante implements Serializable {
-	public static Restaurante[] possiveisRestaurantes = new Restaurante[] {
-			new Unicamp(),
-			new UspGenerico("USP Central", R.drawable.logo_usp_central,
-					"http://www.usp.br/coseas/cardapio.html"),
-			new UspGenerico("USP Quimica", R.drawable.logo_usp_quimica,
-					"http://www.usp.br/coseas/cardapioquimica.html"),
-			new UspGenerico("USP Física", R.drawable.logo_usp_fisica,
-					"http://www.usp.br/coseas/cardapiofisica.html"),
-			new UspGenerico("USP Prefeitura", R.drawable.logo_usp_prefeitura,
-					"http://www.usp.br/coseas/cardcocesp.html"),
-			new UspSaoCarlos(), new UFRJ(), new UERJ() };
-	private static final long serialVersionUID = -1612436480775220733L;
-
-	public abstract int getImagem();
+public class Restaurante implements Serializable {
+	private static final long serialVersionUID = 1;
 
 	private ArrayList<Cardapio> cardapios = new ArrayList<Cardapio>();
+	
+	protected String nome;
+	
+	protected String codigo;
+	
+	protected String site;
+	
+	public String getImagem() {
+		return Util.getBaseSite()+"/imagens/"+codigo+".png";
+	}
 
-	public abstract String getNome();
+	public String getNome() {
+		return nome;
+	}
+	
+	public String getCodigo() {
+		return codigo;
+	}
 
-	public abstract void atualizarCardapios(Main main) throws IOException,
-			Exception;
+	public  String getSite() {
+		return site;
+	}
+	
+	public void atualizarCardapios() throws IOException,
+			Exception {
+		//ESPECIFICO DE CADA IMPLEMENTACAO
+	}
 
 	public Boolean temQueAtualizar() {
 		DateTime now = new DateTime(new Date());
@@ -87,10 +92,10 @@ public abstract class Restaurante implements Serializable {
 		this.cardapios = cardapios;
 	}
 
-	public void atualizar(boolean forcar, Main main) throws Exception {
+	public void atualizar(boolean forcar) throws Exception {
 		removeCardapiosAntigos();
 		if (temQueAtualizar() || forcar) {
-			atualizarCardapios(main);
+			atualizarCardapios();
 		}
 	}
 
@@ -98,7 +103,7 @@ public abstract class Restaurante implements Serializable {
 	public boolean equals(Object o) {
 		if (o instanceof Restaurante) {
 			Restaurante r = (Restaurante) o;
-			if (r.getImagem() == getImagem() && r.getNome().equals(getNome())) {
+			if (r.getCodigo().equals(getCodigo())) {
 				return true;
 			}
 		}
@@ -114,7 +119,5 @@ public abstract class Restaurante implements Serializable {
 	public String toString() {
 		return getNome();
 	}
-
-	public abstract String getSite();
 
 }

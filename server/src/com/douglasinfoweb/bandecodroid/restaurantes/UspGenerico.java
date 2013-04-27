@@ -8,29 +8,22 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import android.util.Log;
-
-import com.douglasinfoweb.bandecodroid.Cardapio;
-import com.douglasinfoweb.bandecodroid.Cardapio.Refeicao;
-import com.douglasinfoweb.bandecodroid.Main;
-import com.douglasinfoweb.bandecodroid.Restaurante;
+import com.douglasinfoweb.bandecodroid.model.Cardapio;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+import com.douglasinfoweb.bandecodroid.model.Cardapio.Refeicao;
 import com.douglasinfoweb.bandecodroid.Util;
 
 @SuppressWarnings("serial")
 public class UspGenerico extends Restaurante {
-	private int imagem;
-	private String nome;
-	private String site;
 
-	public UspGenerico(String nome, int imagem, String site) {
-		this.imagem = imagem;
+	public UspGenerico(String nome,  String site, String codigo) {
 		this.nome = nome;
 		this.site = site;
+		this.codigo = codigo;
 	}
 
 	@Override
-	public void atualizarCardapios(Main main) throws Exception {
-		Log.v("bandeco", "ATUALIZAR");
+	public void atualizarCardapios() throws Exception {
 		ArrayList<Cardapio> cardapios = new ArrayList<Cardapio>();
 		String URL = site;
 		Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30000)
@@ -43,7 +36,14 @@ public class UspGenerico extends Restaurante {
 			if (text.contains("semana")) {
 				String[] textoSplited = Util.removerEspacosDuplicados(text)
 						.split(" ");
-				String[] dataSplited = textoSplited[textoSplited.length - 1]
+				int i=0;
+				for (String s : textoSplited) {
+					if (s.contains("/")) {
+						break;
+					}
+					i++;
+				}
+				String[] dataSplited = textoSplited[i]
 						.split("/");
 				// FORMATO EH DD/MM/AAAA OU DD/MM/AA OU DD/MM/AAA
 				if (dataSplited.length == 3) {
@@ -68,7 +68,6 @@ public class UspGenerico extends Restaurante {
 				} else {
 					throw new Exception("Erro ao recuperar data");
 				}
-				Log.v("usp-fisica", "ultimaData: " + ultimaData.toString());
 				semana = ultimaData.getWeekOfWeekyear();
 				break;
 			}
@@ -85,7 +84,6 @@ public class UspGenerico extends Restaurante {
 			for (Element td : row.select("td")) {
 				String text = td.text();
 				String textP = td.text().toLowerCase(Util.getBRLocale());
-				Log.v("usp-fisica", "td " + tdN + ": " + text);
 				Cardapio cardapio = new Cardapio();
 				if (tdN == 0)
 					cardapio.setRefeicao(Refeicao.ALMOCO);
@@ -134,22 +132,6 @@ public class UspGenerico extends Restaurante {
 
 		setCardapios(cardapios);
 		removeCardapiosAntigos();
-		main.save();
-	}
-
-	@Override
-	public int getImagem() {
-		return imagem;
-	}
-
-	@Override
-	public String getNome() {
-		return nome;
-	}
-
-	@Override
-	public String getSite() {
-		return site;
 	}
 
 }

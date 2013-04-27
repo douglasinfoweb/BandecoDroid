@@ -10,21 +10,21 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import android.util.Log;
-
-import com.douglasinfoweb.bandecodroid.Cardapio;
-import com.douglasinfoweb.bandecodroid.Cardapio.Refeicao;
-import com.douglasinfoweb.bandecodroid.Main;
-import com.douglasinfoweb.bandecodroid.R;
-import com.douglasinfoweb.bandecodroid.Restaurante;
+import com.douglasinfoweb.bandecodroid.model.Cardapio;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+import com.douglasinfoweb.bandecodroid.model.Cardapio.Refeicao;
 import com.douglasinfoweb.bandecodroid.Util;
 
 @SuppressWarnings("serial")
 public class UFRJ extends Restaurante {
+	public UFRJ () {
+		nome="UFRJ";
+		codigo="ufrj";
+		site="http://www.nutricao.ufrj.br/cardapio.htm";
+	}
 	boolean proximo;
 	@Override
-	public void atualizarCardapios(Main main) throws IOException {
-		Log.v("bandeco","ATUALIZAR");
+	public void atualizarCardapios() throws IOException {
 		ArrayList<Cardapio> cardapiosFinal=new ArrayList<Cardapio>();
 		String URL = "http://www.nutricao.ufrj.br/cardapio.htm";
 		//String URL = "http://www.felizardo.me/cardapio_ru.htm";
@@ -32,14 +32,12 @@ public class UFRJ extends Restaurante {
 		//Pega tabelas
 		int tableN=0;
 		for (Element table : doc.select("table")) {
-			Log.v("bandeco","table "+tableN);
 			ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 			Refeicao refeicao;
 			int semana=-1;
 			int trN=0;
 			if (tableN >= 0 && tableN <= 1) {
 				for (Element tr : table.select("tr")) {
-					Log.v("bandeco","tr "+trN);
 					if (trN==0) {
 						String texto = Util.removerEspacosDuplicados(tr.text().toLowerCase(Util.getBRLocale()));
 						//Define refeicao
@@ -50,7 +48,6 @@ public class UFRJ extends Restaurante {
 						}
 						//Define semana
 						String strUltimaData = texto.substring(texto.length()-5, texto.length());
-						Log.v("bandeco", "texto: '"+texto+"' strUltimaData: "+strUltimaData);
 						String[] dataSplited = strUltimaData.split("/");
 						DateTime ultimaData;
 						if (dataSplited.length == 2) {
@@ -78,13 +75,11 @@ public class UFRJ extends Restaurante {
 						int tdN=0;
 						String titulo="";
 						for (Element td : tr.select("td")) {
-							Log.v("bandeco","td "+tdN);
 							String texto = Util.removerEspacosDuplicados(td.text().trim());
 							if (tdN==0) {
 								titulo=texto.toLowerCase();
 							} else {
 								Cardapio cardapio = cardapios.get(tdN-1);
-								Log.v("bandeco","ATRIBUTO "+titulo+": "+cardapio);
 								if (titulo.contains("salada")) {
 									cardapio.setSalada(texto);
 								} else if (titulo.contains("principal")) {
@@ -103,14 +98,12 @@ public class UFRJ extends Restaurante {
 					trN++;
 				}
 				//Adiciona somente os cardapios q foram coletados com sucesso
-				Log.v("bandeco","cardapios: "+cardapios);
 				for (Cardapio c : cardapios) {
 					if (c.getData() != null 
 							&& c.getRefeicao() != null
 							&& c.getPratoPrincipal() != null 
 							&& c.getPratoPrincipal().trim().length() > 2) {
 						cardapiosFinal.add(c);
-						Log.v("bandeco","adicionou "+c);
 					}
 				}
 			}
@@ -119,24 +112,6 @@ public class UFRJ extends Restaurante {
 		Collections.sort(cardapiosFinal);
 		setCardapios(cardapiosFinal);
 		removeCardapiosAntigos();
-		main.save();
-	}
-	
-
-	@Override
-	public int getImagem() {
-		return R.drawable.logo_ufrj;
-	}
-
-	@Override
-	public String getNome() {
-		return "UFRJ";
-	}
-
-
-	@Override
-	public String getSite() {
-		return "http://www.nutricao.ufrj.br/cardapio.htm";
 	}
 	
 	  

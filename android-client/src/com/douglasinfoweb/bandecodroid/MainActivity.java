@@ -17,13 +17,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 
-public class Main extends Activity {
+import com.douglasinfoweb.bandecodroid.model.Cardapio;
+import com.douglasinfoweb.bandecodroid.model.Configuracoes;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+
+public class MainActivity extends Activity {
 	private Configuracoes config;
-    private Main main=this;
+    private MainActivity main=this;
 	private LoadDataThread loadDataThread;
 	private ProgressDialog progressDialog;
 	private Restaurante restauranteAtual;
@@ -141,7 +147,7 @@ public class Main extends Activity {
     			if (config.getRestaurantesEscolhidos().size() > 0) {
 	    			if (restauranteAtual != null) {
 			    		for (Cardapio cardapio : restauranteAtual.getCardapios()) {
-		    				mainScroll.addView(cardapio.getCardapioView(getLayoutInflater()));
+		    				mainScroll.addView(getCardapioView(cardapio));
 		    			}
 			    		if (restauranteAtual.getCardapios().size() == 0) {
 		    				TextView text =new TextView(this);
@@ -183,5 +189,65 @@ public class Main extends Activity {
     }
 	public Configuracoes getConfig() {
 		return config;
+	}
+	public View getCardapioView(Cardapio c) {
+		//Pega o layout de cardapios
+		View layout = (View)getLayoutInflater().inflate(R.layout.cardapio, null);
+		//Pega o titulo do cardapio
+		TextView titulo = (TextView)layout.findViewById(R.id.Titulo);
+		ImageView icone = (ImageView)layout.findViewById(R.id.cardapio_ic);
+		switch (c.getRefeicao()) {
+			case ALMOCO: 
+						icone.setImageResource(R.drawable.ic_sol);
+						titulo.setText("ALMOÇO "+Util.int2diaDaSemana(c.getData().getDayOfWeek(),false));
+						break;
+			case JANTA: 
+						icone.setImageResource(R.drawable.ic_lua);
+						titulo.setText("JANTAR "+Util.int2diaDaSemana(c.getData().getDayOfWeek(),false));
+						break;
+		}
+		setLayoutText(layout,
+				R.id.PratoPrincipalRow,
+				R.id.PratoPrincipal,
+				(c.getPratoPrincipal() != null && c.getPratoPrincipal().length() > 2),
+				c.getPratoPrincipal());
+
+		setLayoutText(layout,
+				R.id.SucoRow,
+				R.id.Suco,
+				(c.getSuco() != null && c.getSuco().length() > 2),
+				c.getSuco());
+		if (c.getPts() != null && c.getPts().length() > 2) {
+				setLayoutText(layout,
+						R.id.SaladaRow,
+						R.id.Salada,
+						(c.getSalada() != null && c.getSalada().length() > 2),
+						c.getSalada()+"\n"+c.getPts());
+		}  else {
+			setLayoutText(layout,
+					R.id.SaladaRow,
+					R.id.Salada,
+					(c.getSalada() != null && c.getSalada().length() > 2),
+					c.getSalada());
+		}
+		setLayoutText(layout,
+				R.id.SobremesaRow,
+				R.id.Sobremesa,
+				(c.getSobremesa() != null && c.getSobremesa().length() > 2),
+				c.getSobremesa());
+	
+		return layout;
+	}
+	private void setLayoutText(View layout, int rowID, int textID, boolean show, String text) {
+		TableRow rowView = (TableRow)layout.findViewById(rowID);
+		TextView textView = (TextView)layout.findViewById(textID);
+		
+
+		textView.setText(text);
+		if (!show) {
+			rowView.setVisibility(View.GONE);
+		} else {
+			rowView.setVisibility(View.VISIBLE);
+		}
 	}
 }

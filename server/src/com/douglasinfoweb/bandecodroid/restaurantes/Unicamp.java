@@ -9,20 +9,21 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import android.util.Log;
-
-import com.douglasinfoweb.bandecodroid.Cardapio;
-import com.douglasinfoweb.bandecodroid.Main;
-import com.douglasinfoweb.bandecodroid.R;
-import com.douglasinfoweb.bandecodroid.Restaurante;
 import com.douglasinfoweb.bandecodroid.Util;
+import com.douglasinfoweb.bandecodroid.model.Cardapio;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
 
 @SuppressWarnings("serial")
 public class Unicamp extends Restaurante {
 	boolean proximo;
+	public Unicamp () {
+		nome="Unicamp";
+		codigo="unicamp";
+		site="http://www.prefeitura.unicamp.br/servicos.php?servID=119";
+	}
+	
 	@Override
-	public void atualizarCardapios(Main main) throws IOException {
-		Log.v("bandeco","ATUALIZAR");
+	public void atualizarCardapios() throws IOException {
 		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 		proximo = true;
 		int pagina=1;
@@ -90,25 +91,6 @@ public class Unicamp extends Restaurante {
 		}
 		setCardapios(cardapios);
 		removeCardapiosAntigos();
-		main.save();
-		Log.v("bandeco","salvou objeto com sucesso :D");
 	}
-	
-	
-	public int getImagem() {
-		return R.drawable.logo_unicamp;
-	}
-
-	@Override
-	public String getNome() {
-		return "UNICAMP";
-	}
-
-
-	@Override
-	public String getSite() {
-		return "http://www.prefeitura.unicamp.br/servicos.php?servID=119";
-	}
-	
 
 }

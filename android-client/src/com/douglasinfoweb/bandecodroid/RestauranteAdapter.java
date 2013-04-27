@@ -1,5 +1,10 @@
 package com.douglasinfoweb.bandecodroid;
 
+import com.douglasinfoweb.bandecodroid.R;
+import com.douglasinfoweb.bandecodroid.R.id;
+import com.douglasinfoweb.bandecodroid.R.layout;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +23,7 @@ public class RestauranteAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return Restaurante.possiveisRestaurantes.length;
+		return com.douglasinfoweb.bandecodroid.model.possiveisRestaurantes.length;
 	}
 
 	@Override

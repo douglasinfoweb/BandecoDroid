@@ -1,5 +1,8 @@
 package com.douglasinfoweb.bandecodroid;
 
+import com.douglasinfoweb.bandecodroid.model.Configuracoes;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;

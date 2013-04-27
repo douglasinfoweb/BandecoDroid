@@ -7,14 +7,16 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.util.Log;
 
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+
 
 public class LoadDataThread extends Thread
 {
     private boolean dataReady=false;
-    private Main main;
+    private MainActivity main;
     private boolean forcarAtualizacao=false;
    
-    LoadDataThread(Main main) 
+    LoadDataThread(MainActivity main) 
     {
     	this.main=main;
     }
@@ -27,8 +29,10 @@ public class LoadDataThread extends Thread
     {
     	Log.v("bandeco", "rodou thread");
     	try {
-    		for (Restaurante r : main.getConfig().getRestaurantesEscolhidos()) 
-   				r.atualizar(forcarAtualizacao, main);
+    		for (Restaurante r : main.getConfig().getRestaurantesEscolhidos()) {
+   				r.atualizar(forcarAtualizacao);
+   				main.save();
+    		}
 
     	} catch (final IOException e) {
 			main.runOnUiThread(new Runnable() {

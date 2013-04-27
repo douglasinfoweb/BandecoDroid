@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import com.douglasinfoweb.bandecodroid.model.Configuracoes;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;

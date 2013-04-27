@@ -9,21 +9,22 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import android.util.Log;
-
-import com.douglasinfoweb.bandecodroid.Cardapio;
-import com.douglasinfoweb.bandecodroid.Cardapio.Refeicao;
-import com.douglasinfoweb.bandecodroid.Main;
-import com.douglasinfoweb.bandecodroid.R;
-import com.douglasinfoweb.bandecodroid.Restaurante;
+import com.douglasinfoweb.bandecodroid.model.Cardapio;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+import com.douglasinfoweb.bandecodroid.model.Cardapio.Refeicao;
 import com.douglasinfoweb.bandecodroid.Util;
 
 @SuppressWarnings("serial")
 public class UERJ extends Restaurante {
 	boolean proximo;
+	public UERJ() {
+		nome="UERJ";
+		site="http://www.restauranteuniversitario.uerj.br/cardapio.html";
+		codigo="uerj";
+	}
+	
 	@Override
-	public void atualizarCardapios(Main main) throws IOException {
-		Log.v("bandeco","ATUALIZAR");
+	public void atualizarCardapios() throws IOException {
 		ArrayList<Cardapio> cardapiosFinal=new ArrayList<Cardapio>();
 		String URL = "http://www.restauranteuniversitario.uerj.br/cardapio.html";
 		Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30*1000).header("Accept", "text/html").get();
@@ -81,23 +82,6 @@ public class UERJ extends Restaurante {
 		//Collections.sort(cardapiosFinal);
 		setCardapios(cardapiosFinal);
 		removeCardapiosAntigos();
-		main.save();
-	}
-	
-	@Override
-	public int getImagem() {
-		return R.drawable.logo_uerj;
-	}
-
-	@Override
-	public String getNome() {
-		return "UERJ";
-	}
-
-
-	@Override
-	public String getSite() {
-		return "http://www.restauranteuniversitario.uerj.br/cardapio.html";
 	}
 	
 	  

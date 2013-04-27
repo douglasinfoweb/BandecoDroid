@@ -21,25 +21,24 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import android.util.Log;
-
-import com.douglasinfoweb.bandecodroid.Cardapio;
-import com.douglasinfoweb.bandecodroid.Cardapio.Refeicao;
-import com.douglasinfoweb.bandecodroid.Main;
-import com.douglasinfoweb.bandecodroid.R;
-import com.douglasinfoweb.bandecodroid.Restaurante;
+import com.douglasinfoweb.bandecodroid.model.Cardapio;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+import com.douglasinfoweb.bandecodroid.model.Cardapio.Refeicao;
 import com.douglasinfoweb.bandecodroid.Util;
 
 @SuppressWarnings("serial")
 public class UspSaoCarlos extends Restaurante {
 	boolean proximo;
+	public UspSaoCarlos() {
+		nome="USP São Carlos";
+		site="http://www.pcasc.usp.br/pop_cardapio.php";
+		codigo="usp_saocarlos";
+	}
 	@Override
-	public void atualizarCardapios(Main main) throws IOException {
-		Log.v("bandeco","ATUALIZAR");
+	public void atualizarCardapios() throws IOException {
 	ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 		String URL = "http://www.pcasc.usp.br/restaurante.xml";
 		String XML = getXmlFromUrl(URL);
-		Log.v("usp-saocarlos","XML: "+XML);
 		Document doc = getDomElement(XML);
 		Element root = doc.getDocumentElement();
 		NodeList dias = root.getChildNodes();
@@ -86,7 +85,6 @@ public class UspSaoCarlos extends Restaurante {
 		}
 		setCardapios(cardapios);
 		removeCardapiosAntigos();
-		main.save();
 	}
 	
 	private final String getNodeValue( Node elem ) {
@@ -124,33 +122,14 @@ public class UspSaoCarlos extends Restaurante {
                 doc = db.parse(is); 
  
             } catch (ParserConfigurationException e) {
-                Log.e("Error: ", e.getMessage());
                 return null;
             } catch (SAXException e) {
-                Log.e("Error: ", e.getMessage());
                 return null;
             } catch (IOException e) {
-                Log.e("Error: ", e.getMessage());
                 return null;
             }
                 // return DOM
             return doc;
     }
-	@Override
-	public int getImagem() {
-		return R.drawable.logo_usp_saocarlos;
-	}
-
-	@Override
-	public String getNome() {
-		return "USP São Carlos";
-	}
-
-
-	@Override
-	public String getSite() {
-		return "http://www.pcasc.usp.br/pop_cardapio.php";
-	}
-	
 	  
 }

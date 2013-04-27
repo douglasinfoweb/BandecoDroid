@@ -1,5 +1,8 @@
 === BandecoDroid ===
 Objetivo eh disponibilizar facilmente o cardapio de restaurantes universitarios no celular. 
-Dividido em duas partes: cliente e servidor. Cliente atualmente eh implementad para android em android-client, servidor em java em server
+Dividido em duas partes: cliente e servidor. 
+Cliente atualmente eh implementado para android, codigo na pasta android-client. 
+Programa servidor eh executado periodicamente para pegar o cardápio das universidades, gerando arquivos que são classes serializadas do java. 
+Eles representarão cardápios genéricos, que serão desserializadas no cliente. Dessa formao, servidor ficará o mais simples possível. (KISS principle)
 
-Veja licensa em LICENSE
+Licensa eh GNUv3, veja em LICENSE

@@ -1,4 +1,4 @@
-package com.douglasinfoweb.bandecodroid;
+package com.douglasinfoweb.bandecodroid.model;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+
 
 import android.app.Activity;
 import android.content.Context;

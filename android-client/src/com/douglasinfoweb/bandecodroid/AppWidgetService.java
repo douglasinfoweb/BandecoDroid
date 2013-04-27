@@ -3,6 +3,10 @@ package com.douglasinfoweb.bandecodroid;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.douglasinfoweb.bandecodroid.model.Cardapio;
+import com.douglasinfoweb.bandecodroid.model.Configuracoes;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
+
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -26,7 +30,7 @@ public class AppWidgetService extends AppWidgetProvider
         Configuracoes config = Configuracoes.read(context);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
         //Adiciona a funcionalidade de ao clicar, abrir o programa
-        Intent intent = new Intent(context, Main.class);
+        Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.backgroud_widget, pendingIntent);
         
