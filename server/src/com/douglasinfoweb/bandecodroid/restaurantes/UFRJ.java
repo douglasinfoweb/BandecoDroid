@@ -21,6 +21,7 @@ public class UFRJ extends Restaurante {
 		nome="UFRJ";
 		codigo="ufrj";
 		site="http://www.nutricao.ufrj.br/cardapio.htm";
+		tinyUrl="http://goo.gl/65Pgx";
 	}
 	boolean proximo;
 	@Override

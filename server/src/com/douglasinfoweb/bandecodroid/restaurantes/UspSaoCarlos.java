@@ -33,6 +33,7 @@ public class UspSaoCarlos extends Restaurante {
 		nome="USP São Carlos";
 		site="http://www.pcasc.usp.br/pop_cardapio.php";
 		codigo="usp_saocarlos";
+		tinyUrl="http://goo.gl/IZWZh";
 	}
 	@Override
 	public void atualizarCardapios() throws IOException {

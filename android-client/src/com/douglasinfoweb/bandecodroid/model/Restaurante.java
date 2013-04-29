@@ -22,12 +22,15 @@ public class Restaurante implements Serializable {
 	
 	protected String site;
 	
+	protected String tinyUrl;
+	
 	public Restaurante(){}
 	
 	public Restaurante(Restaurante r) {
 		this.nome = new String(r.nome);
 		this.codigo = new String(r.codigo);
 		this.site = new String(r.site);
+		this.tinyUrl = new String(r.tinyUrl);
 		this.cardapios = new ArrayList<Cardapio> ();
 		for (Cardapio c: r.cardapios) {
 			this.cardapios.add(new Cardapio(c));
@@ -58,6 +61,10 @@ public class Restaurante implements Serializable {
 
 	public  String getSite() {
 		return site;
+	}
+	
+	public String getTinyUrl() {
+		return tinyUrl;
 	}
 	
 	public void atualizarCardapios() throws IOException,

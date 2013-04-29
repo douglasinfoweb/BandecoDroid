@@ -3,16 +3,16 @@ package com.douglasinfoweb.bandecodroid;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.douglasinfoweb.bandecodroid.model.Cardapio;
-import com.douglasinfoweb.bandecodroid.model.Configuracoes;
-import com.douglasinfoweb.bandecodroid.model.Restaurante;
-
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
+
+import com.douglasinfoweb.bandecodroid.model.Cardapio;
+import com.douglasinfoweb.bandecodroid.model.Configuracoes;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
 
 public class AppWidgetService extends AppWidgetProvider 
 {
@@ -41,12 +41,9 @@ public class AppWidgetService extends AppWidgetProvider
         	Collections.sort(cardapios);
         	if (r.getCardapios().size() > 0 && r.getCardapios().get(0).getData() != null) {
 	        	Cardapio cardapio = cardapios.get(0);
-		        views.setTextViewText(R.id.Titulo_widget, Util.int2diaDaSemana(cardapio.getData().getDayOfWeek(),true));
-		        if (config.getRestaurantesEscolhidos().size() == 1) {
-		        	views.setTextViewText(R.id.txt_widget, cardapio.getPratoPrincipal());
-		        } else {
-		        	views.setTextViewText(R.id.txt_widget, r.getNome()+"\n"+cardapio.getPratoPrincipal());
-		        }
+		        //views.setTextViewText(R.id.Titulo_widget, Util.int2diaDaSemana(cardapio.getData().getDayOfWeek(),true));
+		        views.setTextViewText(R.id.txt_widget, cardapio.getPratoPrincipal());
+		        
 		        //Se for janta, invert
 		        /*
 		        if (cardapio.getRefeicao().equals(Refeicao.JANTA)) {
@@ -60,7 +57,7 @@ public class AppWidgetService extends AppWidgetProvider
 		        }*/
         	}
         } else {
-	        views.setTextViewText(R.id.Titulo_widget, "Sou inútil");
+	        //views.setTextViewText(R.id.Titulo_widget, "Sou inútil");
 	        views.setTextViewText(R.id.txt_widget, "ERRO! Me remova");
         }
         appWidgetManager.updateAppWidget(mAppWidgetId, views);		

@@ -15,15 +15,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -33,6 +32,7 @@ import android.widget.TextView;
 import com.douglasinfoweb.bandecodroid.model.Cardapio;
 import com.douglasinfoweb.bandecodroid.model.Configuracoes;
 import com.douglasinfoweb.bandecodroid.model.Restaurante;
+import com.tjeannin.apprate.AppRate;
 
 /**
  * Activity responsavel por mostrar os cardapios
@@ -47,6 +47,23 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
+        //APP RATER
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+        .setTitle("Ajude-nos")
+        .setIcon(android.R.drawable.ic_dialog_info)
+        .setMessage("Se você está curtindo o BandecoDroid, por favor ajude-nos a divulgá-lo recomendando a outros usuários.")
+        .setPositiveButton("Recomendar !", null)
+        .setNegativeButton("Não", null)
+        .setNeutralButton("Depois", null);
+
+        new AppRate(this)
+        .setMinDaysUntilPrompt(7)
+        .setMinLaunchesUntilPrompt(10)
+        .setCustomDialog(builder)
+        .init();
+        
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
         config = Configuracoes.read(this);
         if (config.getRestaurantesEscolhidos().size() == 0) {
@@ -57,8 +74,15 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	if (data == null || data.getExtras() == null || data.getExtras().get("config") == null) {
-        	abrirConfiguracoes();
+    	Configuracoes config2 = Configuracoes.read(this);
+    	if ((data == null || data.getExtras() == null || data.getExtras().get("config") == null)) {
+    		if ((config2 == null || config2.getRestaurantesEscolhidos() == null || config2.getRestaurantesEscolhidos().size() == 0))
+    			
+    			abrirConfiguracoes();
+    		else {
+    	        config = Configuracoes.read(this);
+    	        start();
+    		}
     	} else {
     		config = (Configuracoes)data.getExtras().get("config");
         	Log.v("bandeco","config: total de restaurantes "+config.getRestaurantesEscolhidos().size());
@@ -184,7 +208,7 @@ public class MainActivity extends Activity {
 		}
 	}
     
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
     	MenuItem itemAtualiza = menu.add(0, Menu.NONE, Menu.NONE, "Atualizar");
@@ -204,12 +228,11 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public boolean onMenuItemClick(MenuItem arg0) {
-				abrirConfiguracoes();
 				return true;
 			}
 		});
     	return true;
-    }
+    }*/
     
     /**
      * Abre janela de configuracoes, dando intent para ConfiguracoesActivity
@@ -241,19 +264,69 @@ public class MainActivity extends Activity {
     			mainScroll.addView(text);
     		}
 
-    		//Poe botao do restaurante
-    		Button btn = new Button(this);
-    		btn.setText("Visitar site");
-    		btn.setOnClickListener(new OnClickListener() {			
-    			@Override
-    			public void onClick(View arg0) {
-    				//Chama browser no endereço do Restaurante
+    		//Poe botoes inferiores
+    		LayoutInflater li = this.getLayoutInflater();
+    		View buttonBar = li.inflate(R.layout.button_bar, null);
+    		ImageButton info = (ImageButton)buttonBar.findViewById(R.id.info);
+    		info.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					//Chama browser no endereço do Restaurante
     				Intent i = new Intent(Intent.ACTION_VIEW);
     				i.setData(Uri.parse(restauranteAtual.getSite()));
     				startActivity(i);
-    			}
-    		});
-    		mainScroll.addView(btn);
+				}
+			});
+    		ImageButton refresh = (ImageButton)buttonBar.findViewById(R.id.refresh);
+    		refresh.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					//Força atualização
+					new BaixaCardapios().execute(true);
+				}
+			});
+    		ImageButton preferences = (ImageButton)buttonBar.findViewById(R.id.preferences);
+
+    		preferences.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					//Força atualização
+					abrirConfiguracoes();
+				}
+				
+			});
+    		ImageButton share = (ImageButton)buttonBar.findViewById(R.id.share);
+    		share.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					//create the send intent
+					Intent shareIntent = 
+					 new Intent(android.content.Intent.ACTION_SEND);
+
+					//set the type
+					shareIntent.setType("text/plain");
+
+					//add a subject
+					shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, 
+					 "Bandeco");
+
+					//build the body of the message to be shared
+					String shareMessage = "Cardapio da "+restauranteAtual.getNome()+" "+restauranteAtual.getTinyUrl();
+
+					//add the message
+					shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, 
+					 shareMessage);
+
+					//start the chooser for sharing
+					startActivity(Intent.createChooser(shareIntent, 
+					 "Compartilhar"));
+				}
+			});
+    		mainScroll.addView(buttonBar);
     	} else {
     		//Isso nunca deveria acontecer
     		TextView text =new TextView(this);
@@ -267,7 +340,7 @@ public class MainActivity extends Activity {
      * @param c Cardapio
      * @return representação do cardapio
      */
-	public View getCardapioView(Cardapio c) {
+	public View getCardapioView(final Cardapio c) {
 		//Pega o layout de cardapios
 		View layout = (View)getLayoutInflater().inflate(R.layout.cardapio, null);
 		//Pega o titulo do cardapio

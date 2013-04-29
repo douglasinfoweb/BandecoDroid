@@ -1,8 +1,5 @@
 package com.douglasinfoweb.bandecodroid;
 
-import com.douglasinfoweb.bandecodroid.model.Configuracoes;
-import com.douglasinfoweb.bandecodroid.model.Restaurante;
-
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
@@ -11,8 +8,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.douglasinfoweb.bandecodroid.model.Configuracoes;
+import com.douglasinfoweb.bandecodroid.model.Restaurante;
 
 public class AppWidgetConfigure extends Activity {
     private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
@@ -21,6 +22,8 @@ public class AppWidgetConfigure extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setResult(RESULT_CANCELED);
 		setContentView(R.layout.widget_config);
 		// Find the widget id from the intent. 

@@ -21,6 +21,7 @@ public class UERJ extends Restaurante {
 		nome="UERJ";
 		site="http://www.restauranteuniversitario.uerj.br/cardapio.html";
 		codigo="uerj";
+		tinyUrl="http://goo.gl/yVDdK";
 	}
 	
 	@Override

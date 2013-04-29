@@ -20,6 +20,7 @@ public class Unicamp extends Restaurante {
 		nome="Unicamp";
 		codigo="unicamp";
 		site="http://www.prefeitura.unicamp.br/servicos.php?servID=119";
+		tinyUrl="http://goo.gl/D9yKZ";
 	}
 	
 	@Override

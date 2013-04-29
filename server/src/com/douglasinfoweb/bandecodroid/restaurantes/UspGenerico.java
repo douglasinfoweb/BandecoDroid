@@ -16,10 +16,11 @@ import com.douglasinfoweb.bandecodroid.Util;
 @SuppressWarnings("serial")
 public class UspGenerico extends Restaurante {
 
-	public UspGenerico(String nome,  String site, String codigo) {
+	public UspGenerico(String nome,  String site, String codigo, String tinyUrl) {
 		this.nome = nome;
 		this.site = site;
 		this.codigo = codigo;
+		this.tinyUrl = tinyUrl;
 	}
 
 	@Override
