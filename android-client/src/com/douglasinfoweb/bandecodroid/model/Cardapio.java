@@ -10,15 +10,37 @@ import org.joda.time.DateTime;
  */
 public class Cardapio implements Serializable, Comparable<Cardapio> {
 	private static final long serialVersionUID = 1;
-	private DateTime data;
-	private String pratoPrincipal;
-	private String pts;
-	private String salada;
-	private String sobremesa;
-	private String suco;
-	private String obs;
+	private DateTime data=null;
+	private String pratoPrincipal=null;
+	private String pts=null;
+	private String salada=null;
+	private String sobremesa=null;
+	private String suco=null;
+	private String obs=null;
 	public enum Refeicao {ALMOCO, JANTA};
-	private Refeicao refeicao;
+	private Refeicao refeicao=null;
+	
+	public Cardapio() {}
+	
+	//Deep Copy
+	public Cardapio (Cardapio c) {
+		if (c.data != null)
+			this.data = new DateTime(c.data);
+		if (c.pratoPrincipal != null)
+			this.pratoPrincipal = new String(c.pratoPrincipal);
+		if (c.pts != null)
+			this.pts = new String(c.pts);
+		if (c.salada != null)
+			this.salada = new String(c.salada);
+		if (c.sobremesa != null)
+			this.sobremesa = new String(c.sobremesa);
+		if (c.suco != null)
+			this.suco = new String(c.suco);
+		if (c.obs != null)
+			this.obs = new String(c.obs);
+		if (c.refeicao != null)
+			this.refeicao = c.refeicao;
+	}
 	
 	public String getPratoPrincipal() {
 		return pratoPrincipal;

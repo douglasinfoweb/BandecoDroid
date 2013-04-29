@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" 
     android:gravity="center">
-    <ImageView android:src="@drawable/logo_unicamp" 
+    <ImageView 
+        android:contentDescription="@string/teste" 
         android:layout_width="75dp"
         android:id="@+id/RestauranteImage"
         android:layout_height="75dp"

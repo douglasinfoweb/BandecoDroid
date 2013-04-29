@@ -1,11 +1,18 @@
 package com.douglasinfoweb.bandecodroid;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,11 +34,13 @@ import com.douglasinfoweb.bandecodroid.model.Cardapio;
 import com.douglasinfoweb.bandecodroid.model.Configuracoes;
 import com.douglasinfoweb.bandecodroid.model.Restaurante;
 
+/**
+ * Activity responsavel por mostrar os cardapios
+ * @author feliz
+ *
+ */
 public class MainActivity extends Activity {
 	private Configuracoes config;
-    private MainActivity main=this;
-	private LoadDataThread loadDataThread;
-	private ProgressDialog progressDialog;
 	private Restaurante restauranteAtual;
    
     @Override
@@ -45,20 +54,30 @@ public class MainActivity extends Activity {
         }
         start();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	if (data == null || data.getExtras() == null || data.getExtras().get("config") == null) {
+        	abrirConfiguracoes();
+    	} else {
+    		config = (Configuracoes)data.getExtras().get("config");
+        	Log.v("bandeco","config: total de restaurantes "+config.getRestaurantesEscolhidos().size());
+        	start();
+    	}
+    }
+    
+    /**
+     * Executado depois de ter recebido o objeto de configuração
+     */
     private void start() {
-        /* Prepara e mostra tela de espera */
-		progressDialog = new ProgressDialog(this);
-		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		progressDialog.setMessage("Baixando cardapios");
-		progressDialog.setCancelable(false);
-		progressDialog.setProgress(0);
-		progressDialog.show();
 
 		//Prepara spinner
 		Spinner spinner = (Spinner)findViewById(R.id.mainSpinner);
 
+		//Se tiver mais de um restaurante selecionado, mostra spinner
 		if (config.getRestaurantesEscolhidos().size() > 1) {
 			spinner.setVisibility(View.VISIBLE);
+			//Cria adapter a partir de array
 			ArrayAdapter<Restaurante> adapter = new ArrayAdapter<Restaurante>(this, android.R.layout.simple_spinner_item, config.getRestaurantesEscolhidos()); 
 			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	
@@ -87,23 +106,84 @@ public class MainActivity extends Activity {
 			spinner.setVisibility(View.GONE);
 		}
         //Atualiza os dados
-        Log.v("bandeco","comecou a pegar dados");
-        loadDataThread = new LoadDataThread(this);
-        updateScreen();
-        loadDataThread.start(false);
-        //E agora a tela
-		updateScreen();
+		new BaixaCardapios().execute(false);
+        
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	if (data == null || data.getExtras() == null || data.getExtras().get("config") == null) {
-        	abrirConfiguracoes();
-    	} else {
-    		config = (Configuracoes)data.getExtras().get("config");
-        	Log.v("bandeco","config: total de restaurantes "+config.getRestaurantesEscolhidos().size());
-        	start();
-    	}
-    }
+    
+    /**
+	 * Inner Class responsável por baixar restaurantes selecionados no background
+	 * @author feliz
+	 */
+    
+	protected class BaixaCardapios extends AsyncTask<Boolean, Void, Boolean> {
+		private ProgressDialog progressDialog;
+		
+		@Override
+		protected void onPreExecute() {
+	        /* Prepara e mostra tela de espera */
+			progressDialog = new ProgressDialog(MainActivity.this);
+			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			progressDialog.setMessage("Baixando cardápios...");
+			progressDialog.setCancelable(false);
+			progressDialog.setProgress(0);
+			progressDialog.show();
+			
+		}
+		
+		@Override
+		protected Boolean doInBackground(Boolean... forcar) {
+			ArrayList<Restaurante> restaurantes = config.getRestaurantesEscolhidos();
+			for (Restaurante r : new ArrayList<Restaurante>(restaurantes)) {
+				if (r.temQueAtualizar() || forcar[0]) {
+					//Baixa lista de restaurantes
+					InputStream inputStream;
+					try {
+						//Baixa objeto do restaurante
+						inputStream = new URL(Util.getBaseSite()+"obj/"+r.getCodigo()).openStream();
+						ObjectInputStream objStream = new ObjectInputStream(inputStream);
+						Restaurante novoRestaurante  = (Restaurante)objStream.readObject();
+						//So por seguranca, se o servidor estiver desatualizado
+						novoRestaurante.removeCardapiosAntigos();
+						//Substitui restaurante na lista
+						restaurantes.remove(r);
+						restaurantes.add(novoRestaurante);
+						//Substitui restaurante atual
+						if (r.equals(restauranteAtual)) {
+							restauranteAtual = novoRestaurante;
+						}
+						//Salva configuracao
+						Configuracoes.save(MainActivity.this, config);
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+						return false;
+					} catch (IOException e) {
+						e.printStackTrace();
+						return false;
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+		@Override
+		protected void onPostExecute(Boolean okay) {
+			progressDialog.dismiss();
+			if (okay) {
+				updateScreen();
+			} else {
+		        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+		        alertDialog.setTitle("Erro!");
+		        alertDialog.setMessage("Erro ao baixar cardápio. Verifique conexão com internet.");
+		        alertDialog.setCanceledOnTouchOutside(true);
+		        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+		        alertDialog.setCancelable(true);
+		        alertDialog.show();
+			}
+		}
+	}
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
@@ -113,9 +193,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public boolean onMenuItemClick(MenuItem arg0) {
-		        loadDataThread = new LoadDataThread(main);
-		        updateScreen();
-		        loadDataThread.start(true);
+				new BaixaCardapios().execute(true);
 				return true;
 			}
 		});
@@ -133,63 +211,62 @@ public class MainActivity extends Activity {
     	return true;
     }
     
+    /**
+     * Abre janela de configuracoes, dando intent para ConfiguracoesActivity
+     */
     public void abrirConfiguracoes() {
-    	Intent intent = new Intent(main, ConfiguracoesActivity.class);
+    	Intent intent = new Intent(this, ConfiguracoesActivity.class);
     	intent.putExtra("config", config);
     	startActivityForResult(intent, 0);
     }
+    
+    /**
+     * Atualiza tela com estado atual
+     */
     public void updateScreen() {
-	    	if (loadDataThread.isDataReady()) {
-	    		if (progressDialog != null)
-	    			progressDialog.dismiss();
-	    		LinearLayout mainScroll = (LinearLayout)findViewById(R.id.main);
-    			mainScroll.removeAllViews();
-    			if (config.getRestaurantesEscolhidos().size() > 0) {
-	    			if (restauranteAtual != null) {
-			    		for (Cardapio cardapio : restauranteAtual.getCardapios()) {
-		    				mainScroll.addView(getCardapioView(cardapio));
-		    			}
-			    		if (restauranteAtual.getCardapios().size() == 0) {
-		    				TextView text =new TextView(this);
-		    				text.setText("Não foi possível recuperar nenhum cardápio");
-		    				mainScroll.addView(text);
-			    		}
-			    		Button btn = new Button(this);
-			    		btn.setText("Ir para site do restaurante");
-			    		btn.setOnClickListener(new OnClickListener() {			
-							@Override
-							public void onClick(View arg0) {
-								Intent i = new Intent(Intent.ACTION_VIEW);
-								i.setData(Uri.parse(restauranteAtual.getSite()));
-								startActivity(i);
-							}
-						});
-			    		mainScroll.addView(btn);
-	    			} else {
-	    				TextView text =new TextView(this);
-	    				text.setText("Erro: Nenhum restaurante atual");
-	    				mainScroll.addView(text);
-	    			}
+    	LinearLayout mainScroll = (LinearLayout)findViewById(R.id.main);
+    	//Remove todas as views anteriores
+    	mainScroll.removeAllViews();
+    	
+    	if (restauranteAtual != null) {
+    		//Adiciona cada cardapio
+    		for (Cardapio cardapio : restauranteAtual.getCardapios()) {
+    			mainScroll.addView(getCardapioView(cardapio));
+    		}
+
+    		//Se nao tiver cardapio, mostra erro
+    		if (restauranteAtual.getCardapios().size() == 0) {
+    			TextView text =new TextView(this);
+    			text.setText("Nenhum cardápio atualizado disponível.");
+    			mainScroll.addView(text);
+    		}
+
+    		//Poe botao do restaurante
+    		Button btn = new Button(this);
+    		btn.setText("Visitar site");
+    		btn.setOnClickListener(new OnClickListener() {			
+    			@Override
+    			public void onClick(View arg0) {
+    				//Chama browser no endereço do Restaurante
+    				Intent i = new Intent(Intent.ACTION_VIEW);
+    				i.setData(Uri.parse(restauranteAtual.getSite()));
+    				startActivity(i);
     			}
-	    	} else {
-	    		if (progressDialog != null)
-	    			progressDialog.show();
-	    	}
-    }	
-    @Override
-    protected void onStop() {
-    	super.onStop();
-    	if (progressDialog != null) {
-	    	progressDialog.dismiss();
-	    	progressDialog=null;
+    		});
+    		mainScroll.addView(btn);
+    	} else {
+    		//Isso nunca deveria acontecer
+    		TextView text =new TextView(this);
+    		text.setText("Erro: Nenhum restaurante atual");
+    		mainScroll.addView(text);
     	}
-    }
-    public void save() throws IOException {
-    	Configuracoes.save(this, config);
-    }
-	public Configuracoes getConfig() {
-		return config;
-	}
+    }	
+    
+    /**
+     * Pega representação de um cardapio na tela
+     * @param c Cardapio
+     * @return representação do cardapio
+     */
 	public View getCardapioView(Cardapio c) {
 		//Pega o layout de cardapios
 		View layout = (View)getLayoutInflater().inflate(R.layout.cardapio, null);
@@ -238,6 +315,7 @@ public class MainActivity extends Activity {
 	
 		return layout;
 	}
+	
 	private void setLayoutText(View layout, int rowID, int textID, boolean show, String text) {
 		TableRow rowView = (TableRow)layout.findViewById(rowID);
 		TextView textView = (TextView)layout.findViewById(textID);

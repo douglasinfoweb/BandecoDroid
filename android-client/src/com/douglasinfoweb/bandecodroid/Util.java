@@ -9,8 +9,9 @@ import java.util.regex.Pattern;
 import org.joda.time.DateTime;
 
 public class Util {
+	
 	public static String getBaseSite() {
-		return "http://localhost/bandecodroid";
+		return "http://bandecodroid.no-ip.org/";
 	}
 	
 	public static Locale getBRLocale() {

@@ -22,8 +22,30 @@ public class Restaurante implements Serializable {
 	
 	protected String site;
 	
-	public String getImagem() {
-		return Util.getBaseSite()+"/imagens/"+codigo+".png";
+	public Restaurante(){}
+	
+	public Restaurante(Restaurante r) {
+		this.nome = new String(r.nome);
+		this.codigo = new String(r.codigo);
+		this.site = new String(r.site);
+		this.cardapios = new ArrayList<Cardapio> ();
+		for (Cardapio c: r.cardapios) {
+			this.cardapios.add(new Cardapio(c));
+		}
+	}
+	/**
+	 * Retorna URL absoluta para a imagem no servidor
+	 * @return URL absoltua da imagem
+	 */
+	public String getImageURL() {
+		return Util.getBaseSite()+"images/"+getImageFilename();
+	}
+	/**
+	 * Retorna o nome do arquivo onde a imagem vai ser guardada
+	 * @return nome do arquivo onde a imagem vai ser guardada
+	 */
+	public String getImageFilename() {
+		return "logo_"+codigo+".gif";
 	}
 
 	public String getNome() {

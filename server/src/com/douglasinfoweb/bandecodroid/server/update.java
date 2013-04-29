@@ -16,11 +16,12 @@ import com.douglasinfoweb.bandecodroid.model.Cardapio;
 import com.douglasinfoweb.bandecodroid.model.Restaurante;
 import com.douglasinfoweb.bandecodroid.restaurantes.*;
 
+/**
+ * Atualiza site e objetos no servidor
+ * @author feliz
+ *
+ */
 public class update {
-
-	/**
-	 * @param args
-	 */
 	private static ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>(
 		Arrays.asList(
 		new Unicamp(),
@@ -41,7 +42,11 @@ public class update {
 		new UERJ()
 		)
 	);
-	
+	/**
+	 * Grava objeto no arquivo
+	 * @param obj objeto a ser gravado
+	 * @param filename arquivo
+	 */
 	private static void write(Serializable obj, String filename) {
 		try{
 			 
@@ -55,8 +60,14 @@ public class update {
 		   }
 	}
 	
+	/**
+	 * Poe html gerado no layout predeterminado por www/layout.html
+	 * @param titulo Titulo da pagina
+	 * @param conteudo Conteudo em html da pagina
+	 * @return HTML com Layout + conteudo
+	 */
 	private static String gerarLayout(String titulo, String conteudo) {
-		File file = new File("www/layout.html");
+		File file = new File("www/layout.htm");
 		try {
 			String layoutStr=FileUtils.readFileToString(file, "UTF-8");
 			layoutStr=layoutStr.replace("[TITULO]", titulo);
@@ -68,12 +79,15 @@ public class update {
 		}
 	}
 	
+	/**
+	 * Gera index.html
+	 */
 	private static void gerarPaginaIndex() {
 		String html="<h2 class=\"first\">Restaurantes</h2><p><table align='center'><tr>";
 		int i=0;
 		for (Restaurante r : restaurantes) {
 			i++;
-			html+="<td style=\"background-color:black;\"><a href='"+r.getCodigo()+".html'><img src='images/logo_"+r.getCodigo()+".gif' width='100px' height='100px' border=0/></a></td>";
+			html+="<td style=\"background-color:black;\"><a href='"+r.getCodigo()+".html'><img src='"+r.getImageURL()+"' width='100px' height='100px' border=0/></a></td>";
 			if (i%4 == 0) {
 				html+="</tr><tr>";
 			}
@@ -87,6 +101,10 @@ public class update {
 		}
 	}
 	
+	/**
+	 * Gera pagina de um restaurante, salva em www/CODIGO.html
+	 * @param r Restaurante a ter pagina gerada
+	 */
 	private static void gerarPaginaRestaurante(Restaurante r) {
 		String html="";
 		File file = new File("www/"+r.getCodigo()+".html");
@@ -126,24 +144,32 @@ public class update {
 		}
 	}
 	
+	/**
+	 * Funcao principal
+	 * @param args Nao importa
+	 */
 	public static void main(String[] args) {
-		System.out.println("Gravando restaurantes...");
-		write(restaurantes, "www/obj/restaurantes");
+		ArrayList<Restaurante> restaurantesGenerico = new ArrayList<Restaurante>();
 		gerarPaginaIndex();
 		for (Restaurante r : restaurantes) {
 			//Atualizar
 			System.out.println("=== Atualizando: "+r.getNome()+" ===");
+			restaurantesGenerico.add(new Restaurante(r));
 			try {
 				r.atualizarCardapios();
 				gerarPaginaRestaurante(r);
+				
+				//NO CASO DE SUCESSO, grava generico Restaurante com cardapios
+				write(new Restaurante(r), "www/obj/"+r.getCodigo());
 				System.out.println("Sucesso!");
-				//NO CASO DE SUCESSO, grava o objeto com cardapios
-				write(r, "www/obj/"+r.getCodigo());
 			} catch (Exception e) {
 				System.err.println("ERRO ATUALIZANDO "+r.getNome()+" :(");
 				e.printStackTrace();
 			}
 		}
+
+		System.out.println("Gravando restaurantes...");
+		write(restaurantesGenerico, "www/obj/restaurantes");
 	}
 
 }

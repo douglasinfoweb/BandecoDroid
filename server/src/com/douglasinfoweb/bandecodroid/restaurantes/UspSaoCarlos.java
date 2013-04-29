@@ -49,11 +49,15 @@ public class UspSaoCarlos extends Restaurante {
 				Node noDoDia = dia.getChildNodes().item(j);
 				if (noDoDia.getNodeName().equals("data")) {
 					String[] dataSplited = getNodeValue(noDoDia).split("/");
-					ultimaData = new DateTime(
-							Integer.parseInt(dataSplited[2]),
-							Integer.parseInt(dataSplited[1]),
-							Integer.parseInt(dataSplited[0]), 
-							0, 0 ,0);
+					if (dataSplited.length == 3) {
+						ultimaData = new DateTime(
+								Integer.parseInt(dataSplited[2]),
+								Integer.parseInt(dataSplited[1]),
+								Integer.parseInt(dataSplited[0]), 
+								0, 0 ,0);
+					} else {
+						ultimaData = null;
+					}
 				} else if (noDoDia.getNodeName().equals("almoco") || noDoDia.getNodeName().equals("jantar")) {
 					Cardapio cardapio = new Cardapio();
 					cardapio.setData(ultimaData);
