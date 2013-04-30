@@ -252,6 +252,7 @@ public class MainActivity extends Activity {
     	mainScroll.removeAllViews();
     	
     	if (restauranteAtual != null) {
+    		restauranteAtual.removeCardapiosAntigos();
     		//Adiciona cada cardapio
     		for (Cardapio cardapio : restauranteAtual.getCardapios()) {
     			mainScroll.addView(getCardapioView(cardapio));
