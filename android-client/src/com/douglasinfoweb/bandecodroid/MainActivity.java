@@ -16,6 +16,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -208,15 +211,41 @@ public class MainActivity extends Activity {
 		}
 	}
     
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
+    	MenuItem itemSite = menu.add(0, Menu.NONE, Menu.NONE, "Visitar Site");
+    	itemSite.setIcon(R.drawable.ic_menu_info_details);
+    	itemSite.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem arg0) {
+				//Chama browser no endereço do Restaurante
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(restauranteAtual.getSite()));
+				startActivity(i);
+				return true;
+			}
+		});
+
+    	MenuItem itemShare = menu.add(0, Menu.NONE, Menu.NONE, "Compartilhar");
+    	itemShare.setIcon(R.drawable.ic_menu_share);
+    	itemShare.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem arg0) {
+				shareRestaurante();
+				return true;
+			}
+		});
+    	
     	MenuItem itemAtualiza = menu.add(0, Menu.NONE, Menu.NONE, "Atualizar");
     	itemAtualiza.setIcon(R.drawable.ic_menu_refresh);
     	itemAtualiza.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			
 			@Override
 			public boolean onMenuItemClick(MenuItem arg0) {
+				//Força atualização
 				new BaixaCardapios().execute(true);
 				return true;
 			}
@@ -228,11 +257,38 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public boolean onMenuItemClick(MenuItem arg0) {
+				//Força atualização
+				abrirConfiguracoes();
 				return true;
 			}
-		});
+		}); 
     	return true;
-    }*/
+    	
+    }
+    
+    private void shareRestaurante() {
+		//create the send intent
+		Intent shareIntent = 
+		 new Intent(android.content.Intent.ACTION_SEND);
+
+		//set the type
+		shareIntent.setType("text/plain");
+
+		//add a subject
+		shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, 
+		 "Bandeco");
+
+		//build the body of the message to be shared
+		String shareMessage = "Cardapio da "+restauranteAtual.getNome()+" "+restauranteAtual.getTinyUrl();
+
+		//add the message
+		shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, 
+		 shareMessage);
+
+		//start the chooser for sharing
+		startActivity(Intent.createChooser(shareIntent, 
+		 "Compartilhar"));
+    }
     
     /**
      * Abre janela de configuracoes, dando intent para ConfiguracoesActivity
@@ -304,27 +360,7 @@ public class MainActivity extends Activity {
 				
 				@Override
 				public void onClick(View v) {
-					//create the send intent
-					Intent shareIntent = 
-					 new Intent(android.content.Intent.ACTION_SEND);
-
-					//set the type
-					shareIntent.setType("text/plain");
-
-					//add a subject
-					shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, 
-					 "Bandeco");
-
-					//build the body of the message to be shared
-					String shareMessage = "Cardapio da "+restauranteAtual.getNome()+" "+restauranteAtual.getTinyUrl();
-
-					//add the message
-					shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, 
-					 shareMessage);
-
-					//start the chooser for sharing
-					startActivity(Intent.createChooser(shareIntent, 
-					 "Compartilhar"));
+					shareRestaurante();
 				}
 			});
     		mainScroll.addView(buttonBar);
