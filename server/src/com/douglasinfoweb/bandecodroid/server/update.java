@@ -43,7 +43,8 @@ public class update {
 				"http://goo.gl/FBXux"),
 		new UspSaoCarlos(), 
 		new UFRJ(), 
-		new UERJ()
+		new UERJ(),
+		new UFUSantaMonica()
 		)
 	);
 	/**
