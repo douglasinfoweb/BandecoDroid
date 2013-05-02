@@ -120,6 +120,10 @@ public class Restaurante implements Serializable {
 	public void setCardapios(ArrayList<Cardapio> cardapios) {
 		this.cardapios = cardapios;
 	}
+	
+	public Cardapio getLastCardapio(){
+		return this.cardapios.get(this.cardapios.size()-1);
+	}
 
 	public void atualizar(boolean forcar) throws Exception {
 		removeCardapiosAntigos();

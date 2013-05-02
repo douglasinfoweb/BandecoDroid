@@ -16,7 +16,6 @@ import com.douglasinfoweb.bandecodroid.Util;
 
 @SuppressWarnings("serial")
 public class UERJ extends Restaurante {
-	boolean proximo;
 	public UERJ() {
 		nome="UERJ";
 		site="http://www.restauranteuniversitario.uerj.br/cardapio.html";
