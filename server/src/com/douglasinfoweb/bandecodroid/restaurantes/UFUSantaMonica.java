@@ -6,7 +6,6 @@ package com.douglasinfoweb.bandecodroid.restaurantes;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.joda.time.DateTime;
 import org.joda.time.MutableDateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,7 +19,7 @@ import com.douglasinfoweb.bandecodroid.model.Cardapio.Refeicao;
 
 /**
  * @author reneoctavio
- *
+ * Valeu rené =D
  */
 @SuppressWarnings("serial")
 public class UFUSantaMonica extends Restaurante {
@@ -67,10 +66,10 @@ public class UFUSantaMonica extends Restaurante {
 			}
 		}	
 		for (Cardapio c : new ArrayList<Cardapio>(newCardapios)) {
-			if (c.getPratoPrincipal() != null
-				&& c.getRefeicao () != null
-				&& c.getData() != null
-				&& c.getPratoPrincipal().length() <= 6) {
+			if (c.getPratoPrincipal() == null
+				|| c.getRefeicao () == null
+				|| c.getData() == null
+				|| c.getPratoPrincipal().length() <= 6) {
 				newCardapios.remove(c);
 			}
 		}

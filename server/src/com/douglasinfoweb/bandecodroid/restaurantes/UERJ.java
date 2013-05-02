@@ -72,10 +72,10 @@ public class UERJ extends Restaurante {
 			trN++;
 		}
 		for (Cardapio c : new ArrayList<Cardapio>(cardapiosFinal)) {
-			if (c.getPratoPrincipal() != null
-				&& c.getRefeicao () != null
-				&& c.getData() != null
-				&& c.getPratoPrincipal().length() <= 6) {
+			if (c.getPratoPrincipal() == null
+				|| c.getRefeicao () == null
+				|| c.getData() == null
+				|| c.getPratoPrincipal().length() <= 6) {
 				cardapiosFinal.remove(c);
 			}
 		}
