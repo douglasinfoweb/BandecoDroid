@@ -162,6 +162,7 @@ public class update {
 			restaurantesGenerico.add(new Restaurante(r));
 			try {
 				r.atualizarCardapios();
+				r.removeCardapiosAntigos();
 				gerarPaginaRestaurante(r);
 				
 				//NO CASO DE SUCESSO, grava generico Restaurante com cardapios
