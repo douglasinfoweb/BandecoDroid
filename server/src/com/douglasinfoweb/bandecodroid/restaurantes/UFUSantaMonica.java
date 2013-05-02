@@ -46,25 +46,21 @@ public class UFUSantaMonica extends Restaurante {
 				date.setYear(Integer.parseInt(dateString[2]));
 				date.setMonthOfYear(Integer.parseInt(dateString[1]));
 				date.setDayOfMonth(Integer.parseInt(dateString[0]));
-				String refeicao = cols.get(1).text().toLowerCase(Util.getBRLocale()).trim();
-				if(refeicao.contains("almo")){
-					Cardapio cardapio = new Cardapio();
-					cardapio.setData(date.toDateTime());
-					cardapio.setRefeicao(Refeicao.ALMOCO);
-					newCardapios.add(cardapio);
-				}
-				else{
-					Cardapio cardapio = new Cardapio();
-					cardapio.setData(date.toDateTime());
-					cardapio.setRefeicao(Refeicao.JANTA);
-					newCardapios.add(cardapio);
-				}
-				newCardapios.get(newCardapios.size()-1).setPratoPrincipal("Arroz " + cols.get(2).text()+"\nFeijão "+cols.get(3).text()+"\n"+cols.get(4).text()+"\n"+cols.get(5).text());
-				newCardapios.get(newCardapios.size()-1).setSalada(cols.get(6).text());
-				newCardapios.get(newCardapios.size()-1).setSobremesa(cols.get(7).text());
-				newCardapios.get(newCardapios.size()-1).setSuco(cols.get(8).text());
+				Cardapio cardapio = new Cardapio();
+				cardapio.setData(date.toDateTime());
+				cardapio.setRefeicao(Refeicao.ALMOCO);
+				newCardapios.add(cardapio);
+				getValuesFromPage(newCardapios, cols);
 			}
-		}	
+			else if(text.contains("janta")){
+				Cardapio cardapio = new Cardapio();
+				cardapio.setData(newCardapios.get(newCardapios.size()-1).getData());
+				cardapio.setRefeicao(Refeicao.JANTA);
+				newCardapios.add(cardapio);
+				getValuesFromPage(newCardapios, cols);
+			}
+
+		}
 		for (Cardapio c : new ArrayList<Cardapio>(newCardapios)) {
 			if (c.getPratoPrincipal() == null
 				|| c.getRefeicao () == null
@@ -74,5 +70,24 @@ public class UFUSantaMonica extends Restaurante {
 			}
 		}
 		setCardapios(newCardapios);
+	}
+	/**
+	 * @param newCardapios
+	 * @param cols
+	 */
+	private void getValuesFromPage(ArrayList<Cardapio> newCardapios,
+			Elements cols) {
+		if(newCardapios.get(newCardapios.size()-1).getRefeicao()==Refeicao.ALMOCO){
+			newCardapios.get(newCardapios.size()-1).setPratoPrincipal("Arroz " + cols.get(2).text()+"\nFeijão "+cols.get(3).text()+"\n"+cols.get(4).text()+"\n"+cols.get(5).text());
+			newCardapios.get(newCardapios.size()-1).setSalada(cols.get(6).text());
+			newCardapios.get(newCardapios.size()-1).setSobremesa(cols.get(7).text());
+			newCardapios.get(newCardapios.size()-1).setSuco(cols.get(8).text());
+		}
+		else{
+			newCardapios.get(newCardapios.size()-1).setPratoPrincipal("Arroz " + cols.get(1).text()+"\nFeijão "+cols.get(2).text()+"\n"+cols.get(3).text()+"\n"+cols.get(4).text());
+			newCardapios.get(newCardapios.size()-1).setSalada(cols.get(5).text());
+			newCardapios.get(newCardapios.size()-1).setSobremesa(cols.get(6).text());
+			newCardapios.get(newCardapios.size()-1).setSuco(cols.get(7).text());
+		}
 	}
 }
