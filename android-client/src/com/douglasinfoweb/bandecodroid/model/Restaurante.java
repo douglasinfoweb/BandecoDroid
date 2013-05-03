@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.joda.time.DateTime;
+import org.joda.time.MutableDateTime;
 
 import android.util.Log;
 
@@ -92,23 +93,17 @@ public class Restaurante implements Serializable {
 	public void removeCardapiosAntigos() {
 		DateTime now = DateTime.now();
 		for (Cardapio c : new ArrayList<Cardapio>(getCardapios())) {
-			// Pra remover, tem que ser no minimo do mesmo dia
-			if (c.getData().getDayOfYear() <= now.getDayOfYear()
-					&& c.getData().getYear() <= now.getYear()) {
-				// Se for de dias que ja passaram, remove
-				if (c.getData().getDayOfYear() < now.getDayOfYear()) {
-					getCardapios().remove(c);
-				} else { // Se eh de hoje, ver se ja passou a hora do
-							// almo�o/janta
-					switch (c.getRefeicao()) {
-					case ALMOCO:
-						if (now.getHourOfDay() >= 15)
-							getCardapios().remove(c);
-					case JANTA:
-						if (now.getHourOfDay() >= 22)
-							getCardapios().remove(c);
-					}
-				}
+			MutableDateTime dataCardapio = new MutableDateTime(c.getData());
+			switch(c.getRefeicao()) {
+			case ALMOCO:
+				dataCardapio.setHourOfDay(15);
+				break;
+			case JANTA:
+				dataCardapio.setHourOfDay(22);
+				break;
+			}
+			if (now.isAfter(dataCardapio)) {
+				getCardapios().remove(c);
 			}
 		}
 	}

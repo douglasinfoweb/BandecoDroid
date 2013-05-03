@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import com.douglasinfoweb.bandecodroid.model.Cardapio;
 import com.douglasinfoweb.bandecodroid.model.Restaurante;
-import com.douglasinfoweb.bandecodroid.restaurantes.UspEach;
+import com.douglasinfoweb.bandecodroid.restaurantes.UFF;
 
 public class RestauranteTeste {
 	public static void main(String[] args) {
-		Restaurante r = new UspEach();
+		Restaurante r = new UFF();
 
 		System.out.println("====== "+r.getNome()+" ======");
 		System.out.println("Codigo: "+r.getCodigo());
@@ -24,6 +24,8 @@ public class RestauranteTeste {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		r.removeCardapiosAntigos();
 		
 		for (Cardapio c : r.getCardapios()) {
 			System.out.println("== "+c.getRefeicao()+" "+c.getData().toString("d/M/y")+" ==");

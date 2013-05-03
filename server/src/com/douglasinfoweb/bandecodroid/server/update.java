@@ -45,6 +45,7 @@ public class update {
 		new UspSaoCarlos(), 
 		new UFRJ(), 
 		new UERJ(),
+		new UFF(),
 		new UFUSantaMonica()
 		)
 	);
