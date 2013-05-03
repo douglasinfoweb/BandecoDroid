@@ -15,7 +15,7 @@ import com.douglasinfoweb.bandecodroid.model.Restaurante;
 
 @SuppressWarnings("serial")
 public class Unicamp extends Restaurante {
-	boolean proximo;
+	private boolean proximo;
 	public Unicamp () {
 		nome="Unicamp";
 		codigo="unicamp";
@@ -91,7 +91,6 @@ public class Unicamp extends Restaurante {
 			pagina++;	
 		}
 		setCardapios(cardapios);
-		removeCardapiosAntigos();
 	}
 
 }

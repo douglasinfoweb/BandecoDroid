@@ -41,6 +41,7 @@ public class update {
 				"http://www.usp.br/coseas/cardcocesp.html",
 				"usp_prefeitura",
 				"http://goo.gl/FBXux"),
+		new UspEach(),
 		new UspSaoCarlos(), 
 		new UFRJ(), 
 		new UERJ(),

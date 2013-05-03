@@ -78,13 +78,13 @@ public class UFUSantaMonica extends Restaurante {
 	private void getValuesFromPage(ArrayList<Cardapio> newCardapios,
 			Elements cols) {
 		if(newCardapios.get(newCardapios.size()-1).getRefeicao()==Refeicao.ALMOCO){
-			newCardapios.get(newCardapios.size()-1).setPratoPrincipal("Arroz " + cols.get(2).text()+"\nFeijão "+cols.get(3).text()+"\n"+cols.get(4).text()+"\n"+cols.get(5).text());
+			newCardapios.get(newCardapios.size()-1).setPratoPrincipal("Arroz " + cols.get(2).text()+", Feijão "+cols.get(3).text()+", "+cols.get(4).text()+", "+cols.get(5).text());
 			newCardapios.get(newCardapios.size()-1).setSalada(cols.get(6).text());
 			newCardapios.get(newCardapios.size()-1).setSobremesa(cols.get(7).text());
 			newCardapios.get(newCardapios.size()-1).setSuco(cols.get(8).text());
 		}
 		else{
-			newCardapios.get(newCardapios.size()-1).setPratoPrincipal("Arroz " + cols.get(1).text()+"\nFeijão "+cols.get(2).text()+"\n"+cols.get(3).text()+"\n"+cols.get(4).text());
+			newCardapios.get(newCardapios.size()-1).setPratoPrincipal("Arroz " + cols.get(1).text()+", Feijão "+cols.get(2).text()+", "+cols.get(3).text()+", "+cols.get(4).text());
 			newCardapios.get(newCardapios.size()-1).setSalada(cols.get(5).text());
 			newCardapios.get(newCardapios.size()-1).setSobremesa(cols.get(6).text());
 			newCardapios.get(newCardapios.size()-1).setSuco(cols.get(7).text());

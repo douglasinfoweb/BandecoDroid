@@ -23,7 +23,6 @@ public class UFRJ extends Restaurante {
 		site="http://www.nutricao.ufrj.br/cardapio.htm";
 		tinyUrl="http://goo.gl/65Pgx";
 	}
-	boolean proximo;
 	@Override
 	public void atualizarCardapios() throws IOException {
 		ArrayList<Cardapio> cardapiosFinal=new ArrayList<Cardapio>();
@@ -112,7 +111,6 @@ public class UFRJ extends Restaurante {
 		}
 		Collections.sort(cardapiosFinal);
 		setCardapios(cardapiosFinal);
-		removeCardapiosAntigos();
 	}
 	
 	  

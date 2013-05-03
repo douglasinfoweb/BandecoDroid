@@ -28,7 +28,6 @@ import com.douglasinfoweb.bandecodroid.Util;
 
 @SuppressWarnings("serial")
 public class UspSaoCarlos extends Restaurante {
-	boolean proximo;
 	public UspSaoCarlos() {
 		nome="USP São Carlos";
 		site="http://www.pcasc.usp.br/pop_cardapio.php";
@@ -89,7 +88,6 @@ public class UspSaoCarlos extends Restaurante {
 			}
 		}
 		setCardapios(cardapios);
-		removeCardapiosAntigos();
 	}
 	
 	private final String getNodeValue( Node elem ) {

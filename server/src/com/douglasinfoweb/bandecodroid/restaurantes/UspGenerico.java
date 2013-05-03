@@ -132,7 +132,6 @@ public class UspGenerico extends Restaurante {
 		}
 
 		setCardapios(cardapios);
-		removeCardapiosAntigos();
 	}
 
 }

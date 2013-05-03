@@ -81,7 +81,6 @@ public class UERJ extends Restaurante {
 		}
 		//Collections.sort(cardapiosFinal);
 		setCardapios(cardapiosFinal);
-		removeCardapiosAntigos();
 	}
 	
 	  
