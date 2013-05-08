@@ -38,38 +38,15 @@ public class UspGenerico extends Restaurante {
 				String[] textoSplited = Util.removerEspacosDuplicados(text)
 						.split(" ");
 				int i=0;
+				//Pega primeira indice da primeira substring q tem /
 				for (String s : textoSplited) {
 					if (s.contains("/")) {
 						break;
 					}
 					i++;
 				}
-				String[] dataSplited = textoSplited[i]
-						.split("/");
-				// FORMATO EH DD/MM/AAAA OU DD/MM/AA OU DD/MM/AAA
-				if (dataSplited.length == 3) {
-					// FORMATO EH DD/MM/AA OU DD/MM/AAA
-					if (dataSplited[2].length() == 2 || dataSplited[2].length() == 3) {
-						ultimaData = new DateTime(
-								Integer.parseInt(dataSplited[2]) + 2000,
-								Integer.parseInt(dataSplited[1]),
-								Integer.parseInt(dataSplited[0]), 0, 0, 0);
-					// FORMATO EH DD/MM/AAAA
-					} else if (dataSplited[2].length() == 4) {
-						ultimaData = new DateTime(
-								Integer.parseInt(dataSplited[2]),
-								Integer.parseInt(dataSplited[1]),
-								Integer.parseInt(dataSplited[0]), 0, 0, 0);
-					}
-				// FORMATO EH DD/MM
-				} else if (dataSplited.length == 2) {
-					ultimaData = new DateTime(ultimaData.getYear(),
-							Integer.parseInt(dataSplited[1]),
-							Integer.parseInt(dataSplited[0]), 0, 0, 0);
-				} else {
-					throw new Exception("Erro ao recuperar data");
-				}
-				semana = ultimaData.getWeekOfWeekyear();
+				
+				semana = Util.str2date(textoSplited[i]).getWeekOfWeekyear();
 				break;
 			}
 		}
@@ -116,7 +93,7 @@ public class UspGenerico extends Restaurante {
 				data.setWeekOfWeekyear(semana);
 				data.setYear(ultimaData.getYear());
 				cardapio.setData(data.toDateTime());
-				cardapio.setPratoPrincipal(text);
+				cardapio.setPratoPrincipal(Util.removerEspacosDuplicados(text));
 				tdN++;
 				if (cardapio.getPratoPrincipal() != null
 						&& cardapio.getRefeicao() != null

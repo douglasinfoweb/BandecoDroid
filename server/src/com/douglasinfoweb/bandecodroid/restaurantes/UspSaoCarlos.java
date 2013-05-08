@@ -35,7 +35,7 @@ public class UspSaoCarlos extends Restaurante {
 		tinyUrl="http://goo.gl/IZWZh";
 	}
 	@Override
-	public void atualizarCardapios() throws IOException {
+	public void atualizarCardapios() throws IOException,Exception {
 	ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 		String URL = "http://www.pcasc.usp.br/restaurante.xml";
 		String XML = getXmlFromUrl(URL);
@@ -48,16 +48,7 @@ public class UspSaoCarlos extends Restaurante {
 			for (int j=0; j < dia.getChildNodes().getLength(); j++) {
 				Node noDoDia = dia.getChildNodes().item(j);
 				if (noDoDia.getNodeName().equals("data")) {
-					String[] dataSplited = getNodeValue(noDoDia).split("/");
-					if (dataSplited.length == 3) {
-						ultimaData = new DateTime(
-								Integer.parseInt(dataSplited[2]),
-								Integer.parseInt(dataSplited[1]),
-								Integer.parseInt(dataSplited[0]), 
-								0, 0 ,0);
-					} else {
-						ultimaData = null;
-					}
+					ultimaData = Util.str2date(getNodeValue(noDoDia));
 				} else if (noDoDia.getNodeName().equals("almoco") || noDoDia.getNodeName().equals("jantar")) {
 					Cardapio cardapio = new Cardapio();
 					cardapio.setData(ultimaData);

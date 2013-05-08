@@ -111,32 +111,7 @@ public class UspEach extends Restaurante {
 						//Vamos criar os cardapios inicias agora
 						//Recuperando data
 						if (splittedLine.contains("/")) {
-							DateTime ultimaData = new DateTime();
-							String[] dataSplited = splittedLine
-									.split("/");
-							// FORMATO EH DD/MM/AAAA OU DD/MM/AA OU DD/MM/AAA
-							if (dataSplited.length == 3) {
-								// FORMATO EH DD/MM/AA OU DD/MM/AAA
-								if (dataSplited[2].length() == 2 || dataSplited[2].length() == 3) {
-									ultimaData = new DateTime(
-											Integer.parseInt(dataSplited[2]) + 2000,
-											Integer.parseInt(dataSplited[1]),
-											Integer.parseInt(dataSplited[0]), 0, 0, 0);
-								// FORMATO EH DD/MM/AAAA
-								} else if (dataSplited[2].length() == 4) {
-									ultimaData = new DateTime(
-											Integer.parseInt(dataSplited[2]),
-											Integer.parseInt(dataSplited[1]),
-											Integer.parseInt(dataSplited[0]), 0, 0, 0);
-								}
-							// FORMATO EH DD/MM
-							} else if (dataSplited.length == 2) {
-								ultimaData = new DateTime(ultimaData.getYear(),
-										Integer.parseInt(dataSplited[1]),
-										Integer.parseInt(dataSplited[0]), 0, 0, 0);
-							} else {
-								throw new Exception("Erro ao recuperar data");
-							}
+							DateTime ultimaData = Util.str2date(splittedLine);
 							//Cria novo objeto Cardapio
 							Cardapio c = new Cardapio();
 							c.setSalada("");

@@ -20,6 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import com.douglasinfoweb.bandecodroid.Util;
 import com.douglasinfoweb.bandecodroid.model.Cardapio;
 import com.douglasinfoweb.bandecodroid.model.Restaurante;
 
@@ -62,32 +63,23 @@ public class UFF extends Restaurante {
 				
 				//Decodifica
 
-				String[] dataSplited = dia.split("/");
-				if (dataSplited.length == 3) {
-					DateTime data = new DateTime(
-							Integer.parseInt(dataSplited[2]),
-							Integer.parseInt(dataSplited[1]),
-							Integer.parseInt(dataSplited[0]), 
-							0, 0 ,0);
-					
-					cardapio.setData(data);
-					cardapio.setPratoPrincipal(pratoPrincipal);
-					cardapio.setSalada(salada);
-					cardapio.setSobremesa(sobremesa);
-					cardapio.setSuco(bebida);
-					//Cria p almoço e janta
-					Cardapio almoco = new Cardapio(cardapio);
-					almoco.setRefeicao(Cardapio.Refeicao.ALMOCO);
-					Cardapio janta = new Cardapio(cardapio);
-					janta.setRefeicao(Cardapio.Refeicao.JANTA);
-					//Checa antes de adicionar
-					if (cardapio.getPratoPrincipal() != null 
-							&& cardapio.getData() != null) {
-						cardapios.add(almoco);
-						cardapios.add(janta);
-					}
-				} else {
-					throw new Exception("Data no formato errado");
+				DateTime data = Util.str2date(dia);
+
+				cardapio.setData(data);
+				cardapio.setPratoPrincipal(pratoPrincipal);
+				cardapio.setSalada(salada);
+				cardapio.setSobremesa(sobremesa);
+				cardapio.setSuco(bebida);
+				//Cria p almoço e janta
+				Cardapio almoco = new Cardapio(cardapio);
+				almoco.setRefeicao(Cardapio.Refeicao.ALMOCO);
+				Cardapio janta = new Cardapio(cardapio);
+				janta.setRefeicao(Cardapio.Refeicao.JANTA);
+				//Checa antes de adicionar
+				if (cardapio.getPratoPrincipal() != null 
+						&& cardapio.getData() != null) {
+					cardapios.add(almoco);
+					cardapios.add(janta);
 				}
 				
 			}

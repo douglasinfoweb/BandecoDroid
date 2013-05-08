@@ -24,7 +24,7 @@ public class Unicamp extends Restaurante {
 	}
 	
 	@Override
-	public void atualizarCardapios() throws IOException {
+	public void atualizarCardapios() throws IOException, Exception {
 		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 		proximo = true;
 		int pagina=1;
@@ -41,15 +41,8 @@ public class Unicamp extends Restaurante {
 					/** INFORMCOES **/
 					if (text.contains("feira")) {
 						String dataTxt = Util.removerEspacosDuplicados(text).trim().substring(0, 10);
-						String[] dataSplited = dataTxt.split("/");
-						if (dataSplited.length == 3) {
-							DateTime data = new DateTime(
-									Integer.parseInt(dataSplited[2]),
-									Integer.parseInt(dataSplited[1]),
-									Integer.parseInt(dataSplited[0]), 
-									0, 0 ,0);
-							cardapio.setData(data);
-						}
+						DateTime data = Util.str2date(dataTxt);
+						cardapio.setData(data);
 					} else if (text.contains("prato principal")) {
 						cardapio.setPratoPrincipal(Util.capitalize(Util.separaEPegaValor(textoNormal)));
 						duasLinhasPratoPrincipal=true;

@@ -17,6 +17,35 @@ public class Util {
 	public static Locale getBRLocale() {
 		return new Locale("pt", "BR");
 	}
+	
+	public static DateTime str2date(String str) throws Exception {
+		DateTime result = new DateTime();
+		String[] dataSplited = str.split("/");
+		// FORMATO EH DD/MM/AAAA OU DD/MM/AA OU DD/MM/AAA
+		if (dataSplited.length == 3) {
+			// FORMATO EH DD/MM/AA OU DD/MM/AAA
+			if (dataSplited[2].length() == 2 || dataSplited[2].length() == 3) {
+				result = new DateTime(
+						Integer.parseInt(dataSplited[2]) + 2000,
+						Integer.parseInt(dataSplited[1]),
+						Integer.parseInt(dataSplited[0]), 0, 0, 0);
+			// FORMATO EH DD/MM/AAAA
+			} else if (dataSplited[2].length() == 4) {
+				result = new DateTime(
+						Integer.parseInt(dataSplited[2]),
+						Integer.parseInt(dataSplited[1]),
+						Integer.parseInt(dataSplited[0]), 0, 0, 0);
+			}
+		// FORMATO EH DD/MM
+		} else if (dataSplited.length == 2) {
+			result = new DateTime(result.getYear(),
+					Integer.parseInt(dataSplited[1]),
+					Integer.parseInt(dataSplited[0]), 0, 0, 0);
+		} else {
+			throw new Exception("Erro ao recuperar data");
+		}
+		return result;
+	}
 
 	public static String int2diaDaSemana(int dayOfWeek, boolean resumido) {
 		String result;

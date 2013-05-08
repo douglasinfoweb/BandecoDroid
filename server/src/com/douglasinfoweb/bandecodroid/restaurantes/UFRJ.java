@@ -1,6 +1,5 @@
 package com.douglasinfoweb.bandecodroid.restaurantes;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -24,7 +23,7 @@ public class UFRJ extends Restaurante {
 		tinyUrl="http://goo.gl/65Pgx";
 	}
 	@Override
-	public void atualizarCardapios() throws IOException {
+	public void atualizarCardapios() throws Exception {
 		ArrayList<Cardapio> cardapiosFinal=new ArrayList<Cardapio>();
 		String URL = "http://www.nutricao.ufrj.br/cardapio.htm";
 		//String URL = "http://www.felizardo.me/cardapio_ru.htm";
@@ -48,14 +47,8 @@ public class UFRJ extends Restaurante {
 						}
 						//Define semana
 						String strUltimaData = texto.substring(texto.length()-5, texto.length());
-						String[] dataSplited = strUltimaData.split("/");
-						DateTime ultimaData;
-						if (dataSplited.length == 2) {
-							ultimaData = new DateTime(
-									DateTime.now().getYear(),
-									Integer.parseInt(dataSplited[1]),
-									Integer.parseInt(dataSplited[0]), 
-									0, 0 ,0);
+						if (strUltimaData.contains("/")) {
+							DateTime ultimaData = Util.str2date(strUltimaData);
 							semana = ultimaData.getWeekOfWeekyear();
 						}
 						//Cria cardapios da semana
