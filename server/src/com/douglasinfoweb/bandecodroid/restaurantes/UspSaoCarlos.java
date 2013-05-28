@@ -47,7 +47,7 @@ public class UspSaoCarlos extends Restaurante {
 			DateTime ultimaData = new DateTime();
 			for (int j=0; j < dia.getChildNodes().getLength(); j++) {
 				Node noDoDia = dia.getChildNodes().item(j);
-				if (noDoDia.getNodeName().equals("data")) {
+				if (noDoDia.getNodeName().equals("data") && getNodeValue(noDoDia).length() >= 3) {
 					ultimaData = Util.str2date(getNodeValue(noDoDia));
 				} else if (noDoDia.getNodeName().equals("almoco") || noDoDia.getNodeName().equals("jantar")) {
 					Cardapio cardapio = new Cardapio();

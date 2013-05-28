@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import com.douglasinfoweb.bandecodroid.model.Cardapio;
 import com.douglasinfoweb.bandecodroid.model.Restaurante;
-import com.douglasinfoweb.bandecodroid.restaurantes.UFUSantaMonica;
+import com.douglasinfoweb.bandecodroid.restaurantes.UFRJ;
 
 public class RestauranteTeste {
 	public static void main(String[] args) {
-		Restaurante r = new UFUSantaMonica();
+		Restaurante r = new UFRJ();
 
 		System.out.println("====== "+r.getNome()+" ======");
 		System.out.println("Codigo: "+r.getCodigo());

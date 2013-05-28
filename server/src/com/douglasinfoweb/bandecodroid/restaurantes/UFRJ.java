@@ -35,7 +35,7 @@ public class UFRJ extends Restaurante {
 			Refeicao refeicao;
 			int semana=-1;
 			int trN=0;
-			if (tableN >= 0 && tableN <= 1) {
+			if (tableN >= 0 && tableN <= 2) {
 				for (Element tr : table.select("tr")) {
 					if (trN==0) {
 						String texto = Util.removerEspacosDuplicados(tr.text().toLowerCase(Util.getBRLocale()));
