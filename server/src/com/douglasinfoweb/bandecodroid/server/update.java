@@ -43,6 +43,7 @@ public class update {
 				"http://goo.gl/FBXux"),
 		new UspEach(),
 		new UspSaoCarlos(), 
+		new UspRibeirao(),
 		new UFRJ(), 
 		new UERJ(),
 		new UFF(),

@@ -69,8 +69,7 @@ public class UspEach extends Restaurante {
 				modo=Modo.SOBREMESA;
 			}
 			//Acabou tabela
-			if (line.length() < 20
-					|| line.contains("SUJEITO")) {
+			if (Util.removerEspacosDuplicados(line).equals("") || line.contains("SUJEITO")) {
 				splittingPoints.clear();
 				cardapios.addAll(cardapiosTemp);
 				cardapiosTemp.clear();
