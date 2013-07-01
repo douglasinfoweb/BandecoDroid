@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import com.douglasinfoweb.bandecodroid.model.Cardapio;
 import com.douglasinfoweb.bandecodroid.model.Restaurante;
-import com.douglasinfoweb.bandecodroid.restaurantes.UspRibeirao;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspEach;
 
 public class RestauranteTeste {
 	public static void main(String[] args) {
-		Restaurante r = new UspRibeirao();
+		Restaurante r = new UspEach();
 
 		System.out.println("====== "+r.getNome()+" ======");
 		System.out.println("Codigo: "+r.getCodigo());

@@ -97,7 +97,7 @@ public class UspEach extends Restaurante {
 				int splitAnterior=0;
 				int i=0;
 				for (Integer split : realSplit) {
-					if (split>0) {
+					if (split>0 && split>splitAnterior) {
 						String splittedLine;
 						//Se o ponto esta mto longe,
 						//significa que a linha ja acabou
