@@ -17,13 +17,13 @@ public class Restaurante implements Serializable {
 
 	private ArrayList<Cardapio> cardapios = new ArrayList<Cardapio>();
 	
-	protected String nome;
+	public String nome;
 	
-	protected String codigo;
+	public String codigo;
 	
-	protected String site;
+	public String site;
 	
-	protected String tinyUrl;
+	public String tinyUrl;
 	
 	public Restaurante(){}
 	

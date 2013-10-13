@@ -10,11 +10,24 @@ import java.util.Arrays;
 
 import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.douglasinfoweb.bandecodroid.Util;
 import com.douglasinfoweb.bandecodroid.model.Cardapio;
 import com.douglasinfoweb.bandecodroid.model.Restaurante;
-import com.douglasinfoweb.bandecodroid.restaurantes.*;
+import com.douglasinfoweb.bandecodroid.restaurantes.UERJ;
+import com.douglasinfoweb.bandecodroid.restaurantes.UFF;
+import com.douglasinfoweb.bandecodroid.restaurantes.UFRJ;
+import com.douglasinfoweb.bandecodroid.restaurantes.UFUSantaMonica;
+import com.douglasinfoweb.bandecodroid.restaurantes.Unicamp;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspEach;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspGenerico;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspRibeirao;
+import com.douglasinfoweb.bandecodroid.restaurantes.UspSaoCarlos;
 
 /**
  * Atualiza site e objetos no servidor
@@ -152,6 +165,81 @@ public class update {
 		}
 	}
 	
+	
+	private static void gerarJsonIndex() {
+		JSONObject jObj = new JSONObject();
+		try {
+			JSONArray jRestaurantes = new JSONArray();
+			
+			for (Restaurante r : restaurantes) {
+				jRestaurantes.put(r.getCodigo());
+			}
+			jObj.put("restaurantes", jRestaurantes);
+			
+			File file = new File("www/json/restaurantes");
+			
+			FileUtils.writeStringToFile(file,jObj.toString());
+		} catch (JSONException je)  {
+			je.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Gera json de um restaurante, salva em www/json/CODIGO.html
+	 * @param r Restaurante a ter pagina gerada
+	 */
+	private static void gerarJsonRestaurante(Restaurante r) {
+		
+		JSONObject jObj = new JSONObject();
+		try {
+			jObj.put("nome", r.getNome());
+			jObj.put("codigo", r.getCodigo());
+			jObj.put("site", r.getSite());
+			jObj.put("tinyUrl", r.getTinyUrl());
+			
+			JSONArray jCardapios = new JSONArray();
+			for (Cardapio c : r.getCardapios()) {
+				JSONObject jCardapio = new JSONObject();
+				
+				DateTime data = c.getData();
+				DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+				jCardapio.put("data", data.toString(formatter));
+				
+				String refeicao;
+				if (c.getRefeicao() == Cardapio.Refeicao.ALMOCO) {
+					refeicao = "ALMOCO";
+				} else {
+					refeicao = "JANTA";
+				}
+				jCardapio.put("refeicao", refeicao);
+				
+				jCardapio.put("pratoPrincipal", c.getPratoPrincipal());
+				
+				jCardapio.put("suco", c.getSuco());
+				
+				jCardapio.put("sobremesa", c.getSobremesa());
+				
+				jCardapio.put("salada", c.getSalada());
+				
+				jCardapio.put("pts", c.getPts());
+				
+				jCardapios.put(jCardapio);
+			}
+			jObj.put("cardapios", jCardapios);
+			
+			File file = new File("www/json/"+r.getCodigo());
+			
+			FileUtils.writeStringToFile(file,jObj.toString());
+		} catch (JSONException je)  {
+			je.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	/**
 	 * Funcao principal
 	 * @param args Nao importa
@@ -168,9 +256,13 @@ public class update {
 				r.removeCardapiosAntigos();
 				gerarPaginaRestaurante(r);
 				
+				//Escrevendo o objeto serializado no java
 				//NO CASO DE SUCESSO, grava generico Restaurante com cardapios
 				write(new Restaurante(r), "www/obj/"+r.getCodigo());
-				System.out.println("Sucesso!");
+				
+				//Escrevendo objeto serializado json
+				gerarJsonRestaurante(new Restaurante(r));
+				
 			} catch (Exception e) {
 				System.err.println("ERRO ATUALIZANDO "+r.getNome()+" :(");
 				e.printStackTrace();
@@ -178,6 +270,7 @@ public class update {
 		}
 
 		System.out.println("Gravando restaurantes...");
+		gerarJsonIndex();
 		write(restaurantesGenerico, "www/obj/restaurantes");
 	}
 

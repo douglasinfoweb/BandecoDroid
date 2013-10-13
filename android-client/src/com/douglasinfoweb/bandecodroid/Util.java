@@ -11,7 +11,7 @@ import org.joda.time.DateTime;
 public class Util {
 	
 	public static String getBaseSite() {
-		return "http://bandecodroid.no-ip.org/";
+		return "http://bandeco.felizardo.org/";
 	}
 	
 	public static Locale getBRLocale() {
@@ -36,11 +36,19 @@ public class Util {
 						Integer.parseInt(dataSplited[1]),
 						Integer.parseInt(dataSplited[0]), 0, 0, 0);
 			}
-		// FORMATO EH DD/MM
 		} else if (dataSplited.length == 2) {
-			result = new DateTime(result.getYear(),
-					Integer.parseInt(dataSplited[1]),
-					Integer.parseInt(dataSplited[0]), 0, 0, 0);
+			// FORMATO EH DD/MM
+			if (dataSplited[1].length() == 2) {
+				result = new DateTime(result.getYear(),
+						Integer.parseInt(dataSplited[1]),
+						Integer.parseInt(dataSplited[0]), 0, 0, 0);
+			} else {
+				//FORMATO EH DD/?????
+				result = new DateTime(result.getYear(),
+						result.getMonthOfYear(),
+						Integer.parseInt(dataSplited[0]), 0, 0, 0);
+			
+			}
 		} else {
 			throw new Exception("Erro ao recuperar data");
 		}

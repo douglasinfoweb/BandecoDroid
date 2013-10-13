@@ -4,11 +4,16 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+
+import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -142,14 +147,13 @@ public class ConfiguracoesActivity extends Activity {
 			progressDialog.show();
 		};
 		
-		@SuppressWarnings("unchecked")
+		
+		
 		@Override
 		protected ArrayList<Restaurante> doInBackground(Void... params) {
 			try {
 				//Baixa lista de restaurantes
-				InputStream inputStream = new URL(Util.getBaseSite()+"obj/restaurantes").openStream();
-				ObjectInputStream objStream = new ObjectInputStream(inputStream);
-				ArrayList<Restaurante> rests  = (ArrayList<Restaurante>)objStream.readObject();
+				ArrayList<Restaurante> rests  = downloadLista();
 				//Baixa imagem de cada restaurante
 				for (Restaurante r : rests) {
 					File f = getBaseContext().getFileStreamPath(r.getImageFilename());
@@ -166,11 +170,37 @@ public class ConfiguracoesActivity extends Activity {
 				//Provavel erro de conexao
 				e.printStackTrace();
 				return null;
-			} catch (ClassNotFoundException e) {
-				// Formato invalido de objeto
+			} 	
+		}
+		
+		
+		private ArrayList<Restaurante> downloadLista() {
+			try {
+				URLConnection connection = new URL(Util.getBaseSite()+"json/restaurantes").openConnection();
+				connection.setConnectTimeout(15*1000);
+				connection.setReadTimeout(15*1000);
+				InputStream inputStream = connection.getInputStream();
+				JSONObject jLista = new JSONObject(IOUtils.toString(inputStream));
+
+				ArrayList<Restaurante> listaFinal = new ArrayList<Restaurante>();
+				JSONArray jRestaurantes = jLista.getJSONArray("restaurantes");
+				for (int i=0; i < jRestaurantes.length(); i++) {
+					Restaurante r = new Restaurante();
+					r.codigo = jRestaurantes.getString(i);
+					listaFinal.add(r);
+				}
+				return listaFinal;
+			} catch (MalformedURLException e) {
 				e.printStackTrace();
 				return null;
-			}		
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			} catch (JSONException e) {
+				e.printStackTrace();
+				return null;
+			}
+			
 		}
 		
 		/**

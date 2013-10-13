@@ -28,14 +28,13 @@ public class UFRJ extends Restaurante {
 		String URL = "http://www.nutricao.ufrj.br/cardapio.htm";
 		//String URL = "http://www.felizardo.me/cardapio_ru.htm";
 		Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30 * 1000).header("Accept", "text/html").get();
-		//Pega tabelas
-		int tableN=0;
+		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();;
 		for (Element table : doc.select("table")) {
-			ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();
 			Refeicao refeicao;
 			int semana=-1;
 			int trN=0;
-			if (tableN == 1 || tableN == 2) {
+			if (table.text().contains("CARDÁPIO RESTAURANTE UNIVERSITÁRIO")) {
+				cardapios=new ArrayList<Cardapio>();
 				for (Element tr : table.select("tr")) {
 					if (trN==0) {
 						String texto = Util.removerEspacosDuplicados(tr.text().toLowerCase(Util.getBRLocale()));
@@ -52,7 +51,7 @@ public class UFRJ extends Restaurante {
 							semana = ultimaData.getWeekOfWeekyear();
 						}
 						//Cria cardapios da semana
-						for (int i=0; i<5; i++) {
+						for (int i=0; i<7; i++) {
 							Cardapio c = new Cardapio();
 							if (semana != -1) {
 								MutableDateTime data = new MutableDateTime();
@@ -64,14 +63,29 @@ public class UFRJ extends Restaurante {
 							c.setRefeicao(refeicao);
 							cardapios.add(c);
 						}
-					} else if (trN >= 3 && trN <= 9) {
+					}
+					trN++;
+				}
+			
+			}
+			
+			trN=0;
+			if (table.text().contains("Segunda") 
+					&& table.text().contains("Terça")
+					&& table.text().contains("Quarta")
+					&& table.text().contains("Quinta")
+					&& table.text().contains("Sexta")
+					&& table.text().contains("Sábado")
+					&& table.text().contains("Domingo")) {
+				for (Element tr : table.select("tr")) {
+					if (trN >= 3 && trN <= 9) {
 						int tdN=0;
 						String titulo="";
 						for (Element td : tr.select("td")) {
 							String texto = Util.removerEspacosDuplicados(td.text().trim());
 							if (tdN==0) {
 								titulo=texto.toLowerCase();
-							} else {
+							} else if (tdN <= 7) {
 								Cardapio cardapio = cardapios.get(tdN-1);
 								if (titulo.contains("salada")) {
 									cardapio.setSalada(texto);
@@ -100,7 +114,6 @@ public class UFRJ extends Restaurante {
 					}
 				}
 			}
-			tableN++;
 		}
 		Collections.sort(cardapiosFinal);
 		setCardapios(cardapiosFinal);

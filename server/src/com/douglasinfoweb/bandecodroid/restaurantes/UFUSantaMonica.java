@@ -37,8 +37,11 @@ public class UFUSantaMonica extends Restaurante {
 		Document doc = Jsoup.connect(this.site).userAgent("Mozilla").timeout(30*1000).header("Accept", "text/html").get();
 		Elements tables = doc.select("table");
 		
-		if (tables.size() < 3)
-			throw new Exception("FALTA TABELA");
+		if (tables.size() < 3) {
+			//Falta tabela, normal nos fins de semana.
+			return;
+		}
+		
 		
 		newCardapios.addAll(readFromTable(tables.get(0),Refeicao.ALMOCO));
 		newCardapios.addAll(readFromTable(tables.get(2),Refeicao.JANTA));

@@ -18,7 +18,7 @@ public class UspRibeirao extends Restaurante {
 
 	public UspRibeirao() {
 		this.nome = "USP Ribeirão";
-		this.site = "http://www.pcarp.usp.br/cardapio/conteudo.asp";
+		this.site = "http://www.ccrp.usp.br/pages/restaurante/conteudo.asp";
 		this.codigo = "usp_ribeirao";
 		this.tinyUrl = "http://goo.gl/kaytZ";
     }

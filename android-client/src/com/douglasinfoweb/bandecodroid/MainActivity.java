@@ -2,10 +2,18 @@ package com.douglasinfoweb.bandecodroid;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+
+import org.apache.commons.io.IOUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,6 +41,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.douglasinfoweb.bandecodroid.model.Cardapio;
+import com.douglasinfoweb.bandecodroid.model.Cardapio.Refeicao;
 import com.douglasinfoweb.bandecodroid.model.Configuracoes;
 import com.douglasinfoweb.bandecodroid.model.Restaurante;
 import com.tjeannin.apprate.AppRate;
@@ -157,39 +166,96 @@ public class MainActivity extends Activity {
 			
 		}
 		
+		private Restaurante downloadRestaurante(String codigo) {
+			try {
+				URLConnection connection = new URL(Util.getBaseSite()+"json/"+codigo).openConnection();
+				connection.setConnectTimeout(15 * 1000);
+				connection.setReadTimeout(15 * 1000);
+				InputStream inputStream = connection.getInputStream();
+				JSONObject jRest = new JSONObject(IOUtils.toString(inputStream));
+				//Populando novo restaurante
+				Restaurante r = new Restaurante();
+				r.nome = jRest.getString("nome");
+				r.site = jRest.getString("site");
+				r.codigo = jRest.getString("codigo");
+				r.tinyUrl = jRest.getString("tinyUrl");
+				JSONArray jCardapios = jRest.getJSONArray("cardapios");
+				//Restaurando cardapios
+				ArrayList<Cardapio> cardapios = new ArrayList<Cardapio>();
+				for (int i=0; i < jCardapios.length(); i++) {
+					JSONObject jCardapio = jCardapios.getJSONObject(i);
+					Cardapio c = new Cardapio();
+					c.setPratoPrincipal(jCardapio.getString("pratoPrincipal"));
+					
+					Refeicao refeicao;
+					if (jCardapio.get("refeicao").equals("ALMOCO")) {
+						refeicao = Refeicao.ALMOCO;
+					} else {
+						refeicao = Refeicao.JANTA;
+					}
+					c.setRefeicao(refeicao);
+					
+					DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+					DateTime dt = formatter.parseDateTime(jCardapio.getString("data"));
+					c.setData(dt);
+					
+					if (!jCardapio.isNull("pts")) {
+						c.setPts(jCardapio.getString("pts"));
+					}
+					
+					if (!jCardapio.isNull("salada")) {
+						c.setSalada(jCardapio.getString("salada"));
+					}
+					
+					if (!jCardapio.isNull("sobremesa")) {
+						c.setSobremesa(jCardapio.getString("sobremesa"));
+					}
+					
+					if (!jCardapio.isNull("suco")) {
+						c.setSuco(jCardapio.getString("suco"));
+					}
+					
+					cardapios.add(c);
+				}
+				r.setCardapios(cardapios);
+				return r;
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+				return null;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			} catch (JSONException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		
 		@Override
 		protected Boolean doInBackground(Boolean... forcar) {
 			ArrayList<Restaurante> restaurantes = config.getRestaurantesEscolhidos();
 			for (Restaurante r : new ArrayList<Restaurante>(restaurantes)) {
 				if (r.temQueAtualizar() || forcar[0]) {
-					//Baixa lista de restaurantes
-					InputStream inputStream;
-					try {
-						//Baixa objeto do restaurante
-						inputStream = new URL(Util.getBaseSite()+"obj/"+r.getCodigo()).openStream();
-						ObjectInputStream objStream = new ObjectInputStream(inputStream);
-						Restaurante novoRestaurante  = (Restaurante)objStream.readObject();
-						//So por seguranca, se o servidor estiver desatualizado
-						novoRestaurante.removeCardapiosAntigos();
-						//Substitui restaurante na lista
-						restaurantes.remove(r);
-						restaurantes.add(novoRestaurante);
-						//Substitui restaurante atual
-						if (r.equals(restauranteAtual)) {
-							restauranteAtual = novoRestaurante;
-						}
-						//Salva configuracao
-						Configuracoes.save(MainActivity.this, config);
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
+					//Baixa objeto do restaurante
+					Restaurante novoRestaurante  = downloadRestaurante(r.getCodigo());
+					if (novoRestaurante == null)
 						return false;
+					//So por seguranca, se o servidor estiver desatualizado
+					novoRestaurante.removeCardapiosAntigos();
+					//Substitui restaurante na lista
+					restaurantes.remove(r);
+					restaurantes.add(novoRestaurante);
+					//Substitui restaurante atual
+					if (r.equals(restauranteAtual)) {
+						restauranteAtual = novoRestaurante;
+					}
+					//Salva configuracao
+					try {
+						Configuracoes.save(MainActivity.this, config);
 					} catch (IOException e) {
 						e.printStackTrace();
-						return false;
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-						return false;
 					}
+
 				}
 			}
 			return true;
