@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LogoUniversidadeViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UILabel *univTick;
 
 @property (weak, nonatomic) IBOutlet UIImageView *univLogo;
-@property (weak, nonatomic) IBOutlet UISwitch *univSwitch;
 @end
