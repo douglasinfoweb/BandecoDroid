@@ -23,7 +23,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //Mostra janela de carregando
     [SVProgressHUD showWithStatus:@"Carregando"];
     //Pega todos os restaurantes
@@ -32,7 +31,8 @@
     [manager GET:@"http://bandeco.felizardo.org/json/restaurantes" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
         
         
-        for (NSString* rest_codigo in responseObject[@"restaurantes"]) {
+        for (NSString* rest_codigo in responseObject[@"restaurantes"])
+        {
             [ self.restaurantesDisponiveis addObject:rest_codigo ];
         }
         
@@ -58,6 +58,18 @@
     if (!cell) {
         cell = [[LogoUniversidadeViewCell alloc] init];
     }
+    
+    NSString* univCod = (NSString*)self.restaurantesDisponiveis[indexPath.row];
+    
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/logo_%@.png", docDir, univCod];
+    
+    if (![UIImage imageWithContentsOfFile:pngFilePath])
+    {
+        [[NSData dataWithData:UIImagePNGRepresentation([UIImage imageWithData:[NSData dataWithContentsOfURL: [NSURL URLWithString:[NSString stringWithFormat:@"http://bandeco.felizardo.org/images/logo_%@.png", univCod]]]])]writeToFile:pngFilePath atomically:YES];
+    }
+    
+    cell.univLogo.image = [UIImage imageWithContentsOfFile:pngFilePath];
     
     cell.univTick.hidden = YES;
   
