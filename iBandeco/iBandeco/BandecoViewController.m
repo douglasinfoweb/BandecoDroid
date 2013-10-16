@@ -59,10 +59,8 @@
         cell = [[LogoUniversidadeViewCell alloc] init];
     }
     
-    //NSString* univCod = (NSString*)self.restaurantesDisponiveis[indexPath.row];
-    
     cell.univTick.hidden = YES;
-    
+  
     return cell;
 }
 
@@ -72,8 +70,14 @@
     
     NSString* codigoRestaurante = self.restaurantesDisponiveis[indexPath.row];
     
-    NSLog(@"%@", codigoRestaurante);
-    cell.univTick.hidden = ! cell.univTick.hidden;
+    if ([ self.restaurantesSelecionados containsObject:codigoRestaurante ]) {
+        cell.univTick.hidden = YES;
+        [ self.restaurantesSelecionados removeObject:codigoRestaurante];
+    } else {
+        cell.univTick.hidden = NO;
+        [ self.restaurantesSelecionados addObject:codigoRestaurante];
+    }
+    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -83,6 +87,8 @@
 
 - (IBAction)doDone:(UIButton *)sender {
 
+    NSLog(@"%@", self.restaurantesSelecionados);
+    
 }
 
 -(NSMutableArray *)restaurantesDisponiveis
