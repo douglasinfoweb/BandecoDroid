@@ -1,3 +1,5 @@
+xcshareddata
+*xcuserdata*
 bin
 obj
 *.html

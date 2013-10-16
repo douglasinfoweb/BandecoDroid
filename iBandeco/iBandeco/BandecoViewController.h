@@ -10,7 +10,9 @@
 #import "LogoUniversidadeViewCell.h"
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
+#import <AFNetworking/AFHTTPRequestOperation.h>
 
 @interface BandecoViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+
 
 @end
