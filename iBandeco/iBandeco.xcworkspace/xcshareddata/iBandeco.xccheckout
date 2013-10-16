@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B9888B19-C5BD-4516-A8DA-B0D7AAF4FBAE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>iBandeco</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>72CDA8D8-6A21-4650-BB76-890F57013146</key>
+		<string>ssh://github.com/douglasinfoweb/BandecoDroid.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iBandeco/iBandeco.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>72CDA8D8-6A21-4650-BB76-890F57013146</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/douglasinfoweb/BandecoDroid.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>72CDA8D8-6A21-4650-BB76-890F57013146</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>72CDA8D8-6A21-4650-BB76-890F57013146</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BandecoDroid</string>
+		</dict>
+	</array>
+</dict>
+</plist>
