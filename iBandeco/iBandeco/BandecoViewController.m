@@ -19,6 +19,7 @@
 
 @implementation BandecoViewController
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -38,9 +39,11 @@
         [self.listaRestaurantesView reloadData];
         [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD dismiss];
         NSLog(@"Error: %@", error);
     }];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -56,11 +59,21 @@
         cell = [[LogoUniversidadeViewCell alloc] init];
     }
     
-    NSString* univCod = (NSString*)self.restaurantesDisponiveis[indexPath.row];
+    //NSString* univCod = (NSString*)self.restaurantesDisponiveis[indexPath.row];
     
-    cell.univSwitch.selected = [ self.restaurantesSelecionados containsObject:univCod];
+    cell.univTick.hidden = YES;
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    LogoUniversidadeViewCell* cell = (LogoUniversidadeViewCell*)[ collectionView cellForItemAtIndexPath:indexPath ];
+    
+    NSString* codigoRestaurante = self.restaurantesDisponiveis[indexPath.row];
+    
+    NSLog(@"%@", codigoRestaurante);
+    cell.univTick.hidden = ! cell.univTick.hidden;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -69,13 +82,7 @@
 }
 
 - (IBAction)doDone:(UIButton *)sender {
-    for (NSUInteger i=0; i < self.restaurantesDisponiveis.count; i++) {
-        NSIndexPath* index = [ NSIndexPath indexPathForItem:i inSection:0];
-        LogoUniversidadeViewCell* cell = (LogoUniversidadeViewCell*)[ self.listaRestaurantesView cellForItemAtIndexPath: index];
-        if (cell && cell.univSwitch.selected) {
-            NSLog(@"%@", self.restaurantesDisponiveis[i]);
-        }
-    }
+
 }
 
 -(NSMutableArray *)restaurantesDisponiveis
