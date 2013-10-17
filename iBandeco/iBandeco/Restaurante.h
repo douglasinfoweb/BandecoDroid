@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Restaurante : NSObject
+@interface Restaurante : NSObject <NSCoding>
 
 @property (strong, nonatomic) NSString* nome;
 
@@ -20,5 +20,8 @@
 
 @property (strong, nonatomic) NSMutableArray* cardapios;
 
+
+//Designated
+- (id)initWithCodigo:(NSString*)codigo;
 
 @end

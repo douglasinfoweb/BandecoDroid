@@ -11,8 +11,12 @@
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
 #import <AFNetworking/AFHTTPRequestOperation.h>
+#import "PrincipalViewController.h"
+#import "BandecoConstantes.h"
 
-@interface BandecoViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ConfiguracoesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property (strong, nonatomic) NSMutableArray*
+restaurantesSelecionados;
 
 @end

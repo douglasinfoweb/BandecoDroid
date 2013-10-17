@@ -15,16 +15,17 @@
 		6E89C5EB180DAD3600DF360E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89C5EA180DAD3600DF360E /* main.m */; };
 		6E89C5EF180DAD3600DF360E /* BandecoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89C5EE180DAD3600DF360E /* BandecoAppDelegate.m */; };
 		6E89C5F2180DAD3600DF360E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E89C5F0180DAD3600DF360E /* Main.storyboard */; };
-		6E89C5F5180DAD3600DF360E /* BandecoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89C5F4180DAD3600DF360E /* BandecoViewController.m */; };
+		6E89C5F5180DAD3600DF360E /* ConfiguracoesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89C5F4180DAD3600DF360E /* ConfiguracoesViewController.m */; };
 		6E89C5F7180DAD3600DF360E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E89C5F6180DAD3600DF360E /* Images.xcassets */; };
 		6E89C5FE180DAD3600DF360E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E89C5FD180DAD3600DF360E /* XCTest.framework */; };
 		6E89C5FF180DAD3600DF360E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E89C5DE180DAD3600DF360E /* Foundation.framework */; };
 		6E89C600180DAD3600DF360E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E89C5E2180DAD3600DF360E /* UIKit.framework */; };
 		6E89C608180DAD3600DF360E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E89C606180DAD3600DF360E /* InfoPlist.strings */; };
 		6E89C60A180DAD3600DF360E /* iBandecoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89C609180DAD3600DF360E /* iBandecoTests.m */; };
+		6E9B2E8818104C3900BD8316 /* PrincipalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B2E8718104C3900BD8316 /* PrincipalViewController.m */; };
+		6E9B2E8F181067CC00BD8316 /* RestauranteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B2E8E181067CC00BD8316 /* RestauranteStorage.m */; };
 		6EEFC595180DAE09000709DB /* Cardapio.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEFC594180DAE09000709DB /* Cardapio.m */; };
 		6EEFC598180DAFE1000709DB /* Restaurante.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEFC597180DAFE1000709DB /* Restaurante.m */; };
-		6EEFC59B180DB18D000709DB /* Preferencias.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEFC59A180DB18D000709DB /* Preferencias.m */; };
 		6EEFC59F180DBD7D000709DB /* LogoUniversidadeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEFC59E180DBD7D000709DB /* LogoUniversidadeViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -51,20 +52,23 @@
 		6E89C5ED180DAD3600DF360E /* BandecoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandecoAppDelegate.h; sourceTree = "<group>"; };
 		6E89C5EE180DAD3600DF360E /* BandecoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandecoAppDelegate.m; sourceTree = "<group>"; };
 		6E89C5F1180DAD3600DF360E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6E89C5F3180DAD3600DF360E /* BandecoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandecoViewController.h; sourceTree = "<group>"; };
-		6E89C5F4180DAD3600DF360E /* BandecoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandecoViewController.m; sourceTree = "<group>"; };
+		6E89C5F3180DAD3600DF360E /* ConfiguracoesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfiguracoesViewController.h; sourceTree = "<group>"; };
+		6E89C5F4180DAD3600DF360E /* ConfiguracoesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfiguracoesViewController.m; sourceTree = "<group>"; };
 		6E89C5F6180DAD3600DF360E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6E89C5FC180DAD3600DF360E /* iBandecoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iBandecoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E89C5FD180DAD3600DF360E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6E89C605180DAD3600DF360E /* iBandecoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iBandecoTests-Info.plist"; sourceTree = "<group>"; };
 		6E89C607180DAD3600DF360E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6E89C609180DAD3600DF360E /* iBandecoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iBandecoTests.m; sourceTree = "<group>"; };
+		6E9B2E8618104C3900BD8316 /* PrincipalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrincipalViewController.h; sourceTree = "<group>"; };
+		6E9B2E8718104C3900BD8316 /* PrincipalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrincipalViewController.m; sourceTree = "<group>"; };
+		6E9B2E891810612500BD8316 /* BandecoConstantes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandecoConstantes.h; sourceTree = "<group>"; };
+		6E9B2E8D181067CC00BD8316 /* RestauranteStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestauranteStorage.h; sourceTree = "<group>"; };
+		6E9B2E8E181067CC00BD8316 /* RestauranteStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestauranteStorage.m; sourceTree = "<group>"; };
 		6EEFC593180DAE09000709DB /* Cardapio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cardapio.h; sourceTree = "<group>"; };
 		6EEFC594180DAE09000709DB /* Cardapio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cardapio.m; sourceTree = "<group>"; };
 		6EEFC596180DAFE1000709DB /* Restaurante.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurante.h; sourceTree = "<group>"; };
 		6EEFC597180DAFE1000709DB /* Restaurante.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurante.m; sourceTree = "<group>"; };
-		6EEFC599180DB18D000709DB /* Preferencias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferencias.h; sourceTree = "<group>"; };
-		6EEFC59A180DB18D000709DB /* Preferencias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferencias.m; sourceTree = "<group>"; };
 		6EEFC59D180DBD7D000709DB /* LogoUniversidadeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoUniversidadeViewCell.h; sourceTree = "<group>"; };
 		6EEFC59E180DBD7D000709DB /* LogoUniversidadeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoUniversidadeViewCell.m; sourceTree = "<group>"; };
 		B8B828A605384726A9C25A0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +139,7 @@
 				6E89C5ED180DAD3600DF360E /* BandecoAppDelegate.h */,
 				6E89C5EE180DAD3600DF360E /* BandecoAppDelegate.m */,
 				6E89C5F6180DAD3600DF360E /* Images.xcassets */,
+				6E9B2E891810612500BD8316 /* BandecoConstantes.h */,
 				6E89C5E5180DAD3600DF360E /* Supporting Files */,
 			);
 			path = iBandeco;
@@ -176,8 +181,6 @@
 				6EEFC594180DAE09000709DB /* Cardapio.m */,
 				6EEFC596180DAFE1000709DB /* Restaurante.h */,
 				6EEFC597180DAFE1000709DB /* Restaurante.m */,
-				6EEFC599180DB18D000709DB /* Preferencias.h */,
-				6EEFC59A180DB18D000709DB /* Preferencias.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -186,10 +189,14 @@
 			isa = PBXGroup;
 			children = (
 				6E89C5F0180DAD3600DF360E /* Main.storyboard */,
-				6E89C5F3180DAD3600DF360E /* BandecoViewController.h */,
-				6E89C5F4180DAD3600DF360E /* BandecoViewController.m */,
+				6E89C5F3180DAD3600DF360E /* ConfiguracoesViewController.h */,
+				6E89C5F4180DAD3600DF360E /* ConfiguracoesViewController.m */,
 				6EEFC59D180DBD7D000709DB /* LogoUniversidadeViewCell.h */,
 				6EEFC59E180DBD7D000709DB /* LogoUniversidadeViewCell.m */,
+				6E9B2E8618104C3900BD8316 /* PrincipalViewController.h */,
+				6E9B2E8718104C3900BD8316 /* PrincipalViewController.m */,
+				6E9B2E8D181067CC00BD8316 /* RestauranteStorage.h */,
+				6E9B2E8E181067CC00BD8316 /* RestauranteStorage.m */,
 			);
 			name = "view-controller";
 			sourceTree = "<group>";
@@ -329,11 +336,12 @@
 			files = (
 				6EEFC59F180DBD7D000709DB /* LogoUniversidadeViewCell.m in Sources */,
 				6EEFC598180DAFE1000709DB /* Restaurante.m in Sources */,
+				6E9B2E8F181067CC00BD8316 /* RestauranteStorage.m in Sources */,
 				6EEFC595180DAE09000709DB /* Cardapio.m in Sources */,
 				6E89C5EB180DAD3600DF360E /* main.m in Sources */,
 				6E89C5EF180DAD3600DF360E /* BandecoAppDelegate.m in Sources */,
-				6EEFC59B180DB18D000709DB /* Preferencias.m in Sources */,
-				6E89C5F5180DAD3600DF360E /* BandecoViewController.m in Sources */,
+				6E9B2E8818104C3900BD8316 /* PrincipalViewController.m in Sources */,
+				6E89C5F5180DAD3600DF360E /* ConfiguracoesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

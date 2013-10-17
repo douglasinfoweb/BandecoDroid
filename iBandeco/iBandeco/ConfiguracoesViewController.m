@@ -6,18 +6,17 @@
 //  Copyright (c) 2013 Vinícius Daly Felizardo. All rights reserved.
 //
 
-#import "BandecoViewController.h"
+#import "ConfiguracoesViewController.h"
 
-@interface BandecoViewController ()
+@interface ConfiguracoesViewController ()
 
 @property (strong, nonatomic) NSMutableArray* restaurantesDisponiveis;
-@property (strong, nonatomic) NSMutableArray*
-    restaurantesSelecionados;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *listaRestaurantesView;
 
 @end
 
-@implementation BandecoViewController
+@implementation ConfiguracoesViewController
 
 
 - (void)viewDidLoad
@@ -28,7 +27,7 @@
     //Pega todos os restaurantes
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    [manager GET:@"http://bandeco.felizardo.org/json/restaurantes" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+    [manager GET:(BANDECO_SITE @"json/restaurantes") parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
         
         
         for (NSString* rest_codigo in responseObject[@"restaurantes"])
@@ -64,14 +63,17 @@
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *pngFilePath = [NSString stringWithFormat:@"%@/logo_%@.png", docDir, univCod];
     
-    if (![UIImage imageWithContentsOfFile:pngFilePath])
+    UIImage* logoImage = [UIImage imageWithContentsOfFile:pngFilePath];
+    if (!logoImage)
     {
-        [[NSData dataWithData:UIImagePNGRepresentation([UIImage imageWithData:[NSData dataWithContentsOfURL: [NSURL URLWithString:[NSString stringWithFormat:@"http://bandeco.felizardo.org/images/logo_%@.png", univCod]]]])]writeToFile:pngFilePath atomically:YES];
+        //Se nao tiver imagem, baixa e salva.
+        [[NSData dataWithData:UIImagePNGRepresentation([UIImage imageWithData:[NSData dataWithContentsOfURL: [NSURL URLWithString:[NSString stringWithFormat:(BANDECO_SITE @"/images/logo_%@.png"), univCod]]]])]writeToFile:pngFilePath atomically:YES];
+        logoImage = [UIImage imageWithContentsOfFile:pngFilePath];
     }
     
-    cell.univLogo.image = [UIImage imageWithContentsOfFile:pngFilePath];
+    cell.univLogo.image = logoImage;
     
-    cell.univTick.hidden = YES;
+    cell.univTick.hidden = ![self.restaurantesSelecionados containsObject:univCod];
   
     return cell;
 }
@@ -98,9 +100,25 @@
 }
 
 - (IBAction)doDone:(UIButton *)sender {
+    if ([self.restaurantesSelecionados count] > 0) {
+        //Ordena por ordem alfabetica
+        [self.restaurantesSelecionados sortUsingSelector:@selector(compare:)];
+        
+        //Chama SEGUE para view/controller principal
+        [ self performSegueWithIdentifier:@"abrePrincipal" sender:self];
+        //NSLog(@"%@", self.restaurantesSelecionados);
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Selecione ao menos uma universidade." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+}
 
-    NSLog(@"%@", self.restaurantesSelecionados);
-    
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"abrePrincipal"]) {
+        PrincipalViewController* pVC = segue.destinationViewController;
+        pVC.restaurantesSelecionados = self.restaurantesSelecionados;
+    }
 }
 
 -(NSMutableArray *)restaurantesDisponiveis

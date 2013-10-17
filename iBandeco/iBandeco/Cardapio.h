@@ -8,11 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Cardapio : NSObject
+typedef enum {
+    ALMOCO,
+    JANTA
+} Refeicao;
+
+@interface Cardapio : NSObject <NSCoding>
+@property (nonatomic) Refeicao refeicao;
 @property (strong, nonatomic) NSDate* data;
 @property (strong, nonatomic) NSString* pratoPrincipal;
 @property (strong, nonatomic) NSString* pts;
 @property (strong, nonatomic) NSString* salada;
 @property (strong, nonatomic) NSString* sobremesa;
 @property (strong, nonatomic) NSString* suco;
+
+//Designated
+- initComPratoPrincipal:(NSString*)pratoPrincipal
+                ComData:(NSDate*)data
+            ComRefeicao:(Refeicao) refeicao;
 @end
