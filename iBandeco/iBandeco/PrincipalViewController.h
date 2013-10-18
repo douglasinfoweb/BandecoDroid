@@ -15,4 +15,5 @@
 @property (strong, nonatomic) NSArray*
 restaurantesSelecionados;
 
+
 @end

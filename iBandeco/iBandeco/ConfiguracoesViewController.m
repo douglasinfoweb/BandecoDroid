@@ -39,10 +39,18 @@
         [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
-        NSLog(@"Error: %@", error);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível atualizar universidades." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }];
 }
 
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    //Clicou no OK
+    if (buttonIndex == 0) {
+        [ self performSegueWithIdentifier:@"abrePrincipal" sender:self];
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -108,7 +116,7 @@
         [ self performSegueWithIdentifier:@"abrePrincipal" sender:self];
         //NSLog(@"%@", self.restaurantesSelecionados);
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Selecione ao menos uma universidade." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Selecione ao menos uma universidade." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }

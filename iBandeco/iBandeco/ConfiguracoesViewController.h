@@ -14,7 +14,7 @@
 #import "PrincipalViewController.h"
 #import "BandecoConstantes.h"
 
-@interface ConfiguracoesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ConfiguracoesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray*
 restaurantesSelecionados;

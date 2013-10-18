@@ -95,7 +95,6 @@
                           object:self
                         userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"OK", @"Resultado", nil]];
         
-        NSLog(@"Enviado!!!");
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         

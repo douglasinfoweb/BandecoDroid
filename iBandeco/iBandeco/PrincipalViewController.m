@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) NSMutableArray* restaurantes;
 
+@property (atomic) NSUInteger restaurantesToUpdate;
+
 @end
 
 @implementation PrincipalViewController
@@ -31,15 +33,21 @@
 
 -(void) updatedFinished:(NSNotification *)notification
 {
-    NSLog(@"UPDATED FINISHED");
+    self.restaurantesToUpdate--;
+    //Se faltar restaurante para atualizar, nao faz nada
+    if (self.restaurantesToUpdate > 0)
+        return;
+    
     [SVProgressHUD dismiss];
     NSString *string = [[notification userInfo]
                         objectForKey:@"Resultado"];
     if ([string isEqualToString:@"OK"]) {
-        //TODO: Reload view, etc
-        NSLog(@"%@", self.restaurantes);
+        //Salve os cardapios
+        [RestauranteStorage saveRestaurantes:self.restaurantes];
+        
     } else {
-        NSLog(@"Erro!!! NOT COOL");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível atualizar os cardápios." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
     
 }
@@ -57,7 +65,7 @@
             NSMutableArray* selecionadosTemp = [[NSMutableArray alloc] init];
             
             for (Restaurante* r in self.restaurantes) {
-                [selecionadosTemp addObject:r];
+                [selecionadosTemp addObject:r.codigo];
             }
             
             self.restaurantesSelecionados = [selecionadosTemp mutableCopy];
@@ -110,10 +118,11 @@
                                                    object:nil];
         
         [SVProgressHUD showWithStatus:@"Carregando"];
+        
+        self.restaurantesToUpdate = 0;
         for (Restaurante* r in self.restaurantes) {
+            self.restaurantesToUpdate++;
             [ RestauranteStorage atualizaRestaurante:r];
-            
-            NSLog(@"Atualiza %@", r);
         }
     }
 }
@@ -122,7 +131,6 @@
 {
     if ([segue.identifier isEqualToString:@"abreConfig"]) {
         //SEGUE para tela de Configuracoes
-        NSLog(@"Abre config SEGUE!");
         ConfiguracoesViewController* configVC = segue.destinationViewController;
         
         configVC.restaurantesSelecionados = [self.restaurantesSelecionados mutableCopy];
