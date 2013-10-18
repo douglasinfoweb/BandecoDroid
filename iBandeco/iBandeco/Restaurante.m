@@ -53,4 +53,17 @@
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@: %@", self.codigo, self.cardapios];
 }
+
+- (BOOL)temQueAtualizar
+{
+    //TODO: Fzer isso
+    //Codigo java: https://github.com/Felizardo/iBandeco/blob/master/android-client/src/com/douglasinfoweb/bandecodroid/model/Restaurante.java
+    return YES;
+}
+
+-(void)removeCardapiosAntigos
+{
+    //TODO: fazer isso
+}
+
 @end

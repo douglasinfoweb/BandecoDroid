@@ -24,4 +24,8 @@
 //Designated
 - (id)initWithCodigo:(NSString*)codigo;
 
+- (BOOL) temQueAtualizar;
+
+- (void) removeCardapiosAntigos;
+
 @end

@@ -15,6 +15,10 @@
 {
     self = [super init];
     if (self) {
+        if (pratoPrincipal == nil || data == nil) {
+            NSLog(@"Erro ao tentar criar cardapio (Prato: %@ Data: %@)",pratoPrincipal, data);
+            return nil;
+        }
         self.pratoPrincipal = pratoPrincipal;
         self.data = data;
         self.refeicao = refeicao;

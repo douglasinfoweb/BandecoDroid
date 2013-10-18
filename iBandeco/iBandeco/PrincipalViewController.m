@@ -9,14 +9,166 @@
 #import "PrincipalViewController.h"
 
 @interface PrincipalViewController ()
+@property (weak, nonatomic) IBOutlet UINavigationItem *tituloBar;
 
 @property (strong, nonatomic) NSMutableArray* restaurantes;
 
+@property (weak, nonatomic) IBOutlet UITableView *cardapiosTableView;
 @property (atomic) NSUInteger restaurantesToUpdate;
+
+@property (nonatomic) NSUInteger restauranteNaTelaIndex;
 
 @end
 
 @implementation PrincipalViewController
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CardapioTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cardapioTableViewCell" forIndexPath:indexPath];
+    
+    if (!cell) {
+        cell = [[CardapioTableViewCell alloc] init];
+    }
+    
+    
+    Restaurante* restauranteNaTela = self.restaurantes[self.restauranteNaTelaIndex];
+    Cardapio* cardapio = restauranteNaTela.cardapios[indexPath.section];
+    
+    NSInteger rowEquiv = indexPath.row;
+    //Como nem toda row aparece, temos que adicionar as que nao aparecem
+    if (rowEquiv >= 1 && cardapio.suco == nil)
+        rowEquiv++;
+    
+    if (rowEquiv >= 2 && cardapio.sobremesa == nil)
+        rowEquiv++;
+    
+    if (rowEquiv >= 3 && cardapio.salada == nil)
+        rowEquiv++;
+    
+    if (rowEquiv >= 4 && cardapio.pts == nil)
+        rowEquiv++;
+    
+    
+    cell.textView.scrollEnabled = (rowEquiv==0);
+    
+    switch (rowEquiv) {
+        case 0: //Prato principal
+            cell.iconeLabel.text = @"🍗";
+            cell.textView.text = cardapio.pratoPrincipal;
+            break;
+        case 1: //Suco
+            cell.iconeLabel.text = @"🍹";
+            cell.textView.text = cardapio.suco;
+            break;
+        case 2: //Sobremesa
+            cell.iconeLabel.text = @"🍮";
+            cell.textView.text = cardapio.sobremesa;
+            break;
+        case 3: //Salada
+            cell.iconeLabel.text = @"🌿";
+            cell.textView.text = cardapio.salada;
+            break;
+        case 4: //PTS
+            cell.iconeLabel.text = @"🌾";
+            cell.textView.text = cardapio.pts;
+            break;
+    }
+    
+    
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    Restaurante* restauranteNaTela = self.restaurantes[self.restauranteNaTelaIndex];
+    Cardapio* cardapio = restauranteNaTela.cardapios[section];
+    NSInteger subsectionCount = 1;
+    if (cardapio.suco != nil)
+        subsectionCount++;
+    if (cardapio.sobremesa != nil)
+        subsectionCount++;
+    if (cardapio.salada != nil)
+        subsectionCount++;
+    if (cardapio.pts != nil)
+        subsectionCount++;
+        
+    return subsectionCount;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    Restaurante* restauranteNaTela = self.restaurantes[self.restauranteNaTelaIndex];
+    Cardapio* cardapio = restauranteNaTela.cardapios[section];
+    //Pegando refeicao
+    NSString* refeicao;
+    if (cardapio.refeicao == ALMOCO) {
+        refeicao = @"Almoço";
+    } else {
+        refeicao = @"Jantar";
+    }
+    //Pegando dia da semana
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+
+    NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:cardapio.data];
+
+    NSString* diaSemana;
+    
+    switch ([weekdayComponents weekday]) {
+        case 1:
+            diaSemana=@"Domingo";
+            break;
+        case 2:
+            diaSemana=@"Segunda";
+            break;
+        case 3:
+            diaSemana=@"Terça";
+            break;
+        case 4:
+            diaSemana=@"Quarta";
+            break;
+        case 5:
+            diaSemana=@"Quinta";
+            break;
+        case 6:
+            diaSemana=@"Sexta";
+            break;
+        case 7:
+            diaSemana=@"Sábado";
+            break;
+        default:
+            diaSemana=@"Erro data";
+            break;
+    }
+    
+    NSString* titulo = [NSString stringWithFormat:@"%@ - %@", diaSemana, refeicao];
+    return titulo;
+}
+
+- (void) update
+{
+    Restaurante* restauranteNaTela = self.restaurantes[self.restauranteNaTelaIndex];
+    
+    self.tituloBar.leftBarButtonItem.enabled = !(self.restauranteNaTelaIndex == 0);
+    
+    self.tituloBar.rightBarButtonItem.enabled = !(self.restauranteNaTelaIndex == [self.restaurantes count] - 1);
+    
+    [self.cardapiosTableView reloadData];
+    
+    self.tituloBar.title = restauranteNaTela.nome;
+}
+- (IBAction)nextBtnClick:(UIBarButtonItem *)sender {
+    self.restauranteNaTelaIndex++;
+    [self update];
+}
+- (IBAction)backBtnClick:(UIBarButtonItem *)sender {
+    self.restauranteNaTelaIndex--;
+    [self update];
+}
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,14 +183,20 @@
 }
 
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    Restaurante* restauranteSelecionado = self.restaurantes[self.restauranteNaTelaIndex];
+    return [ restauranteSelecionado.cardapios count ];
+}
+
 -(void) updatedFinished:(NSNotification *)notification
 {
     self.restaurantesToUpdate--;
+    
     //Se faltar restaurante para atualizar, nao faz nada
     if (self.restaurantesToUpdate > 0)
         return;
     
-    [SVProgressHUD dismiss];
     NSString *string = [[notification userInfo]
                         objectForKey:@"Resultado"];
     if ([string isEqualToString:@"OK"]) {
@@ -49,6 +207,8 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível atualizar os cardápios." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
+    [self update];
+    [SVProgressHUD dismiss];
     
 }
 
@@ -57,6 +217,7 @@
     [super viewDidLoad];
     //Carrega restaurantes serializados, se possivel
     self.restaurantes = [ RestauranteStorage loadRestaurantes ];
+    self.restauranteNaTelaIndex=0;
     
     //Se tiver restaurantes carregados mas nao tiver selecionados
     if (self.restaurantes && !self.restaurantesSelecionados) {
@@ -87,6 +248,8 @@
             }
         }
         self.restaurantes = novosRestaurantes;
+        
+        [self update];
     
     }
 }
@@ -95,7 +258,7 @@
 - (Restaurante*)restauranteComCodigo: (NSString*)codigo
 {
     for (Restaurante* r in self.restaurantes) {
-        if ([r.nome isEqualToString:codigo])
+        if ([r.codigo isEqualToString:codigo])
              return r;
     }
     return nil;
@@ -108,6 +271,7 @@
     if ([self.restaurantesSelecionados count] == 0) {
         [ self performSegueWithIdentifier:@"abreConfig" sender:self];
     } else {
+        
         //Verifica se tem que atualizar algum restaurante
         // ... e atualiza ...
         //*Restaurantes "em branco" serao atualizados*
@@ -119,10 +283,19 @@
         
         [SVProgressHUD showWithStatus:@"Carregando"];
         
+        
         self.restaurantesToUpdate = 0;
+        bool temQueAtualizar = NO;
         for (Restaurante* r in self.restaurantes) {
-            self.restaurantesToUpdate++;
-            [ RestauranteStorage atualizaRestaurante:r];
+            [ r removeCardapiosAntigos ];
+            if ([ r temQueAtualizar]) {
+                temQueAtualizar = YES;
+                self.restaurantesToUpdate++;
+                [ RestauranteStorage atualizaRestaurante:r];
+            }
+        }
+        if (temQueAtualizar) {
+            [SVProgressHUD showWithStatus:@"Carregando"];
         }
     }
 }

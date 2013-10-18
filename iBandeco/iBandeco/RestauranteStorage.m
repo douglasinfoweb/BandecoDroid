@@ -66,6 +66,9 @@
             
                  Cardapio * cardapio = [[Cardapio alloc] initComPratoPrincipal:cardapioDict[@"pratoPrincipal"] ComData:data ComRefeicao:refeicao];
             
+            if (!cardapio)
+                continue;
+            
             if ([ cardapioDict objectForKey:@"pts"]) {
                 cardapio.pts = cardapioDict[@"pts"];
             }

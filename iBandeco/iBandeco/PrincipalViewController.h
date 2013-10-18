@@ -10,7 +10,8 @@
 #import "ConfiguracoesViewController.h"
 #import "Restaurante.h"
 #import "RestauranteStorage.h"
-@interface PrincipalViewController : UIViewController
+#import "CardapioTableViewCell.h"
+@interface PrincipalViewController : UIViewController < UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSArray*
 restaurantesSelecionados;
