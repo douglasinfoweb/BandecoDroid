@@ -56,14 +56,54 @@
 
 - (BOOL)temQueAtualizar
 {
-    //TODO: Fzer isso
-    //Codigo java: https://github.com/Felizardo/iBandeco/blob/master/android-client/src/com/douglasinfoweb/bandecodroid/model/Restaurante.java
+    NSDate* now = [NSDate date];
+    
+    
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    
+    NSDateComponents* nowComponents = [gregorian components:(NSCalendarUnitWeekOfYear|NSCalendarUnitYear) fromDate:now];
+    
+    if (self.cardapios.count >= 1) {
+        Cardapio* ultimoCardapio = self.cardapios.lastObject;
+        NSDateComponents* ultimoCardapioComponents = [gregorian components:(NSCalendarUnitWeekOfYear|NSCalendarUnitYear) fromDate:ultimoCardapio.data];
+        
+        if (ultimoCardapioComponents.weekOfYear >= nowComponents.weekOfYear &&
+            ultimoCardapioComponents.year >= nowComponents.year) {
+            return NO;
+        }
+    }
+    
     return YES;
 }
 
 -(void)removeCardapiosAntigos
 {
-    //TODO: fazer isso
+    NSDate* now = [NSDate date];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    for (Cardapio* c in [self.cardapios copy]) {
+        NSDateComponents* componente= [[NSDateComponents alloc] init];
+        
+        switch (c.refeicao) {
+            case ALMOCO:
+                componente.hour = 15;
+                break;
+            case JANTA:
+                componente.hour = 22;
+                break;
+        }
+        
+        NSDate* dataCardapio = [ gregorian dateByAddingComponents:componente toDate: c.data options:0];
+        //Se now eh depois do dataCardapio
+        if ([now compare: dataCardapio] == NSOrderedDescending) {
+            //Remove cardapio
+            [ self.cardapios removeObject:c];
+        }
+    }
 }
 
 @end

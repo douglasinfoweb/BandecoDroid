@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Cardapio.h"
 
 @interface Restaurante : NSObject <NSCoding>
 

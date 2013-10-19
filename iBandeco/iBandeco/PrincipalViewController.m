@@ -263,7 +263,21 @@
     }
     return nil;
 }
+- (IBAction)atualizarBtnClick:(UIBarButtonItem *)sender {
+    
+    [SVProgressHUD showWithStatus:@"Carregando"];
+    self.restaurantesToUpdate = 0;
+    for (Restaurante* r in self.restaurantes) {
+        self.restaurantesToUpdate++;
+        [ RestauranteStorage atualizaRestaurante:r];
+    }
+}
 
+- (IBAction)siteBtnClick:(UIBarButtonItem *)sender {
+    Restaurante* restauranteSelecionado = self.restaurantes[self.restauranteNaTelaIndex];
+    NSURL *url = [NSURL URLWithString:restauranteSelecionado.site];
+    [[UIApplication sharedApplication] openURL:url];
+}
 
 
 - (void)viewDidAppear:(BOOL)animated
@@ -281,8 +295,6 @@
                                                      name:@"UpdatedFinished"
                                                    object:nil];
         
-        [SVProgressHUD showWithStatus:@"Carregando"];
-        
         
         self.restaurantesToUpdate = 0;
         bool temQueAtualizar = NO;
@@ -296,6 +308,9 @@
         }
         if (temQueAtualizar) {
             [SVProgressHUD showWithStatus:@"Carregando"];
+        } else {
+            //Salve os cardapios
+            [RestauranteStorage saveRestaurantes:self.restaurantes];
         }
     }
 }
