@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		364E6F1768C045FDB02BE7AF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B828A605384726A9C25A0A /* libPods.a */; };
+		6E89C5DF180DAD3600DF360E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E89C5DE180DAD3600DF360E /* Foundation.framework */; };
+		6E89C5E1180DAD3600DF360E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E89C5E0180DAD3600DF360E /* CoreGraphics.framework */; };
+		6E89C5E3180DAD3600DF360E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E89C5E2180DAD3600DF360E /* UIKit.framework */; };
+		6E89C5E9180DAD3600DF360E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E89C5E7180DAD3600DF360E /* InfoPlist.strings */; };
+		6E89C5EB180DAD3600DF360E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89C5EA180DAD3600DF360E /* main.m */; };
+		6E89C5EF180DAD3600DF360E /* BandecoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89C5EE180DAD3600DF360E /* BandecoAppDelegate.m */; };
+		6E89C5F2180DAD3600DF360E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E89C5F0180DAD3600DF360E /* Main.storyboard */; };
+		6E89C5F5180DAD3600DF360E /* ConfiguracoesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89C5F4180DAD3600DF360E /* ConfiguracoesViewController.m */; };
+		6E89C5F7180DAD3600DF360E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E89C5F6180DAD3600DF360E /* Images.xcassets */; };
+		6E89C5FE180DAD3600DF360E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E89C5FD180DAD3600DF360E /* XCTest.framework */; };
+		6E89C5FF180DAD3600DF360E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E89C5DE180DAD3600DF360E /* Foundation.framework */; };
+		6E89C600180DAD3600DF360E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E89C5E2180DAD3600DF360E /* UIKit.framework */; };
+		6E89C608180DAD3600DF360E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E89C606180DAD3600DF360E /* InfoPlist.strings */; };
+		6E89C60A180DAD3600DF360E /* iBandecoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89C609180DAD3600DF360E /* iBandecoTests.m */; };
+		6E964E7C181171510008ADD6 /* CardapioTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E964E7B181171510008ADD6 /* CardapioTableViewCell.m */; };
+		6E9B2E8818104C3900BD8316 /* PrincipalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B2E8718104C3900BD8316 /* PrincipalViewController.m */; };
+		6E9B2E8F181067CC00BD8316 /* RestauranteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B2E8E181067CC00BD8316 /* RestauranteStorage.m */; };
+		6EEFC595180DAE09000709DB /* Cardapio.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEFC594180DAE09000709DB /* Cardapio.m */; };
+		6EEFC598180DAFE1000709DB /* Restaurante.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEFC597180DAFE1000709DB /* Restaurante.m */; };
+		6EEFC59F180DBD7D000709DB /* LogoUniversidadeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEFC59E180DBD7D000709DB /* LogoUniversidadeViewCell.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E89C601180DAD3600DF360E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E89C5D3180DAD3600DF360E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E89C5DA180DAD3600DF360E;
+			remoteInfo = iBandeco;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5973562CDE094833BAA0A3D0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		6E89C5DB180DAD3600DF360E /* iBandeco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBandeco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E89C5DE180DAD3600DF360E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6E89C5E0180DAD3600DF360E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6E89C5E2180DAD3600DF360E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6E89C5E6180DAD3600DF360E /* iBandeco-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iBandeco-Info.plist"; sourceTree = "<group>"; };
+		6E89C5E8180DAD3600DF360E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6E89C5EA180DAD3600DF360E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6E89C5EC180DAD3600DF360E /* iBandeco-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iBandeco-Prefix.pch"; sourceTree = "<group>"; };
+		6E89C5ED180DAD3600DF360E /* BandecoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandecoAppDelegate.h; sourceTree = "<group>"; };
+		6E89C5EE180DAD3600DF360E /* BandecoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandecoAppDelegate.m; sourceTree = "<group>"; };
+		6E89C5F1180DAD3600DF360E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E89C5F3180DAD3600DF360E /* ConfiguracoesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfiguracoesViewController.h; sourceTree = "<group>"; };
+		6E89C5F4180DAD3600DF360E /* ConfiguracoesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfiguracoesViewController.m; sourceTree = "<group>"; };
+		6E89C5F6180DAD3600DF360E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6E89C5FC180DAD3600DF360E /* iBandecoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iBandecoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E89C5FD180DAD3600DF360E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6E89C605180DAD3600DF360E /* iBandecoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iBandecoTests-Info.plist"; sourceTree = "<group>"; };
+		6E89C607180DAD3600DF360E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6E89C609180DAD3600DF360E /* iBandecoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iBandecoTests.m; sourceTree = "<group>"; };
+		6E964E7A181171510008ADD6 /* CardapioTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardapioTableViewCell.h; sourceTree = "<group>"; };
+		6E964E7B181171510008ADD6 /* CardapioTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardapioTableViewCell.m; sourceTree = "<group>"; };
+		6E9B2E8618104C3900BD8316 /* PrincipalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrincipalViewController.h; sourceTree = "<group>"; };
+		6E9B2E8718104C3900BD8316 /* PrincipalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrincipalViewController.m; sourceTree = "<group>"; };
+		6E9B2E891810612500BD8316 /* BandecoConstantes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandecoConstantes.h; sourceTree = "<group>"; };
+		6E9B2E8D181067CC00BD8316 /* RestauranteStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestauranteStorage.h; sourceTree = "<group>"; };
+		6E9B2E8E181067CC00BD8316 /* RestauranteStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestauranteStorage.m; sourceTree = "<group>"; };
+		6EEFC593180DAE09000709DB /* Cardapio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cardapio.h; sourceTree = "<group>"; };
+		6EEFC594180DAE09000709DB /* Cardapio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cardapio.m; sourceTree = "<group>"; };
+		6EEFC596180DAFE1000709DB /* Restaurante.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurante.h; sourceTree = "<group>"; };
+		6EEFC597180DAFE1000709DB /* Restaurante.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurante.m; sourceTree = "<group>"; };
+		6EEFC59D180DBD7D000709DB /* LogoUniversidadeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoUniversidadeViewCell.h; sourceTree = "<group>"; };
+		6EEFC59E180DBD7D000709DB /* LogoUniversidadeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoUniversidadeViewCell.m; sourceTree = "<group>"; };
+		B8B828A605384726A9C25A0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E89C5D8180DAD3600DF360E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E89C5E1180DAD3600DF360E /* CoreGraphics.framework in Frameworks */,
+				6E89C5E3180DAD3600DF360E /* UIKit.framework in Frameworks */,
+				6E89C5DF180DAD3600DF360E /* Foundation.framework in Frameworks */,
+				364E6F1768C045FDB02BE7AF /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E89C5F9180DAD3600DF360E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E89C5FE180DAD3600DF360E /* XCTest.framework in Frameworks */,
+				6E89C600180DAD3600DF360E /* UIKit.framework in Frameworks */,
+				6E89C5FF180DAD3600DF360E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E89C5D2180DAD3600DF360E = {
+			isa = PBXGroup;
+			children = (
+				6E89C5E4180DAD3600DF360E /* iBandeco */,
+				6E89C603180DAD3600DF360E /* iBandecoTests */,
+				6E89C5DD180DAD3600DF360E /* Frameworks */,
+				6E89C5DC180DAD3600DF360E /* Products */,
+				5973562CDE094833BAA0A3D0 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		6E89C5DC180DAD3600DF360E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E89C5DB180DAD3600DF360E /* iBandeco.app */,
+				6E89C5FC180DAD3600DF360E /* iBandecoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E89C5DD180DAD3600DF360E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E89C5DE180DAD3600DF360E /* Foundation.framework */,
+				6E89C5E0180DAD3600DF360E /* CoreGraphics.framework */,
+				6E89C5E2180DAD3600DF360E /* UIKit.framework */,
+				6E89C5FD180DAD3600DF360E /* XCTest.framework */,
+				B8B828A605384726A9C25A0A /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E89C5E4180DAD3600DF360E /* iBandeco */ = {
+			isa = PBXGroup;
+			children = (
+				6EEFC59C180DBD3B000709DB /* view-controller */,
+				6EEFC592180DADB8000709DB /* model */,
+				6E89C5ED180DAD3600DF360E /* BandecoAppDelegate.h */,
+				6E89C5EE180DAD3600DF360E /* BandecoAppDelegate.m */,
+				6E89C5F6180DAD3600DF360E /* Images.xcassets */,
+				6E9B2E891810612500BD8316 /* BandecoConstantes.h */,
+				6E89C5E5180DAD3600DF360E /* Supporting Files */,
+			);
+			path = iBandeco;
+			sourceTree = "<group>";
+		};
+		6E89C5E5180DAD3600DF360E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E89C5E6180DAD3600DF360E /* iBandeco-Info.plist */,
+				6E89C5E7180DAD3600DF360E /* InfoPlist.strings */,
+				6E89C5EA180DAD3600DF360E /* main.m */,
+				6E89C5EC180DAD3600DF360E /* iBandeco-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E89C603180DAD3600DF360E /* iBandecoTests */ = {
+			isa = PBXGroup;
+			children = (
+				6E89C609180DAD3600DF360E /* iBandecoTests.m */,
+				6E89C604180DAD3600DF360E /* Supporting Files */,
+			);
+			path = iBandecoTests;
+			sourceTree = "<group>";
+		};
+		6E89C604180DAD3600DF360E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E89C605180DAD3600DF360E /* iBandecoTests-Info.plist */,
+				6E89C606180DAD3600DF360E /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6EEFC592180DADB8000709DB /* model */ = {
+			isa = PBXGroup;
+			children = (
+				6EEFC593180DAE09000709DB /* Cardapio.h */,
+				6EEFC594180DAE09000709DB /* Cardapio.m */,
+				6EEFC596180DAFE1000709DB /* Restaurante.h */,
+				6EEFC597180DAFE1000709DB /* Restaurante.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		6EEFC59C180DBD3B000709DB /* view-controller */ = {
+			isa = PBXGroup;
+			children = (
+				6E89C5F0180DAD3600DF360E /* Main.storyboard */,
+				6E89C5F3180DAD3600DF360E /* ConfiguracoesViewController.h */,
+				6E89C5F4180DAD3600DF360E /* ConfiguracoesViewController.m */,
+				6EEFC59D180DBD7D000709DB /* LogoUniversidadeViewCell.h */,
+				6EEFC59E180DBD7D000709DB /* LogoUniversidadeViewCell.m */,
+				6E9B2E8618104C3900BD8316 /* PrincipalViewController.h */,
+				6E9B2E8718104C3900BD8316 /* PrincipalViewController.m */,
+				6E9B2E8D181067CC00BD8316 /* RestauranteStorage.h */,
+				6E9B2E8E181067CC00BD8316 /* RestauranteStorage.m */,
+				6E964E7A181171510008ADD6 /* CardapioTableViewCell.h */,
+				6E964E7B181171510008ADD6 /* CardapioTableViewCell.m */,
+			);
+			name = "view-controller";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E89C5DA180DAD3600DF360E /* iBandeco */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E89C60D180DAD3600DF360E /* Build configuration list for PBXNativeTarget "iBandeco" */;
+			buildPhases = (
+				3B0E487BCC7644E0BD509577 /* Check Pods Manifest.lock */,
+				6E89C5D7180DAD3600DF360E /* Sources */,
+				6E89C5D8180DAD3600DF360E /* Frameworks */,
+				6E89C5D9180DAD3600DF360E /* Resources */,
+				477027FC84AD45418256A059 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iBandeco;
+			productName = iBandeco;
+			productReference = 6E89C5DB180DAD3600DF360E /* iBandeco.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6E89C5FB180DAD3600DF360E /* iBandecoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E89C610180DAD3600DF360E /* Build configuration list for PBXNativeTarget "iBandecoTests" */;
+			buildPhases = (
+				6E89C5F8180DAD3600DF360E /* Sources */,
+				6E89C5F9180DAD3600DF360E /* Frameworks */,
+				6E89C5FA180DAD3600DF360E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E89C602180DAD3600DF360E /* PBXTargetDependency */,
+			);
+			name = iBandecoTests;
+			productName = iBandecoTests;
+			productReference = 6E89C5FC180DAD3600DF360E /* iBandecoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E89C5D3180DAD3600DF360E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Bandeco;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Vinícius Daly Felizardo";
+				TargetAttributes = {
+					6E89C5FB180DAD3600DF360E = {
+						TestTargetID = 6E89C5DA180DAD3600DF360E;
+					};
+				};
+			};
+			buildConfigurationList = 6E89C5D6180DAD3600DF360E /* Build configuration list for PBXProject "iBandeco" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6E89C5D2180DAD3600DF360E;
+			productRefGroup = 6E89C5DC180DAD3600DF360E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E89C5DA180DAD3600DF360E /* iBandeco */,
+				6E89C5FB180DAD3600DF360E /* iBandecoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E89C5D9180DAD3600DF360E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E89C5F7180DAD3600DF360E /* Images.xcassets in Resources */,
+				6E89C5E9180DAD3600DF360E /* InfoPlist.strings in Resources */,
+				6E89C5F2180DAD3600DF360E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E89C5FA180DAD3600DF360E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E89C608180DAD3600DF360E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B0E487BCC7644E0BD509577 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		477027FC84AD45418256A059 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E89C5D7180DAD3600DF360E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E964E7C181171510008ADD6 /* CardapioTableViewCell.m in Sources */,
+				6EEFC59F180DBD7D000709DB /* LogoUniversidadeViewCell.m in Sources */,
+				6EEFC598180DAFE1000709DB /* Restaurante.m in Sources */,
+				6E9B2E8F181067CC00BD8316 /* RestauranteStorage.m in Sources */,
+				6EEFC595180DAE09000709DB /* Cardapio.m in Sources */,
+				6E89C5EB180DAD3600DF360E /* main.m in Sources */,
+				6E89C5EF180DAD3600DF360E /* BandecoAppDelegate.m in Sources */,
+				6E9B2E8818104C3900BD8316 /* PrincipalViewController.m in Sources */,
+				6E89C5F5180DAD3600DF360E /* ConfiguracoesViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E89C5F8180DAD3600DF360E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E89C60A180DAD3600DF360E /* iBandecoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6E89C602180DAD3600DF360E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E89C5DA180DAD3600DF360E /* iBandeco */;
+			targetProxy = 6E89C601180DAD3600DF360E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6E89C5E7180DAD3600DF360E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E89C5E8180DAD3600DF360E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6E89C5F0180DAD3600DF360E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E89C5F1180DAD3600DF360E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6E89C606180DAD3600DF360E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E89C607180DAD3600DF360E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E89C60B180DAD3600DF360E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6E89C60C180DAD3600DF360E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E89C60E180DAD3600DF360E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5973562CDE094833BAA0A3D0 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iBandeco/iBandeco-Prefix.pch";
+				INFOPLIST_FILE = "iBandeco/iBandeco-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6E89C60F180DAD3600DF360E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5973562CDE094833BAA0A3D0 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iBandeco/iBandeco-Prefix.pch";
+				INFOPLIST_FILE = "iBandeco/iBandeco-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6E89C611180DAD3600DF360E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iBandeco.app/iBandeco";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iBandeco/iBandeco-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "iBandecoTests/iBandecoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		6E89C612180DAD3600DF360E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iBandeco.app/iBandeco";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iBandeco/iBandeco-Prefix.pch";
+				INFOPLIST_FILE = "iBandecoTests/iBandecoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E89C5D6180DAD3600DF360E /* Build configuration list for PBXProject "iBandeco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E89C60B180DAD3600DF360E /* Debug */,
+				6E89C60C180DAD3600DF360E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E89C60D180DAD3600DF360E /* Build configuration list for PBXNativeTarget "iBandeco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E89C60E180DAD3600DF360E /* Debug */,
+				6E89C60F180DAD3600DF360E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E89C610180DAD3600DF360E /* Build configuration list for PBXNativeTarget "iBandecoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E89C611180DAD3600DF360E /* Debug */,
+				6E89C612180DAD3600DF360E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E89C5D3180DAD3600DF360E /* Project object */;
+}

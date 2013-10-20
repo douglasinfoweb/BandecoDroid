@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3CC7705217FDC45100DF4F37 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC7705117FDC45100DF4F37 /* Foundation.framework */; };
+		3CC7705417FDC45100DF4F37 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC7705317FDC45100DF4F37 /* CoreGraphics.framework */; };
+		3CC7705617FDC45100DF4F37 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC7705517FDC45100DF4F37 /* UIKit.framework */; };
+		3CC7705C17FDC45100DF4F37 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CC7705A17FDC45100DF4F37 /* InfoPlist.strings */; };
+		3CC7705E17FDC45100DF4F37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC7705D17FDC45100DF4F37 /* main.m */; };
+		3CC7706217FDC45100DF4F37 /* BandecoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC7706117FDC45100DF4F37 /* BandecoAppDelegate.m */; };
+		3CC7706517FDC45100DF4F37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC7706317FDC45100DF4F37 /* Main.storyboard */; };
+		3CC7706817FDC45100DF4F37 /* BandecoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC7706717FDC45100DF4F37 /* BandecoViewController.m */; };
+		3CC7706A17FDC45100DF4F37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CC7706917FDC45100DF4F37 /* Images.xcassets */; };
+		3CC7707117FDC45100DF4F37 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC7707017FDC45100DF4F37 /* XCTest.framework */; };
+		3CC7707217FDC45100DF4F37 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC7705117FDC45100DF4F37 /* Foundation.framework */; };
+		3CC7707317FDC45100DF4F37 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC7705517FDC45100DF4F37 /* UIKit.framework */; };
+		3CC7707B17FDC45100DF4F37 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CC7707917FDC45100DF4F37 /* InfoPlist.strings */; };
+		3CC7707D17FDC45100DF4F37 /* iBandecoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC7707C17FDC45100DF4F37 /* iBandecoTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3CC7707417FDC45100DF4F37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CC7704617FDC45100DF4F37 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3CC7704D17FDC45100DF4F37;
+			remoteInfo = iBandeco;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3CC7704E17FDC45100DF4F37 /* iBandeco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBandeco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CC7705117FDC45100DF4F37 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3CC7705317FDC45100DF4F37 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3CC7705517FDC45100DF4F37 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3CC7705917FDC45100DF4F37 /* iBandeco-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iBandeco-Info.plist"; sourceTree = "<group>"; };
+		3CC7705B17FDC45100DF4F37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3CC7705D17FDC45100DF4F37 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3CC7705F17FDC45100DF4F37 /* iBandeco-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iBandeco-Prefix.pch"; sourceTree = "<group>"; };
+		3CC7706017FDC45100DF4F37 /* BandecoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandecoAppDelegate.h; sourceTree = "<group>"; };
+		3CC7706117FDC45100DF4F37 /* BandecoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandecoAppDelegate.m; sourceTree = "<group>"; };
+		3CC7706417FDC45100DF4F37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3CC7706617FDC45100DF4F37 /* BandecoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandecoViewController.h; sourceTree = "<group>"; };
+		3CC7706717FDC45100DF4F37 /* BandecoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandecoViewController.m; sourceTree = "<group>"; };
+		3CC7706917FDC45100DF4F37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3CC7706F17FDC45100DF4F37 /* iBandecoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iBandecoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CC7707017FDC45100DF4F37 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		3CC7707817FDC45100DF4F37 /* iBandecoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iBandecoTests-Info.plist"; sourceTree = "<group>"; };
+		3CC7707A17FDC45100DF4F37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3CC7707C17FDC45100DF4F37 /* iBandecoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iBandecoTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3CC7704B17FDC45100DF4F37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CC7705417FDC45100DF4F37 /* CoreGraphics.framework in Frameworks */,
+				3CC7705617FDC45100DF4F37 /* UIKit.framework in Frameworks */,
+				3CC7705217FDC45100DF4F37 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CC7706C17FDC45100DF4F37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CC7707117FDC45100DF4F37 /* XCTest.framework in Frameworks */,
+				3CC7707317FDC45100DF4F37 /* UIKit.framework in Frameworks */,
+				3CC7707217FDC45100DF4F37 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3CC7704517FDC45100DF4F37 = {
+			isa = PBXGroup;
+			children = (
+				3CC7705717FDC45100DF4F37 /* iBandeco */,
+				3CC7707617FDC45100DF4F37 /* iBandecoTests */,
+				3CC7705017FDC45100DF4F37 /* Frameworks */,
+				3CC7704F17FDC45100DF4F37 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3CC7704F17FDC45100DF4F37 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3CC7704E17FDC45100DF4F37 /* iBandeco.app */,
+				3CC7706F17FDC45100DF4F37 /* iBandecoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3CC7705017FDC45100DF4F37 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CC7705117FDC45100DF4F37 /* Foundation.framework */,
+				3CC7705317FDC45100DF4F37 /* CoreGraphics.framework */,
+				3CC7705517FDC45100DF4F37 /* UIKit.framework */,
+				3CC7707017FDC45100DF4F37 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3CC7705717FDC45100DF4F37 /* iBandeco */ = {
+			isa = PBXGroup;
+			children = (
+				3CC7706017FDC45100DF4F37 /* BandecoAppDelegate.h */,
+				3CC7706117FDC45100DF4F37 /* BandecoAppDelegate.m */,
+				3CC7706317FDC45100DF4F37 /* Main.storyboard */,
+				3CC7706617FDC45100DF4F37 /* BandecoViewController.h */,
+				3CC7706717FDC45100DF4F37 /* BandecoViewController.m */,
+				3CC7706917FDC45100DF4F37 /* Images.xcassets */,
+				3CC7705817FDC45100DF4F37 /* Supporting Files */,
+			);
+			path = iBandeco;
+			sourceTree = "<group>";
+		};
+		3CC7705817FDC45100DF4F37 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3CC7705917FDC45100DF4F37 /* iBandeco-Info.plist */,
+				3CC7705A17FDC45100DF4F37 /* InfoPlist.strings */,
+				3CC7705D17FDC45100DF4F37 /* main.m */,
+				3CC7705F17FDC45100DF4F37 /* iBandeco-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3CC7707617FDC45100DF4F37 /* iBandecoTests */ = {
+			isa = PBXGroup;
+			children = (
+				3CC7707C17FDC45100DF4F37 /* iBandecoTests.m */,
+				3CC7707717FDC45100DF4F37 /* Supporting Files */,
+			);
+			path = iBandecoTests;
+			sourceTree = "<group>";
+		};
+		3CC7707717FDC45100DF4F37 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3CC7707817FDC45100DF4F37 /* iBandecoTests-Info.plist */,
+				3CC7707917FDC45100DF4F37 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3CC7704D17FDC45100DF4F37 /* iBandeco */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CC7708017FDC45100DF4F37 /* Build configuration list for PBXNativeTarget "iBandeco" */;
+			buildPhases = (
+				3CC7704A17FDC45100DF4F37 /* Sources */,
+				3CC7704B17FDC45100DF4F37 /* Frameworks */,
+				3CC7704C17FDC45100DF4F37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iBandeco;
+			productName = iBandeco;
+			productReference = 3CC7704E17FDC45100DF4F37 /* iBandeco.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3CC7706E17FDC45100DF4F37 /* iBandecoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CC7708317FDC45100DF4F37 /* Build configuration list for PBXNativeTarget "iBandecoTests" */;
+			buildPhases = (
+				3CC7706B17FDC45100DF4F37 /* Sources */,
+				3CC7706C17FDC45100DF4F37 /* Frameworks */,
+				3CC7706D17FDC45100DF4F37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3CC7707517FDC45100DF4F37 /* PBXTargetDependency */,
+			);
+			name = iBandecoTests;
+			productName = iBandecoTests;
+			productReference = 3CC7706F17FDC45100DF4F37 /* iBandecoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3CC7704617FDC45100DF4F37 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Bandeco;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Vinicius Daly Felizardo";
+				TargetAttributes = {
+					3CC7706E17FDC45100DF4F37 = {
+						TestTargetID = 3CC7704D17FDC45100DF4F37;
+					};
+				};
+			};
+			buildConfigurationList = 3CC7704917FDC45100DF4F37 /* Build configuration list for PBXProject "iBandeco" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3CC7704517FDC45100DF4F37;
+			productRefGroup = 3CC7704F17FDC45100DF4F37 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3CC7704D17FDC45100DF4F37 /* iBandeco */,
+				3CC7706E17FDC45100DF4F37 /* iBandecoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3CC7704C17FDC45100DF4F37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CC7706A17FDC45100DF4F37 /* Images.xcassets in Resources */,
+				3CC7705C17FDC45100DF4F37 /* InfoPlist.strings in Resources */,
+				3CC7706517FDC45100DF4F37 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CC7706D17FDC45100DF4F37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CC7707B17FDC45100DF4F37 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3CC7704A17FDC45100DF4F37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CC7705E17FDC45100DF4F37 /* main.m in Sources */,
+				3CC7706217FDC45100DF4F37 /* BandecoAppDelegate.m in Sources */,
+				3CC7706817FDC45100DF4F37 /* BandecoViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CC7706B17FDC45100DF4F37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CC7707D17FDC45100DF4F37 /* iBandecoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3CC7707517FDC45100DF4F37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3CC7704D17FDC45100DF4F37 /* iBandeco */;
+			targetProxy = 3CC7707417FDC45100DF4F37 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3CC7705A17FDC45100DF4F37 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CC7705B17FDC45100DF4F37 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3CC7706317FDC45100DF4F37 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CC7706417FDC45100DF4F37 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3CC7707917FDC45100DF4F37 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CC7707A17FDC45100DF4F37 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3CC7707E17FDC45100DF4F37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3CC7707F17FDC45100DF4F37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3CC7708117FDC45100DF4F37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iBandeco/iBandeco-Prefix.pch";
+				INFOPLIST_FILE = "iBandeco/iBandeco-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3CC7708217FDC45100DF4F37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iBandeco/iBandeco-Prefix.pch";
+				INFOPLIST_FILE = "iBandeco/iBandeco-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		3CC7708417FDC45100DF4F37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iBandeco.app/iBandeco";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iBandeco/iBandeco-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "iBandecoTests/iBandecoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		3CC7708517FDC45100DF4F37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iBandeco.app/iBandeco";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iBandeco/iBandeco-Prefix.pch";
+				INFOPLIST_FILE = "iBandecoTests/iBandecoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3CC7704917FDC45100DF4F37 /* Build configuration list for PBXProject "iBandeco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CC7707E17FDC45100DF4F37 /* Debug */,
+				3CC7707F17FDC45100DF4F37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3CC7708017FDC45100DF4F37 /* Build configuration list for PBXNativeTarget "iBandeco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CC7708117FDC45100DF4F37 /* Debug */,
+				3CC7708217FDC45100DF4F37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3CC7708317FDC45100DF4F37 /* Build configuration list for PBXNativeTarget "iBandecoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CC7708417FDC45100DF4F37 /* Debug */,
+				3CC7708517FDC45100DF4F37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3CC7704617FDC45100DF4F37 /* Project object */;
+}
