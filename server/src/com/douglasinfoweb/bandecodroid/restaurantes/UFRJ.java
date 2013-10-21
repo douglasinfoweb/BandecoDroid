@@ -29,47 +29,46 @@ public class UFRJ extends Restaurante {
 		//String URL = "http://www.felizardo.me/cardapio_ru.htm";
 		Document doc = Jsoup.connect(URL).userAgent("Mozilla").timeout(30 * 1000).header("Accept", "text/html").get();
 		ArrayList<Cardapio> cardapios=new ArrayList<Cardapio>();;
+		
+		int semana;
+		
+		
+		//Cria todos os cardapios com data
+		for (Element p : doc.select("p")) {
+			if (p.text().contains("Atualizado em")) {
+				cardapios=new ArrayList<Cardapio>();
+				String texto = Util.removerEspacosDuplicados(p.text().toLowerCase(Util.getBRLocale()));
+				String[] splitedData = texto.split(" ");
+				
+				DateTime ultimaData = Util.str2date(splitedData[2]);				
+				semana = ultimaData.getWeekOfWeekyear();
+				
+				//Cria cardapios da semana
+				for (int i=0; i<7; i++) {
+					Cardapio c = new Cardapio();
+					Cardapio c2 = new Cardapio();
+					
+					MutableDateTime data = new MutableDateTime();
+					data.setDayOfWeek(i+1);
+					data.setWeekOfWeekyear(semana);
+					data.setYear(DateTime.now().getYear());
+					c.setData(data.toDateTime());
+					c2.setData(data.toDateTime());
+					//Almoco
+					cardapios.add(c);
+					//Jantar
+					cardapios.add(c2);
+				}
+				
+			}
+		}
+		
+		
 		for (Element table : doc.select("table")) {
 			Refeicao refeicao;
-			int semana=-1;
+			
 			int trN=0;
-			if (table.text().contains("CARDÁPIO RESTAURANTE UNIVERSITÁRIO")) {
-				cardapios=new ArrayList<Cardapio>();
-				for (Element tr : table.select("tr")) {
-					if (trN==0) {
-						String texto = Util.removerEspacosDuplicados(tr.text().toLowerCase(Util.getBRLocale()));
-						//Define refeicao
-						if (texto.contains("almoço")) {
-							refeicao = Refeicao.ALMOCO;
-						} else {
-							refeicao = Refeicao.JANTA;
-						}
-						//Define semana
-						String strUltimaData = texto.substring(texto.length()-5, texto.length());
-						if (strUltimaData.contains("/")) {
-							DateTime ultimaData = Util.str2date(strUltimaData);
-							semana = ultimaData.getWeekOfWeekyear();
-						}
-						//Cria cardapios da semana
-						for (int i=0; i<7; i++) {
-							Cardapio c = new Cardapio();
-							if (semana != -1) {
-								MutableDateTime data = new MutableDateTime();
-								data.setDayOfWeek(i+1);
-								data.setWeekOfWeekyear(semana);
-								data.setYear(DateTime.now().getYear());
-								c.setData(data.toDateTime());
-							}
-							c.setRefeicao(refeicao);
-							cardapios.add(c);
-						}
-					}
-					trN++;
-				}
 			
-			}
-			
-			trN=0;
 			if (table.text().contains("Segunda") 
 					&& table.text().contains("Terça")
 					&& table.text().contains("Quarta")
@@ -77,6 +76,13 @@ public class UFRJ extends Restaurante {
 					&& table.text().contains("Sexta")
 					&& table.text().contains("Sábado")
 					&& table.text().contains("Domingo")) {
+
+				if (table.text().contains("Almoço")) {
+					refeicao = Refeicao.ALMOCO;
+				} else {
+					refeicao = Refeicao.JANTA;
+				}
+				
 				for (Element tr : table.select("tr")) {
 					if (trN >= 3 && trN <= 9) {
 						int tdN=0;
@@ -86,7 +92,13 @@ public class UFRJ extends Restaurante {
 							if (tdN==0) {
 								titulo=texto.toLowerCase();
 							} else if (tdN <= 7) {
-								Cardapio cardapio = cardapios.get(tdN-1);
+								Cardapio cardapio;
+								if (refeicao == Refeicao.ALMOCO) {
+									cardapio = cardapios.get(tdN*2-2);
+								} else {
+									cardapio = cardapios.get(tdN*2-1);
+								}
+								cardapio.setRefeicao(refeicao);
 								if (titulo.contains("salada")) {
 									cardapio.setSalada(texto);
 								} else if (titulo.contains("principal")) {
@@ -104,15 +116,15 @@ public class UFRJ extends Restaurante {
 					}
 					trN++;
 				}
-				//Adiciona somente os cardapios q foram coletados com sucesso
-				for (Cardapio c : cardapios) {
-					if (c.getData() != null 
-							&& c.getRefeicao() != null
-							&& c.getPratoPrincipal() != null 
-							&& c.getPratoPrincipal().trim().length() > 2) {
-						cardapiosFinal.add(c);
-					}
-				}
+			}
+		}				
+		//Adiciona somente os cardapios q foram coletados com sucesso
+		for (Cardapio c : cardapios) {
+			if (c.getData() != null 
+					&& c.getRefeicao() != null
+					&& c.getPratoPrincipal() != null 
+					&& c.getPratoPrincipal().trim().length() > 2) {
+				cardapiosFinal.add(c);
 			}
 		}
 		Collections.sort(cardapiosFinal);

@@ -29,17 +29,17 @@ public class UspEach extends Restaurante {
 		//Baixa PDF e converte para txt com xpdf
 		//USING wget to download file
 		//String ex=
-				execute("wget http://each.uspnet.usp.br/infra/restaurante/cardapio-almoco.pdf");
+				execute("wget http://each.uspnet.usp.br/infra/restaurante/cardapio.pdf");
 		//System.out.println("wget: "+ex);
-		File pdfFile = new File("cardapio-almoco.pdf");
+		File pdfFile = new File("cardapio.pdf");
 		//USING XPDF PDF TO TEXT to convert pdf to txt
 		//ex=
-				execute("pdftotext -enc UTF-8 -layout cardapio-almoco.pdf");
+				execute("pdftotext -enc UTF-8 -layout cardapio.pdf");
 		//System.out.println("xpdf-pdftotext: "+ex);
 		pdfFile.delete(); //Deleta pdf
 		pdfFile=null;
 
-		File txtFile = new File("cardapio-almoco.txt");
+		File txtFile = new File("cardapio.txt");
 		FileInputStream inputTxt = new FileInputStream(txtFile);
 		BufferedReader br = new BufferedReader(new InputStreamReader(inputTxt, Charset.forName("UTF-8")));
 		String line;
@@ -111,6 +111,7 @@ public class UspEach extends Restaurante {
 						//Recuperando data
 						if (splittedLine.contains("/")) {
 							DateTime ultimaData = Util.str2date(splittedLine);
+							//System.out.println(splittedLine);
 							//Cria novo objeto Cardapio
 							Cardapio c = new Cardapio();
 							c.setSalada("");
