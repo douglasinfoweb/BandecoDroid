@@ -54,7 +54,8 @@ import com.tjeannin.apprate.AppRate;
 public class MainActivity extends Activity {
 	private Configuracoes config;
 	private Restaurante restauranteAtual;
-   
+	private ProgressDialog progressDialog;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -152,7 +153,6 @@ public class MainActivity extends Activity {
 	 */
     
 	protected class BaixaCardapios extends AsyncTask<Boolean, Void, Boolean> {
-		private ProgressDialog progressDialog;
 		
 		@Override
 		protected void onPreExecute() {
@@ -374,6 +374,7 @@ public class MainActivity extends Activity {
     	mainScroll.removeAllViews();
     	
     	if (restauranteAtual != null) {
+    		
     		restauranteAtual.removeCardapiosAntigos();
     		//Adiciona cada cardapio
     		for (Cardapio cardapio : restauranteAtual.getCardapios()) {
@@ -503,5 +504,12 @@ public class MainActivity extends Activity {
 		} else {
 			rowView.setVisibility(View.VISIBLE);
 		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (progressDialog.isShowing())
+			progressDialog.cancel();
 	}
 }

@@ -52,6 +52,8 @@ public class ConfiguracoesActivity extends Activity {
 	private Configuracoes config;
 	private ArrayList<Restaurante> restaurantesDisponiveis=null;
 	private ArrayList<Restaurante> restaurantesSelecionados;
+
+	private ProgressDialog progressDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +137,6 @@ public class ConfiguracoesActivity extends Activity {
 	 */
 	protected class BaixaRestaurantes extends AsyncTask<Void, Void, ArrayList<Restaurante>> {
 
-		private ProgressDialog progressDialog;
 		
 		protected void onPreExecute() {
 	        /* Prepara e mostra tela de espera */
@@ -321,4 +322,10 @@ public class ConfiguracoesActivity extends Activity {
 	}
 	
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (progressDialog.isShowing())
+			progressDialog.cancel();
+	}
 }
